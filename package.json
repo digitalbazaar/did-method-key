@@ -1,0 +1,48 @@
+{
+  "name": "did-io-key",
+  "version": "0.0.1",
+  "description": "A did:key method driver for did-io",
+  "homepage": "http://github.com/digitalbazaar/did-io-driver",
+  "author": {
+    "name": "Digital Bazaar, Inc.",
+    "email": "support@digitalbazaar.com",
+    "url": "http://digitalbazaar.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/digitalbazaar/did-io-driver"
+  },
+  "bugs": {
+    "url": "https://github.com/digitalbazaar/did-io-driver/issues",
+    "email": "support@digitalbazaar.com"
+  },
+  "license": "BSD-3-Clause",
+  "main": "lib/",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "dirty-chai": "^2.0.1",
+    "mocha": "^6.1.4"
+  },
+  "engines": {
+    "node": "^8.6.0"
+  },
+  "keywords": [
+    "Decentralized",
+    "Identifier",
+    "DID"
+  ],
+  "scripts": {
+    "mocha": "mocha ./tests/**/*.spec.js ./tests/*.spec.js",
+    "test": "npm run mocha",
+    "preversion": "npm test",
+    "postversion": "git push --follow-tags"
+  },
+  "eslintConfig": {
+    "env": {
+      "mocha": true,
+      "node": true
+    }
+  }
+}

@@ -22,6 +22,20 @@ TBD
 A `did:key` method driver for the [`did-io`](https://github.com/digitalbazaar/did-io)
 client library.
 
+The did:key method is used to express public keys in a way that doesn't require 
+a DID Registry of any kind. Its general format is:
+
+```
+did:key:<multibase encoded, multicodec identified, public key>
+```
+
+So, for example, the following DID would be derived from a base-58 encoded 
+ed25519 public key:
+
+```
+did:key:z279zvWFCpJdqTuZtJRtyYMC1nJy5eb1rLfAMiv5FfPBiy3S
+```
+
 See also (related specs):
 
 * [Decentralized Identifiers (DIDs) - Data Model and Syntaxes](https://w3c-ccg.github.io/did-spec/)

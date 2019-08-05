@@ -60,12 +60,9 @@ npm install
 ```js
 const didKeyDriver = require('did-key-driver');
 
+const didDocument = await didKeyDriver.generate();
 
-didKeyDriver.generate()
-  .then(didDocument => {
-    console.log(JSON.stringify(didDocument, null, 2));
-  })
-  .catch(console.error);
+JSON.stringify(didDocument, null, 2);
 ```
 
 ## Contribute

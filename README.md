@@ -8,6 +8,7 @@
 
 - [Background](#background)
   * [Example DID Document](#example-did-document)
+- [Security](#security)
 - [Install](#install)
 - [Usage](#usage)
 - [Contribute](#contribute)
@@ -77,6 +78,16 @@ That DID would correspond to the following DID Document:
   ]
 }
 ```
+
+## Security
+
+The `keyAgreement` key is a Curve25519 public key (suitable for 
+Diffie-Hellman key exchange) that is deterministically _derived_ from the source 
+Ed25519 key, using  [`ed2curve-js`](https://github.com/dchest/ed2curve-js). 
+
+Note that this derived key is optional -- there's currently 
+[no proof](https://crypto.stackexchange.com/questions/3260/using-same-keypair-for-diffie-hellman-and-signing/3311#3311) 
+that this is safe to do.
 
 ## Install
 

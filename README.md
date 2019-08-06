@@ -100,7 +100,7 @@ Results in:
   ],
   "keyAgreement": [
     {
-      "id": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
+      "id": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#zBzoR5sqFgi6q3iFia8JPNfENCpi7RNSTKF7XNXX96SBY4",
       "type": "X25519KeyAgreementKey2019",
       "controller": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
       "publicKeyBase58": "JhNWeSVLMYccCk7iopQW4guaSJTojqpMEELgSLhKwRr"
@@ -113,11 +113,12 @@ If you have an existing [`crypto-ld`](https://github.com/digitalbazaar/crypto-ld
 key pair, you can convert it to a `did:key` method DID Doc:
 
 ```js
+const {Ed25519KeyPair} = require('crypto-ld');
 const {toDidKeyMethodDoc} = require('did-method-key');
 
-const key = await LDKeyPair.generate();
+const edKey = await Ed25519KeyPair.generate();
 
-toDidKeyMethodDoc(key);
+toDidKeyMethodDoc(edKey);
 
 // Returns a DID Document
 ```

@@ -1,6 +1,6 @@
 {
   "name": "did-method-key",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A did:key method driver for did-io and standalone use.",
   "homepage": "http://github.com/digitalbazaar/did-method-key",
   "author": {
@@ -19,9 +19,8 @@
   "license": "BSD-3-Clause",
   "main": "lib/",
   "dependencies": {
-    "crypto-ld": "digitalbazaar/crypto-ld#master",
-    "ed2curve": "^0.2.1",
-    "node-forge": "^0.8.5"
+    "crypto-ld": "^3.6.0",
+    "x25519-key-pair": "digitalbazaar/x25519-key-pair#initial"
   },
   "devDependencies": {
     "chai": "^4.2.0",

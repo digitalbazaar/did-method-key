@@ -113,7 +113,7 @@ If you have an existing [`crypto-ld`](https://github.com/digitalbazaar/crypto-ld
 key pair, you can convert it to a `did:key` method DID Doc:
 
 ```js
-const {toDidKeyMethodDoc} = require('did-key-driver');
+const {toDidKeyMethodDoc} = require('did-method-key');
 
 const key = await LDKeyPair.generate();
 

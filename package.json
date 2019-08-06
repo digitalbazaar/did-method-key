@@ -1,19 +1,19 @@
 {
-  "name": "did-io-key",
+  "name": "did-method-key",
   "version": "0.0.1",
-  "description": "A did:key method driver for did-io",
-  "homepage": "http://github.com/digitalbazaar/did-io-driver",
+  "description": "A did:key method driver for did-io and standalone use.",
+  "homepage": "http://github.com/digitalbazaar/did-method-key",
   "author": {
     "name": "Digital Bazaar, Inc.",
     "email": "support@digitalbazaar.com",
-    "url": "http://digitalbazaar.com/"
+    "url": "https://digitalbazaar.com/"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/digitalbazaar/did-io-driver"
+    "url": "https://github.com/digitalbazaar/did-method-key"
   },
   "bugs": {
-    "url": "https://github.com/digitalbazaar/did-io-driver/issues",
+    "url": "https://github.com/digitalbazaar/did-method-key/issues",
     "email": "support@digitalbazaar.com"
   },
   "license": "BSD-3-Clause",

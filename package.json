@@ -24,7 +24,6 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "dirty-chai": "^2.0.1",
     "mocha": "^6.1.4"
   },
   "engines": {

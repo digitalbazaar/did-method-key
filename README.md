@@ -33,7 +33,7 @@ So, for example, the following DID would be derived from a base-58 encoded
 ed25519 public key:
 
 ```
-did:key:z279zvWFCpJdqTuZtJRtyYMC1nJy5eb1rLfAMiv5FfPBiy3S
+did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH
 ```
 
 See also (related specs):
@@ -114,11 +114,11 @@ key pair, you can convert it to a `did:key` method DID Doc:
 
 ```js
 const {Ed25519KeyPair} = require('crypto-ld');
-const {toDidKeyMethodDoc} = require('did-method-key').driver();
+const {keyToDidDoc} = require('did-method-key').driver();
 
 const edKey = await Ed25519KeyPair.generate();
 
-toDidKeyMethodDoc(edKey);
+keyToDidDoc(edKey);
 
 // Returns a DID Document
 ```

@@ -6,20 +6,21 @@
 
 ## Table of Contents
 
-- [Security](#security)
 - [Background](#background)
-- [Supported Drivers](#supported-drivers)
+  * [Example DID Document](#example-did-document)
 - [Install](#install)
 - [Usage](#usage)
 - [Contribute](#contribute)
 - [Commercial Support](#commercial-support)
 - [License](#license)
 
-## Security
-
-TBD
-
 ## Background
+
+See also (related specs):
+
+* [Decentralized Identifiers (DIDs) - Data Model and Syntaxes](https://w3c-ccg.github.io/did-spec/)
+* [Linked Data Cryptographic Suite Registry](https://w3c-ccg.github.io/ld-cryptosuite-registry/)
+* [Linked Data Proofs](https://w3c-dvcg.github.io/ld-proofs/)
 
 A `did:key` method driver for the [`did-io`](https://github.com/digitalbazaar/did-io)
 client library and for standalone use.
@@ -38,43 +39,9 @@ ed25519 public key:
 did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH
 ```
 
-See also (related specs):
+That DID would correspond to the following DID Document:
 
-* [Decentralized Identifiers (DIDs) - Data Model and Syntaxes](https://w3c-ccg.github.io/did-spec/)
-* [Linked Data Cryptographic Suite Registry](https://w3c-ccg.github.io/ld-cryptosuite-registry/)
-* [Linked Data Proofs](https://w3c-dvcg.github.io/ld-proofs/)
-
-## Install
-
-Requires Node.js 8.3+
-
-To install locally (for development):
-
-```
-git clone https://github.com/digitalbazaar/did-method-key.git
-cd did-method-key
-npm install
-```
-
-## Usage
-
-To generate a new key and get its corresponding `did:key` method DID Document:
-
-```js
-const didKeyDriver = require('did-method-key').driver();
-
-const didDocument = await didKeyDriver.generate(); // Ed25519 key type by default
-
-JSON.stringify(didDocument, null, 2);
-```
-
-To get a DID Document for an existing `did:key` DID:
-
-```js
-const didDocument = await didKeyDriver.get({did: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH'});
-```
-
-Results in:
+### Example DID Document
 
 ```json
 {
@@ -110,6 +77,38 @@ Results in:
   ]
 }
 ```
+
+## Install
+
+Requires Node.js 8.3+
+
+To install locally (for development):
+
+```
+git clone https://github.com/digitalbazaar/did-method-key.git
+cd did-method-key
+npm install
+```
+
+## Usage
+
+To generate a new key and get its corresponding `did:key` method DID Document:
+
+```js
+const didKeyDriver = require('did-method-key').driver();
+
+const didDocument = await didKeyDriver.generate(); // Ed25519 key type by default
+
+JSON.stringify(didDocument, null, 2);
+```
+
+To get a DID Document for an existing `did:key` DID:
+
+```js
+const didDocument = await didKeyDriver.get({did: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH'});
+```
+
+(Results in the [example DID Doc](#example-did-document) above).
 
 If you have an existing [`crypto-ld`](https://github.com/digitalbazaar/crypto-ld) 
 key pair, you can convert it to a `did:key` method DID Doc:

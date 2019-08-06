@@ -19,7 +19,9 @@
   "license": "BSD-3-Clause",
   "main": "lib/",
   "dependencies": {
-    "crypto-ld": "digitalbazaar/crypto-ld#from-fingerprint"
+    "bs58": "^4.0.1",
+    "crypto-ld": "digitalbazaar/crypto-ld#master",
+    "ed2curve": "^0.2.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

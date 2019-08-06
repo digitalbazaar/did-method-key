@@ -1,6 +1,6 @@
-# did:key method driver _(did-key-method)_
+# did:key method driver _(did-method-key)_
 
-> A [DID](https://w3c-ccg.github.io/did-spec/) (Decentralized Identifier) method driver for the `did-io` library
+> A [DID](https://w3c-ccg.github.io/did-spec/) (Decentralized Identifier) method driver for the `did-io` library and for standalone use
 
 ## Table of Contents
 
@@ -20,7 +20,7 @@ TBD
 ## Background
 
 A `did:key` method driver for the [`did-io`](https://github.com/digitalbazaar/did-io)
-client library.
+client library and for standalone use.
 
 The `did:key` method is used to express public keys in a way that doesn't 
 require a DID Registry of any kind. Its general format is:
@@ -49,8 +49,8 @@ Requires Node.js 8.3+
 To install locally (for development):
 
 ```
-git clone https://github.com/digitalbazaar/did-key-driver.git
-cd did-key-driver
+git clone https://github.com/digitalbazaar/did-method-key.git
+cd did-method-key
 npm install
 ```
 
@@ -59,7 +59,7 @@ npm install
 To generate a new key and get its corresponding `did:key` method DID Document:
 
 ```js
-const didKeyDriver = require('did-key-driver');
+const didKeyDriver = require('did-method-key');
 
 const didDocument = await didKeyDriver.generate(); // Ed25519 key type by default
 

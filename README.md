@@ -1,5 +1,7 @@
 # did:key method driver _(did-method-key)_
 
+[![Build Status](https://travis-ci.org/digitalbazaar/did-method-key.png?branch=master)](https://travis-ci.org/digitalbazaar/did-method-key)
+
 > A [DID](https://w3c-ccg.github.io/did-spec/) (Decentralized Identifier) method driver for the `did-io` library and for standalone use
 
 ## Table of Contents

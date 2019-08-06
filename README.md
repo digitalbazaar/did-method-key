@@ -59,7 +59,7 @@ npm install
 To generate a new key and get its corresponding `did:key` method DID Document:
 
 ```js
-const didKeyDriver = require('did-method-key');
+const didKeyDriver = require('did-method-key').driver();
 
 const didDocument = await didKeyDriver.generate(); // Ed25519 key type by default
 
@@ -114,7 +114,7 @@ key pair, you can convert it to a `did:key` method DID Doc:
 
 ```js
 const {Ed25519KeyPair} = require('crypto-ld');
-const {toDidKeyMethodDoc} = require('did-method-key');
+const {toDidKeyMethodDoc} = require('did-method-key').driver();
 
 const edKey = await Ed25519KeyPair.generate();
 

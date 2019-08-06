@@ -39,7 +39,6 @@ did:key:z279zvWFCpJdqTuZtJRtyYMC1nJy5eb1rLfAMiv5FfPBiy3S
 See also (related specs):
 
 * [Decentralized Identifiers (DIDs) - Data Model and Syntaxes](https://w3c-ccg.github.io/did-spec/)
-* [Veres One DID Method](https://w3c-ccg.github.io/didm-veres-one/)
 * [Linked Data Cryptographic Suite Registry](https://w3c-ccg.github.io/ld-cryptosuite-registry/)
 * [Linked Data Proofs](https://w3c-dvcg.github.io/ld-proofs/)
 

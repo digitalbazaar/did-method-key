@@ -1,4 +1,4 @@
-# did:key method driver _(did-io-key)_
+# did:key method driver _(did-key-method)_
 
 > A [DID](https://w3c-ccg.github.io/did-spec/) (Decentralized Identifier) method driver for the `did-io` library
 
@@ -22,8 +22,8 @@ TBD
 A `did:key` method driver for the [`did-io`](https://github.com/digitalbazaar/did-io)
 client library.
 
-The did:key method is used to express public keys in a way that doesn't require 
-a DID Registry of any kind. Its general format is:
+The `did:key` method is used to express public keys in a way that doesn't 
+require a DID Registry of any kind. Its general format is:
 
 ```
 did:key:<multibase encoded, multicodec identified, public key>
@@ -56,12 +56,70 @@ npm install
 
 ## Usage
 
+To generate a new key and get its corresponding `did:key` method DID Document:
+
 ```js
 const didKeyDriver = require('did-key-driver');
 
-const didDocument = await didKeyDriver.generate();
+const didDocument = await didKeyDriver.generate(); // Ed25519 key type by default
 
 JSON.stringify(didDocument, null, 2);
+```
+
+To get a DID Document for an existing `did:key` DID:
+
+```js
+const didDocument = await didKeyDriver.get({did: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH'});
+```
+
+Results in:
+
+```json
+{
+  "@context": "https://w3id.org/did/v1",
+  "id": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
+  "publicKey": [
+    {
+      "id": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
+      "type": "Ed25519VerificationKey2018",
+      "controller": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
+      "publicKeyBase58": "B12NYF8RrR3h41TDCTJojY59usg3mbtbjnFs7Eud1Y6u"
+    }
+  ],
+  "authentication": [
+    "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"
+  ],
+  "assertionMethod": [
+    "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"
+  ],
+  "capabilityDelegation": [
+    "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"
+  ],
+  "capabilityInvocation": [
+    "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"
+  ],
+  "keyAgreement": [
+    {
+      "id": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
+      "type": "X25519KeyAgreementKey2019",
+      "controller": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
+      "publicKeyBase58": "JhNWeSVLMYccCk7iopQW4guaSJTojqpMEELgSLhKwRr"
+    }
+  ]
+}
+```
+
+If you have an existing [`crypto-ld`](https://github.com/digitalbazaar/crypto-ld) 
+key pair, you can convert it to a `did:key` method DID Doc:
+
+```js
+const {toDidKeyMethodDoc} = require('did-key-driver');
+
+const key = await LDKeyPair.generate();
+
+toDidKeyMethodDoc(key);
+
+// Returns a DID Document
 ```
 
 ## Contribute

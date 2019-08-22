@@ -93,6 +93,12 @@ that this is safe to do.
 
 Requires Node.js 8.3+
 
+To install from `npm`:
+
+```
+npm install --save did-method-key 
+```
+
 To install locally (for development):
 
 ```

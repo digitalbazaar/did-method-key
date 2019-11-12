@@ -13,25 +13,18 @@ describe('did:key method driver', () => {
   describe('get', () => {
     it('should get a did:key DID', async () => {
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      const keyId = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
       const didDoc = await didKeyDriver.get({did});
 
       expect(didDoc.id).to.equal(did);
       expect(didDoc['@context']).to.equal('https://w3id.org/did/v1');
-      expect(didDoc.authentication).to.eql([
-        'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH'
-      ]);
-      expect(didDoc.assertionMethod).to.eql([
-        'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH'
-      ]);
-      expect(didDoc.capabilityDelegation).to.eql([
-        'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH'
-      ]);
-      expect(didDoc.capabilityInvocation).to.eql([
-        'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH'
-      ]);
+      expect(didDoc.authentication).to.eql([keyId]);
+      expect(didDoc.assertionMethod).to.eql([keyId]);
+      expect(didDoc.capabilityDelegation).to.eql([keyId]);
+      expect(didDoc.capabilityInvocation).to.eql([keyId]);
 
       const [publicKey] = didDoc.publicKey;
-      expect(publicKey.id).to.equal(did);
+      expect(publicKey.id).to.equal(keyId);
       expect(publicKey.type).to.equal('Ed25519VerificationKey2018');
       expect(publicKey.controller).to.equal(did);
       expect(publicKey.publicKeyBase58).to

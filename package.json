@@ -1,6 +1,6 @@
 {
   "name": "did-method-key",
-  "version": "0.2.1-0",
+  "version": "0.3.0",
   "description": "A did:key method driver for did-io and standalone use.",
   "homepage": "http://github.com/digitalbazaar/did-method-key",
   "author": {

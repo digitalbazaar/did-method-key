@@ -1,7 +1,7 @@
 # did:key method driver _(did-method-key)_
 
 [![NPM Version](https://img.shields.io/npm/v/did-method-key.svg?style=flat-square)](https://npm.im/did-method-key)
-[![Build Status](https://travis-ci.org/digitalbazaar/did-method-key.png?branch=master)](https://travis-ci.org/digitalbazaar/did-method-key)
+[![Build Status](https://travis-ci.org/digitalbazaar/did-method-key-js.png?branch=master)](https://travis-ci.org/digitalbazaar/did-method-key-js)
 
 > A [DID](https://w3c-ccg.github.io/did-spec/) (Decentralized Identifier) method driver for the `did-io` library and for standalone use
 

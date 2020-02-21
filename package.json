@@ -20,6 +20,7 @@
   "main": "lib/",
   "dependencies": {
     "crypto-ld": "^3.6.0",
+    "security-context": "^4.0.0",
     "x25519-key-pair": "digitalbazaar/x25519-key-pair#initial"
   },
   "devDependencies": {

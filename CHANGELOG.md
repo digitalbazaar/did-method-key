@@ -2,6 +2,9 @@
 
 ## 0.5.0 - 2020-02-21
 
+### Added
+- `driver.get()` can now also resolve individual keys.
+
 ### Changed
 - **BREAKING**: Undo previous change, using `https://w3id.org/did/v0.11` as
   `@context`, apologies for the confusion.

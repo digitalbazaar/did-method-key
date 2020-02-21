@@ -17,7 +17,7 @@ describe('did:key method driver', () => {
       const didDoc = await didKeyDriver.get({did});
 
       expect(didDoc.id).to.equal(did);
-      expect(didDoc['@context']).to.equal('https://www.w3.org/ns/did/v1');
+      expect(didDoc['@context']).to.eql(['https://w3id.org/did/v0.11']);
       expect(didDoc.authentication).to.eql([keyId]);
       expect(didDoc.assertionMethod).to.eql([keyId]);
       expect(didDoc.capabilityDelegation).to.eql([keyId]);

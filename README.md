@@ -47,7 +47,7 @@ That DID would correspond to the following DID Document:
 
 ```json
 {
-  "@context": "https://www.w3.org/ns/did/v1",
+  "@context": ["https://w3id.org/did/v0.11"],
   "id": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
   "publicKey": [
     {

@@ -1,5 +1,11 @@
 # did:key driver ChangeLog
 
+## 0.5.0 - 2020-02-21
+
+### Changed
+- **BREAKING**: Undo previous change, using `https://w3id.org/did/v0.11` as
+  `@context`, apologies for the confusion.
+
 ## 0.4.0 - 2020-01-29
 
 ### Changed

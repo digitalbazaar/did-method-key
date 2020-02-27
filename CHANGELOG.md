@@ -1,5 +1,10 @@
 # did:key driver ChangeLog
 
+## 0.5.1 - 2020-02-27
+
+### Changed
+- Use x25519-key-pair@1.
+
 ## 0.5.0 - 2020-02-24
 
 ### Added

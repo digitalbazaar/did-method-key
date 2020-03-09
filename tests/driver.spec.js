@@ -32,7 +32,7 @@ describe('did:key method driver', () => {
 
       const [kak] = didDoc.keyAgreement;
       expect(kak.id).to.equal(did +
-        '#zBzoR5sqFgi6q3iFia8JPNfENCpi7RNSTKF7XNXX96SBY4');
+        '#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc');
       expect(kak.type).to.equal('X25519KeyAgreementKey2019');
       expect(kak.controller).to.equal(did);
       expect(kak.publicKeyBase58).to
@@ -55,12 +55,12 @@ describe('did:key method driver', () => {
 
     it('should resolve an individual key agreement key', async () => {
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const kakKeyId = did + '#zBzoR5sqFgi6q3iFia8JPNfENCpi7RNSTKF7XNXX96SBY4';
+      const kakKeyId = did + '#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc';
       const key = await didKeyDriver.get({did: kakKeyId});
 
       expect(key).to.eql({
         '@context': 'https://w3id.org/security/v2',
-        id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#zBzoR5sqFgi6q3iFia8JPNfENCpi7RNSTKF7XNXX96SBY4',
+        id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc',
         type: 'X25519KeyAgreementKey2019',
         controller: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
         publicKeyBase58: 'JhNWeSVLMYccCk7iopQW4guaSJTojqpMEELgSLhKwRr'

@@ -19,13 +19,13 @@
   "license": "BSD-3-Clause",
   "main": "lib/",
   "dependencies": {
-    "crypto-ld": "^3.6.0",
+    "crypto-ld": "^3.7.0",
     "security-context": "^4.0.0",
-    "x25519-key-pair": "^1.0.0"
+    "x25519-key-pair": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^7.0.1"
+    "mocha": "^7.1.1"
   },
   "engines": {
     "node": ">=8.6.0"

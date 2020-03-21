@@ -19,7 +19,8 @@
   "license": "BSD-3-Clause",
   "main": "lib/",
   "dependencies": {
-    "crypto-ld": "^3.6.0",
+    "crypto-ld": "^3.7.0",
+    "secp256k1-key-pair": "^1.1.0",
     "security-context": "^4.0.0",
     "x25519-key-pair": "^1.0.0"
   },

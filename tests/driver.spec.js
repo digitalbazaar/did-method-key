@@ -79,13 +79,13 @@ describe('did:key method driver', () => {
     });
   });
 
-  describe('setKeyId', () => {
+  describe('computeKeyId', () => {
     const key = {
       fingerprint: () => '12345'
     };
 
-    it('should set the key id based on fingerprint', () => {
-      didKeyDriver.setKeyId({key});
+    it('should set the key id based on fingerprint', async () => {
+      key.id = await didKeyDriver.computeKeyId({key});
 
       expect(key.id).to.equal('did:key:12345#12345');
     });

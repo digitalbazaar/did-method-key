@@ -78,4 +78,22 @@ describe('did:key method driver', () => {
       expect(fetchedDidDoc).to.eql(genDidDoc);
     });
   });
+
+  describe('setKeyId', () => {
+    const key = {
+      fingerprint: () => '12345'
+    };
+
+    it('should set the key id based on fingerprint', () => {
+      didKeyDriver.setKeyId({key});
+
+      expect(key.id).to.equal('did:key:12345#12345');
+    });
+  });
+
+  describe('methodId', () => {
+    it('should return did method id', () => {
+      expect(didKeyDriver.methodId).to.equal('key');
+    });
+  });
 });

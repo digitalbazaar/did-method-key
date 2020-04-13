@@ -91,9 +91,9 @@ describe('did:key method driver', () => {
     });
   });
 
-  describe('methodId', () => {
+  describe('method', () => {
     it('should return did method id', () => {
-      expect(didKeyDriver.methodId).to.equal('key');
+      expect(didKeyDriver.method).to.equal('key');
     });
   });
 });

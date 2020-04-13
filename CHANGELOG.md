@@ -1,11 +1,14 @@
 # did:key driver ChangeLog
 
-## 0.6.0 - 2020-03-09
+## 0.6.0 - 2020-04-13
 
 ### Changed
 - **BREAKING**: Use `x25519-key-pair` v2.0.0, changed fingerprint format
   for X25519 keys.
 - Use `crypto-ld` v0.3.7.
+
+### Added
+- Add `computeKeyId()` and `method` to driver, to work with `did-io` downstream.
 
 ## 0.5.1 - 2020-02-27
 

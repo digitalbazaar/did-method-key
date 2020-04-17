@@ -13,6 +13,7 @@ describe('did:key method driver', () => {
   describe('get', () => {
     it('should get the DID Document for a did:key DID', async () => {
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      // eslint-disable-next-line max-len
       const keyId = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
       const didDoc = await didKeyDriver.get({did});
 
@@ -46,6 +47,7 @@ describe('did:key method driver', () => {
 
       expect(key).to.eql({
         '@context': 'https://w3id.org/security/v2',
+        // eslint-disable-next-line max-len
         id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
         type: 'Ed25519VerificationKey2018',
         controller: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
@@ -55,11 +57,13 @@ describe('did:key method driver', () => {
 
     it('should resolve an individual key agreement key', async () => {
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const kakKeyId = did + '#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc';
+      const kakKeyId =
+        `${did}#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc`;
       const key = await didKeyDriver.get({did: kakKeyId});
 
       expect(key).to.eql({
         '@context': 'https://w3id.org/security/v2',
+        // eslint-disable-next-line max-len
         id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc',
         type: 'X25519KeyAgreementKey2019',
         controller: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',

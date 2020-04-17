@@ -1,7 +1,6 @@
 # did:key method driver _(did-method-key)_
 
 [![NPM Version](https://img.shields.io/npm/v/did-method-key.svg?style=flat-square)](https://npm.im/did-method-key)
-[![Build Status](https://travis-ci.org/digitalbazaar/did-method-key-js.png?branch=master)](https://travis-ci.org/digitalbazaar/did-method-key-js)
 
 > A [DID](https://w3c-ccg.github.io/did-spec/) (Decentralized Identifier) method driver for the `did-io` library and for standalone use
 
@@ -27,14 +26,14 @@ See also (related specs):
 A `did:key` method driver for the [`did-io`](https://github.com/digitalbazaar/did-io)
 client library and for standalone use.
 
-The `did:key` method is used to express public keys in a way that doesn't 
+The `did:key` method is used to express public keys in a way that doesn't
 require a DID Registry of any kind. Its general format is:
 
 ```
 did:key:<multibase encoded, multicodec identified, public key>
 ```
 
-So, for example, the following DID would be derived from a base-58 encoded 
+So, for example, the following DID would be derived from a base-58 encoded
 ed25519 public key:
 
 ```
@@ -82,12 +81,12 @@ That DID would correspond to the following DID Document:
 
 ## Security
 
-The `keyAgreement` key is a Curve25519 public key (suitable for 
-Diffie-Hellman key exchange) that is deterministically _derived_ from the source 
-Ed25519 key, using  [`ed2curve-js`](https://github.com/dchest/ed2curve-js). 
+The `keyAgreement` key is a Curve25519 public key (suitable for
+Diffie-Hellman key exchange) that is deterministically _derived_ from the source
+Ed25519 key, using  [`ed2curve-js`](https://github.com/dchest/ed2curve-js).
 
-Note that this derived key is optional -- there's currently 
-[no proof](https://crypto.stackexchange.com/questions/3260/using-same-keypair-for-diffie-hellman-and-signing/3311#3311) 
+Note that this derived key is optional -- there's currently
+[no proof](https://crypto.stackexchange.com/questions/3260/using-same-keypair-for-diffie-hellman-and-signing/3311#3311)
 that this is safe to do.
 
 ## Install
@@ -97,7 +96,7 @@ Requires Node.js 8.3+
 To install from `npm`:
 
 ```
-npm install --save did-method-key 
+npm install --save did-method-key
 ```
 
 To install locally (for development):
@@ -128,7 +127,7 @@ const didDocument = await didKeyDriver.get({did: 'did:key:z6MkpTHR8VNsBxYAAWHut2
 
 (Results in the [example DID Doc](#example-did-document) above).
 
-If you have an existing [`crypto-ld`](https://github.com/digitalbazaar/crypto-ld) 
+If you have an existing [`crypto-ld`](https://github.com/digitalbazaar/crypto-ld)
 key pair, you can convert it to a `did:key` method DID Doc:
 
 ```js

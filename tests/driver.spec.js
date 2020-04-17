@@ -68,7 +68,7 @@ describe('did:key method driver', () => {
     });
   });
 
-  describe('generate', () => {
+  describe('generate', async () => {
     it('should generate and get round trip', async () => {
       const genDidDoc = await didKeyDriver.generate();
       const did = genDidDoc.id;
@@ -79,7 +79,7 @@ describe('did:key method driver', () => {
     });
   });
 
-  describe('computeKeyId', () => {
+  describe('computeKeyId', async () => {
     const key = {
       fingerprint: () => '12345'
     };
@@ -92,7 +92,7 @@ describe('did:key method driver', () => {
   });
 
   describe('method', () => {
-    it('should return did method id', () => {
+    it('should return did method id', async () => {
       expect(didKeyDriver.method).to.equal('key');
     });
   });

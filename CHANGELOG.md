@@ -1,6 +1,6 @@
 # did:key driver ChangeLog
 
-## 0.6.1 - TBD
+## 0.6.1 - 2020-04-20
 
 ### Changed
 - Return public/private key pair from `generate()`, available on `didDoc.keys`.

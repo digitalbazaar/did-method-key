@@ -76,6 +76,9 @@ describe('did:key method driver', () => {
     it('should generate and get round trip', async () => {
       const genDidDoc = await didKeyDriver.generate();
       const did = genDidDoc.id;
+      const keyId = genDidDoc.authentication[0];
+
+      expect(genDidDoc.keys[keyId].controller).to.equal(did);
 
       const fetchedDidDoc = await didKeyDriver.get({did});
 

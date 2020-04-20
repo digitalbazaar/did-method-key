@@ -4,7 +4,6 @@
 
 ### Changed
 - Return public/private key pair from `generate()`, available on `didDoc.keys`.
-  Example: `const didDoc = await driver.generate(); didDoc.keys // -> keys obj`.
 
 ## 0.6.0 - 2020-04-13
 

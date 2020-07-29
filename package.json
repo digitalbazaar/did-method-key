@@ -21,7 +21,7 @@
   "dependencies": {
     "crypto-ld": "^3.7.0",
     "security-context": "^4.0.0",
-    "x25519-key-pair": "^2.0.0"
+    "x25519-key-pair": "digitalbazaar/x25519-key-pair#wasm"
   },
   "devDependencies": {
     "chai": "^4.2.0",

@@ -120,7 +120,7 @@ const didDocument = await didKeyDriver.generate(); // Ed25519 key type by defaul
 console.log(JSON.stringify(didDocument, null, 2)); // see DID Document above
 
 didDocument.keys
-// -> 
+// ->
 {
   "did:key:z6MkqPnSmWhrV28rjGkGjCuT5Fzxm5WwL6jgAiYc4PvTWVny#z6MkqPnSmWhrV28rjGkGjCuT5Fzxm5WwL6jgAiYc4PvTWVny": {
     "controller": "did:key:z6MkqPnSmWhrV28rjGkGjCuT5Fzxm5WwL6jgAiYc4PvTWVny",
@@ -155,7 +155,7 @@ const {keyToDidDoc} = require('did-method-key').driver();
 
 const edKey = await Ed25519KeyPair.generate();
 
-keyToDidDoc(edKey);
+const didDoc = await keyToDidDoc(edKey);
 
 // Returns a DID Document
 ```

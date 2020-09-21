@@ -1,5 +1,13 @@
 # did:key driver ChangeLog
 
+## 1.0.0 - 2020-09-xx
+
+### Added
+- Add cache with option to configure its max size.
+
+### Changed
+- **BREAKING**: Make `keyToDidDoc` asynchronous.
+
 ## 0.6.1 - 2020-04-20
 
 ### Changed

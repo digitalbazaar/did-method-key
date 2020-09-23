@@ -2,7 +2,7 @@
   "name": "did-method-key",
   "version": "0.7.1-0",
   "description": "A did:key method driver for did-io and standalone use.",
-  "homepage": "http://github.com/digitalbazaar/did-method-key",
+  "homepage": "http://github.com/digitalbazaar/did-method-key-js",
   "author": {
     "name": "Digital Bazaar, Inc.",
     "email": "support@digitalbazaar.com",
@@ -10,10 +10,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/digitalbazaar/did-method-key"
+    "url": "https://github.com/digitalbazaar/did-method-key-js"
   },
   "bugs": {
-    "url": "https://github.com/digitalbazaar/did-method-key/issues",
+    "url": "https://github.com/digitalbazaar/did-method-key-js/issues",
     "email": "support@digitalbazaar.com"
   },
   "license": "BSD-3-Clause",

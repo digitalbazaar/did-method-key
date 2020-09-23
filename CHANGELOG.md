@@ -1,6 +1,6 @@
 # did:key driver ChangeLog
 
-## 1.0.0 - 2020-09-xx
+## 0.7.0 - 2020-09-23
 
 ### Added
 - Add cache with option to configure its max size.

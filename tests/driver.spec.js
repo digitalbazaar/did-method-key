@@ -79,6 +79,8 @@ describe('did:key method driver', () => {
       const keyId = genDidDoc.authentication[0];
 
       expect(genDidDoc.keys[keyId].controller).to.equal(did);
+      expect(genDidDoc.keypairs.authentication[0].id).to.equal(keyId);
+      expect(genDidDoc.keypairs.authentication[0].controller).to.equal(did);
 
       const fetchedDidDoc = await didKeyDriver.get({did});
 

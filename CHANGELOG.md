@@ -1,6 +1,6 @@
 # did:key driver ChangeLog
 
-## 0.8.0 - 2021-01-22
+## 1.0.0 - 2021-01-xx
 
 ### Changed
 - **BREAKING**: Return {didDocument, keyPairs} from `generate()`.

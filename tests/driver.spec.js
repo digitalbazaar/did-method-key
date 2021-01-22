@@ -15,23 +15,23 @@ describe('did:key method driver', () => {
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
       // eslint-disable-next-line max-len
       const keyId = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const didDoc = await didKeyDriver.get({did});
+      const didDocument = await didKeyDriver.get({did});
 
-      expect(didDoc.id).to.equal(did);
-      expect(didDoc['@context']).to.eql(['https://w3id.org/did/v0.11']);
-      expect(didDoc.authentication).to.eql([keyId]);
-      expect(didDoc.assertionMethod).to.eql([keyId]);
-      expect(didDoc.capabilityDelegation).to.eql([keyId]);
-      expect(didDoc.capabilityInvocation).to.eql([keyId]);
+      expect(didDocument.id).to.equal(did);
+      expect(didDocument['@context']).to.eql(['https://w3id.org/did/v0.11']);
+      expect(didDocument.authentication).to.eql([keyId]);
+      expect(didDocument.assertionMethod).to.eql([keyId]);
+      expect(didDocument.capabilityDelegation).to.eql([keyId]);
+      expect(didDocument.capabilityInvocation).to.eql([keyId]);
 
-      const [publicKey] = didDoc.publicKey;
+      const [publicKey] = didDocument.verificationMethod;
       expect(publicKey.id).to.equal(keyId);
       expect(publicKey.type).to.equal('Ed25519VerificationKey2018');
       expect(publicKey.controller).to.equal(did);
       expect(publicKey.publicKeyBase58).to
         .equal('B12NYF8RrR3h41TDCTJojY59usg3mbtbjnFs7Eud1Y6u');
 
-      const [kak] = didDoc.keyAgreement;
+      const [kak] = didDocument.keyAgreement;
       expect(kak.id).to.equal(did +
         '#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc');
       expect(kak.type).to.equal('X25519KeyAgreementKey2019');
@@ -74,17 +74,15 @@ describe('did:key method driver', () => {
 
   describe('generate', async () => {
     it('should generate and get round trip', async () => {
-      const genDidDoc = await didKeyDriver.generate();
-      const did = genDidDoc.id;
-      const keyId = genDidDoc.authentication[0];
+      const {didDocument, keyPairs} = await didKeyDriver.generate();
+      const did = didDocument.id;
+      const keyId = didDocument.authentication[0];
 
-      expect(genDidDoc.keys[keyId].controller).to.equal(did);
-      expect(genDidDoc.keypairs.authentication[0].id).to.equal(keyId);
-      expect(genDidDoc.keypairs.authentication[0].controller).to.equal(did);
+      expect(keyPairs.get(keyId).controller).to.equal(did);
+      expect(keyPairs.get(keyId).id).to.equal(keyId);
 
       const fetchedDidDoc = await didKeyDriver.get({did});
-
-      expect(fetchedDidDoc).to.eql(genDidDoc);
+      expect(fetchedDidDoc).to.eql(didDocument);
     });
   });
 

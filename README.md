@@ -49,7 +49,7 @@ That DID would correspond to the following DID Document:
 {
   "@context": ["https://w3id.org/did/v0.11"],
   "id": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
-  "publicKey": [
+  "verificationMethod": [
     {
       "id": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
       "type": "Ed25519VerificationKey2018",
@@ -115,13 +115,14 @@ To generate a new key and get its corresponding `did:key` method DID Document:
 ```js
 const didKeyDriver = require('did-method-key').driver();
 
-const didDocument = await didKeyDriver.generate(); // Ed25519 key type by default
+// generate did:key using Ed25519 key type by default
+const {didDocument, keyPairs} = await didKeyDriver.generate();
 
-console.log(JSON.stringify(didDocument, null, 2)); // see DID Document above
+// print the DID Document above
+console.log(JSON.stringify(didDocument, null, 2));
 
-didDocument.keys
-// ->
-{
+// keyPairs will be set like so ->
+Map({
   "did:key:z6MkqPnSmWhrV28rjGkGjCuT5Fzxm5WwL6jgAiYc4PvTWVny#z6MkqPnSmWhrV28rjGkGjCuT5Fzxm5WwL6jgAiYc4PvTWVny": {
     "controller": "did:key:z6MkqPnSmWhrV28rjGkGjCuT5Fzxm5WwL6jgAiYc4PvTWVny",
     "type": "Ed25519VerificationKey2018",
@@ -135,13 +136,14 @@ didDocument.keys
     "privateKeyBase58": "BGi7pTP2JHo1odGw3mTWnM4hZmyGWWaAPDne2YHY3VEB",
     "publicKeyBase58": "8bpoQzGLY5ZGfrsQFUrX6Am3eyT3a15haQN8nG1f8eit"
   }
-}
+})
 ```
 
 To get a DID Document for an existing `did:key` DID:
 
 ```js
-const didDocument = await didKeyDriver.get({did: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH'});
+const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+const didDocument = await didKeyDriver.get({did});
 ```
 
 (Results in the [example DID Doc](#example-did-document) above).
@@ -154,8 +156,7 @@ const {Ed25519KeyPair} = require('crypto-ld');
 const {keyToDidDoc} = require('did-method-key').driver();
 
 const edKey = await Ed25519KeyPair.generate();
-
-const didDoc = await keyToDidDoc(edKey);
+const {didDocument, keyPairs} = await keyToDidDoc(edKey);
 
 // Returns a DID Document
 ```

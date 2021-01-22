@@ -1,5 +1,15 @@
 # did:key driver ChangeLog
 
+## 0.7.1 - 2021-01-21
+
+### Added
+
+- Add `keypairs` property that indexes verification methods.
+
+### Changed
+- Avoid mutation of ed25519 key passed into keyToDidDoc.
+- Set `id` field for keypairs.
+
 ## 0.7.0 - 2020-09-23
 
 ### Added

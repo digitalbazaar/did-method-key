@@ -19,10 +19,11 @@
   "license": "BSD-3-Clause",
   "main": "lib/",
   "dependencies": {
+    "@digitalbazaar/ed25519-verification-key-2018": "^1.1.0",
     "@digitalbazaar/lru-memoize": "^1.1.0",
-    "crypto-ld": "^3.7.0",
+    "crypto-ld": "^4.0.3",
     "security-context": "^4.0.0",
-    "x25519-key-pair": "^3.0.0"
+    "x25519-key-pair": "^3.1.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

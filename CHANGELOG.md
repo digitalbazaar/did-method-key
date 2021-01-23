@@ -3,9 +3,13 @@
 ## 1.0.0 - 2021-01-xx
 
 ### Changed
+- **BREAKING**: Change to named function inputs, `key` -> `keyPair`.
+- **BREAKING**: Rename `computeKeyId()` -> `computeId()`.
+- **BREAKING**: Rename `keyToDidDoc()` -> `keyPairToDidDocument()`.
 - **BREAKING**: Return {didDocument, keyPairs} from `generate()`.
 - Avoid mutation of ed25519 key passed into keyToDidDoc.
 - Set `id` field for keypairs.
+- Use underscores for utility functions.
 
 ## 0.7.0 - 2020-09-23
 

@@ -7,6 +7,7 @@
 - **BREAKING**: Rename `computeKeyId()` -> `computeId()`.
 - **BREAKING**: Rename `keyToDidDoc()` -> `keyPairToDidDocument()`.
 - **BREAKING**: Return {didDocument, keyPairs} from `generate()`.
+- Upgrade to crypto-ld 4.0
 - Avoid mutation of ed25519 key passed into keyToDidDoc.
 - Set `id` field for keypairs.
 - Use underscores for utility functions.

@@ -1,15 +1,14 @@
 # did:key driver ChangeLog
 
-## 1.0.0 - 2021-01-xx
+## 1.0.0 - 
 
 ### Changed
-- **BREAKING**: Change to named function inputs, `key` -> `keyPair`.
-- **BREAKING**: Rename `computeKeyId()` -> `computeId()`.
-- **BREAKING**: Rename `keyToDidDoc()` -> `keyPairToDidDocument()`.
+- **BREAKING**: Rename npm package from `did-method-key` to 
+  `@digitalbazaar/did-method-key`.
 - **BREAKING**: Return {didDocument, keyPairs} from `generate()`.
-- Upgrade to crypto-ld 4.0
+- **BREAKING**: Upgrade to crypto-ld 5.0
+- **BREAKING**: Rename `computeKeyId()` -> `computeId()`.
 - Avoid mutation of ed25519 key passed into keyToDidDoc.
-- Set `id` field for keypairs.
 - Use underscores for utility functions.
 
 ## 0.7.0 - 2020-09-23

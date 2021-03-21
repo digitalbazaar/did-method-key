@@ -1,9 +1,10 @@
-# did:key method driver _(did-method-key)_
+# did:key method driver _(@digitalbazaar/did-method-key)_
 
-[![NPM Version](https://img.shields.io/npm/v/did-method-key.svg?style=flat-square)](https://npm.im/did-method-key)
-![Node.js CI](https://github.com/digitalbazaar/did-method-key-js/workflows/Node.js%20CI/badge.svg)
+[![Node.js CI](https://github.com/digitalbazaar/did-method-key/workflows/Node.js%20CI/badge.svg)](https://github.com/digitalbazaar/did-method-key/actions?query=workflow%3A%22Node.js+CI%22)
+[![Coverage status](https://img.shields.io/codecov/c/github/digitalbazaar/did-method-key)](https://codecov.io/gh/digitalbazaar/did-method-key)
+[![NPM Version](https://img.shields.io/npm/v/digitalbazaar/did-method-key)](https://www.npmjs.com/package/@digitalbazaar/did-method-key)
 
-> A [DID](https://w3c-ccg.github.io/did-spec/) (Decentralized Identifier) method driver for the `did-io` library and for standalone use
+> A [DID](https://w3c.github.io/did-core) (Decentralized Identifier) method driver for the `did-io` library and for standalone use
 
 ## Table of Contents
 
@@ -20,7 +21,7 @@
 
 See also (related specs):
 
-* [Decentralized Identifiers (DIDs) - Data Model and Syntaxes](https://w3c-ccg.github.io/did-spec/)
+* [Decentralized Identifiers (DIDs)](https://w3c.github.io/did-core)
 * [Linked Data Cryptographic Suite Registry](https://w3c-ccg.github.io/ld-cryptosuite-registry/)
 * [Linked Data Proofs](https://w3c-dvcg.github.io/ld-proofs/)
 
@@ -92,12 +93,12 @@ that this is safe to do.
 
 ## Install
 
-Requires Node.js 8.3+
+Requires Node.js 12+
 
 To install from `npm`:
 
 ```
-npm install --save did-method-key
+npm install --save @digitalbazaar/did-method-key
 ```
 
 To install locally (for development):
@@ -113,7 +114,7 @@ npm install
 To generate a new key and get its corresponding `did:key` method DID Document:
 
 ```js
-const didKeyDriver = require('did-method-key').driver();
+const didKeyDriver = require('@digitalbazaar/did-method-key').driver();
 
 // generate did:key using Ed25519 key type by default
 const {didDocument, keyPairs} = await didKeyDriver.generate();
@@ -167,7 +168,7 @@ See [the contribute file](https://github.com/digitalbazaar/bedrock/blob/master/C
 
 PRs accepted.
 
-Small note: If editing the Readme, please conform to the
+If editing the Readme, please conform to the
 [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
 
 ## Commercial Support

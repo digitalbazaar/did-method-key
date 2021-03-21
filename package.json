@@ -1,7 +1,7 @@
 {
-  "name": "did-method-key",
+  "name": "@digitalbazaar/did-method-key",
   "version": "1.0.0-0",
-  "description": "A did:key method driver for did-io and standalone use.",
+  "description": "A did:key method resolver.",
   "homepage": "http://github.com/digitalbazaar/did-method-key-js",
   "author": {
     "name": "Digital Bazaar, Inc.",
@@ -17,24 +17,57 @@
     "email": "support@digitalbazaar.com"
   },
   "license": "BSD-3-Clause",
-  "main": "lib/",
+  "main": "lib/index.js",
+  "module": "lib/main.js",
   "dependencies": {
-    "@digitalbazaar/ed25519-verification-key-2018": "^1.1.0",
-    "@digitalbazaar/lru-memoize": "^1.1.0",
-    "crypto-ld": "^4.0.3",
-    "security-context": "^4.0.0",
-    "x25519-key-pair": "^3.1.0"
+    "@digitalbazaar/ed25519-verification-key-2020": "^2.0.0",
+    "@digitalbazaar/x25519-key-agreement-key-2019": "^5.0.0",
+    "did-context": "^2.0.0",
+    "ed25519-signature-2020-context": "^1.0.1",
+    "esm": "^3.2.25",
+    "security-context": "^4.0.0"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "cross-env": "^7.0.2",
-    "eslint": "^7.9.0",
+    "@babel/core": "^7.13.10",
+    "@babel/plugin-transform-modules-commonjs": "^7.13.8",
+    "@babel/plugin-transform-runtime": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "@babel/runtime": "^7.13.10",
+    "babel-loader": "^8.2.2",
+    "chai": "^4.3.4",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.22.0",
     "eslint-config-digitalbazaar": "^2.6.1",
-    "mocha": "^7.1.1",
-    "nyc": "^15.0.1"
+    "eslint-plugin-jsdoc": "^32.3.0",
+    "karma": "^6.2.0",
+    "karma-babel-preprocessor": "^8.0.1",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-mocha": "^2.0.1",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-sourcemap-loader": "^0.3.8",
+    "karma-webpack": "^5.0.0",
+    "mocha": "^8.3.2",
+    "mocha-lcov-reporter": "^1.3.0",
+    "nyc": "^15.1.0",
+    "webpack": "^5.26.3"
+  },
+  "nyc": {
+    "exclude": [
+      "tests"
+    ],
+    "reporter": [
+      "html",
+      "text-summary"
+    ]
+  },
+  "browser": {
+    "buffer": false,
+    "crypto": false,
+    "util": false
   },
   "engines": {
-    "node": ">=12.13.0"
+    "node": ">=12"
   },
   "keywords": [
     "Decentralized",
@@ -42,13 +75,12 @@
     "DID"
   ],
   "scripts": {
-    "test": "npm run test-node",
-    "test-node": "cross-env NODE_ENV=test mocha --preserve-symlinks -t 30000 -A -R ${REPORTER:-spec} tests/*.spec.js",
-    "preversion": "npm test",
-    "postversion": "git push --follow-tags",
-    "lint": "eslint lib tests",
+    "test": "npm run lint && npm run test-node && npm run test-karma",
+    "test-node": "cross-env NODE_ENV=test mocha -r esm --preserve-symlinks -t 10000 test/*.spec.js",
+    "test-karma": "karma start karma.conf.js",
     "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary npm run test-node",
     "coverage-ci": "cross-env NODE_ENV=test nyc --reporter=text-lcov npm run test-node > coverage.lcov",
-    "coverage-report": "nyc report"
+    "coverage-report": "nyc report",
+    "lint": "eslint ."
   }
 }

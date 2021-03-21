@@ -1,13 +1,13 @@
 /*!
- * Copyright (c) 2019-2020 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2019-20201 Digital Bazaar, Inc. All rights reserved.
  */
-'use strict';
-
-const chai = require('chai');
+import chai from 'chai';
 chai.should();
 const {expect} = chai;
 
-const didKeyDriver = require('../lib/').driver();
+import {driver} from '../';
+
+const didKeyDriver = driver();
 
 describe('did:key method driver', () => {
   describe('get', () => {
@@ -18,7 +18,10 @@ describe('did:key method driver', () => {
       const didDocument = await didKeyDriver.get({did});
 
       expect(didDocument.id).to.equal(did);
-      expect(didDocument['@context']).to.eql(['https://w3id.org/did/v0.11']);
+      expect(didDocument['@context']).to.eql([
+        'https://w3id.org/did/v0.11',
+        'https://w3id.org/security/suites/ed25519-2020/v1'
+      ]);
       expect(didDocument.authentication).to.eql([keyId]);
       expect(didDocument.assertionMethod).to.eql([keyId]);
       expect(didDocument.capabilityDelegation).to.eql([keyId]);
@@ -26,10 +29,10 @@ describe('did:key method driver', () => {
 
       const [publicKey] = didDocument.verificationMethod;
       expect(publicKey.id).to.equal(keyId);
-      expect(publicKey.type).to.equal('Ed25519VerificationKey2018');
+      expect(publicKey.type).to.equal('Ed25519VerificationKey2020');
       expect(publicKey.controller).to.equal(did);
-      expect(publicKey.publicKeyBase58).to
-        .equal('B12NYF8RrR3h41TDCTJojY59usg3mbtbjnFs7Eud1Y6u');
+      expect(publicKey.publicKeyMultibase).to
+        .equal('zB12NYF8RrR3h41TDCTJojY59usg3mbtbjnFs7Eud1Y6u');
 
       const [kak] = didDocument.keyAgreement;
       expect(kak.id).to.equal(did +
@@ -46,12 +49,12 @@ describe('did:key method driver', () => {
       const key = await didKeyDriver.get({did: keyId});
 
       expect(key).to.eql({
-        '@context': 'https://w3id.org/security/v2',
+        '@context': 'https://w3id.org/security/suites/ed25519-2020/v1',
         // eslint-disable-next-line max-len
         id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-        type: 'Ed25519VerificationKey2018',
+        type: 'Ed25519VerificationKey2020',
         controller: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-        publicKeyBase58: 'B12NYF8RrR3h41TDCTJojY59usg3mbtbjnFs7Eud1Y6u'
+        publicKeyMultibase: 'zB12NYF8RrR3h41TDCTJojY59usg3mbtbjnFs7Eud1Y6u'
       });
     });
 

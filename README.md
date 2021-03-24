@@ -104,8 +104,8 @@ npm install --save @digitalbazaar/did-method-key
 To install locally (for development):
 
 ```
-git clone https://github.com/digitalbazaar/did-method-key.git
-cd did-method-key
+git clone https://github.com/digitalbazaar/did-method-key-js.git
+cd did-method-key-js
 npm install
 ```
 

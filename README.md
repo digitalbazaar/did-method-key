@@ -117,7 +117,9 @@ To generate a new key and get its corresponding `did:key` method DID Document:
 const didKeyDriver = require('@digitalbazaar/did-method-key').driver();
 
 // generate did:key using Ed25519 key type by default
-const {didDocument, keyPairs} = await didKeyDriver.generate();
+const {
+  didDocument, keyPairs, verificationKeyPair, keyAgreementKeyPair
+} = await didKeyDriver.generate();
 
 // print the DID Document above
 console.log(JSON.stringify(didDocument, null, 2));
@@ -148,19 +150,6 @@ const didDocument = await didKeyDriver.get({did});
 ```
 
 (Results in the [example DID Doc](#example-did-document) above).
-
-If you have an existing [`crypto-ld`](https://github.com/digitalbazaar/crypto-ld)
-key pair, you can convert it to a `did:key` method DID Doc:
-
-```js
-const {Ed25519KeyPair} = require('crypto-ld');
-const {keyToDidDoc} = require('did-method-key').driver();
-
-const edKey = await Ed25519KeyPair.generate();
-const {didDocument, keyPairs} = await keyToDidDoc(edKey);
-
-// Returns a DID Document
-```
 
 ## Contribute
 

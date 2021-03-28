@@ -22,7 +22,7 @@
   "dependencies": {
     "@digitalbazaar/ed25519-verification-key-2020": "^2.0.0",
     "@digitalbazaar/x25519-key-agreement-key-2019": "digitalbazaar/x25519-key-agreement-key-2019#fix-env",
-    "did-context": "^2.0.0",
+    "did-context": "digitalbazaar/did-context#did-core-cr",
     "ed25519-signature-2020-context": "^1.0.1",
     "esm": "^3.2.25",
     "security-context": "^4.0.0"

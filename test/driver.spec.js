@@ -19,7 +19,7 @@ describe('did:key method driver', () => {
 
       expect(didDocument.id).to.equal(did);
       expect(didDocument['@context']).to.eql([
-        'https://w3id.org/did/v0.11',
+        'https://www.w3.org/ns/did/v1',
         'https://w3id.org/security/suites/ed25519-2020/v1'
       ]);
       expect(didDocument.authentication).to.eql([keyId]);

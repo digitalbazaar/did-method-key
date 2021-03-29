@@ -52,31 +52,35 @@ That DID would correspond to the following DID Document:
     "https://www.w3.org/ns/did/v1",
     "https://w3id.org/security/suites/ed25519-2020/v1"
   ],
-  "id": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
-  "verificationMethod": [{
-    "id": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
-    "type": "Ed25519VerificationKey2020",
-    "controller": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
-    "publicKeyMultibase": "zB12NYF8RrR3h41TDCTJojY59usg3mbtbjnFs7Eud1Y6u"
-    }],
+  "id": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
+  "verificationMethod": [
+    {
+      "id": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
+      "type": "Ed25519VerificationKey2020",
+      "controller": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
+      "publicKeyMultibase": "zrS3jcoWtFYvEmdjKkYeXQqgzvTR3FwU3VTyL7gX2Z2S"
+    }
+  ],
   "authentication": [
-    "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"
+    "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop"
   ],
   "assertionMethod": [
-    "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"
+    "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop"
   ],
   "capabilityDelegation": [
-    "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"
+    "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop"
   ],
   "capabilityInvocation": [
-    "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"
+    "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop"
   ],
-  "keyAgreement": [{
-    "id": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc",
-    "type": "X25519KeyAgreementKey2019",
-    "controller": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
-    "publicKeyBase58": "JhNWeSVLMYccCk7iopQW4guaSJTojqpMEELgSLhKwRr"
-  }]
+  "keyAgreement": [
+    {
+      "id": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6LSmNXTNXTkUPL6UHaBCDJhtvNTTzCgcUQ6kM6S7zngPFPj",
+      "type": "X25519KeyAgreementKey2019",
+      "controller": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
+      "publicKeyBase58": "AhMHrDetNvcMNuCQfZnkaL9ycqfZusDwsNNkdY99fscy"
+    }
+  ]
 }
 ```
 
@@ -117,38 +121,57 @@ const didKeyDriver = require('@digitalbazaar/did-method-key').driver();
 
 // generate did:key using Ed25519 key type by default
 const {
-  didDocument, keyPairs, verificationKeyPair, keyAgreementKeyPair
+  didDocument, keyPairs
 } = await didKeyDriver.generate();
 
 // print the DID Document above
 console.log(JSON.stringify(didDocument, null, 2));
 
 // keyPairs will be set like so ->
-Map({
-  "did:key:z6MkqPnSmWhrV28rjGkGjCuT5Fzxm5WwL6jgAiYc4PvTWVny#z6MkqPnSmWhrV28rjGkGjCuT5Fzxm5WwL6jgAiYc4PvTWVny": {
-    "controller": "did:key:z6MkqPnSmWhrV28rjGkGjCuT5Fzxm5WwL6jgAiYc4PvTWVny",
-    "type": "Ed25519VerificationKey2018",
-    "privateKeyBase58": "3rACVtG71pbij7fvVenidrMjk9jDDMeBG7LeUt84cbyC5BCcAgyrpaDzGHAn38snSXbGKkNhaRKVMvSyt4bpAxgy",
-    "publicKeyBase58": "BwXQBGTR9UePcmua3dwcEASxwWF5vDVKUhdgE7xSbH1b"
-  },
-  "did:key:z6MkqPnSmWhrV28rjGkGjCuT5Fzxm5WwL6jgAiYc4PvTWVny#z6LSjGzxwJ5CdYH1mFFAn8NUQkyXW7zAGcFrTP5pGifBr2Ve": {
-    "id": "did:key:z6MkqPnSmWhrV28rjGkGjCuT5Fzxm5WwL6jgAiYc4PvTWVny#z6LSjGzxwJ5CdYH1mFFAn8NUQkyXW7zAGcFrTP5pGifBr2Ve",
-    "controller": "did:key:z6MkqPnSmWhrV28rjGkGjCuT5Fzxm5WwL6jgAiYc4PvTWVny",
-    "type": "X25519KeyAgreementKey2019",
-    "privateKeyBase58": "BGi7pTP2JHo1odGw3mTWnM4hZmyGWWaAPDne2YHY3VEB",
-    "publicKeyBase58": "8bpoQzGLY5ZGfrsQFUrX6Am3eyT3a15haQN8nG1f8eit"
-  }
-})
+Map(
+    {
+      "id": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
+      "type": "Ed25519VerificationKey2020",
+      "controller": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
+      "publicKeyMultibase": "zrS3jcoWtFYvEmdjKkYeXQqgzvTR3FwU3VTyL7gX2Z2S",
+      "privateKeyMultibase": "zAikBWSMGw5qsBZ5oz99dZhLUyheEamiKyeyJCMnchnFn1zXapmditR7NY317ajE5KrxGp7FpakADViDFeWhm8C2"
+    },
+    {
+      "id": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6LSmNXTNXTkUPL6UHaBCDJhtvNTTzCgcUQ6kM6S7zngPFPj",
+      "type": "X25519KeyAgreementKey2019",
+      "controller": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
+      "publicKeyBase58": "AhMHrDetNvcMNuCQfZnkaL9ycqfZusDwsNNkdY99fscy",
+      "privateKeyBase58": "HBxPbDj1ZteHV1t63bwwvEFsssG6u7pGzVEPsHMFyhGz"
+    }
+);
 ```
 
 To get a DID Document for an existing `did:key` DID:
 
 ```js
-const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+const did = 'did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop';
 const didDocument = await didKeyDriver.get({did});
 ```
 
 (Results in the [example DID Doc](#example-did-document) above).
+
+You can also use a `.get()` to retrieve an individual key (this is useful
+for constructing `documentLoader`s for JSON-LD Signature libs, and the resulting
+key does include the appropriate `@context`).
+
+```js
+
+const verificationKeyId = 'did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6LSmNXTNXTkUPL6UHaBCDJhtvNTTzCgcUQ6kM6S7zngPFPj';
+await didKeyDriver.get({url: verificationKeyId});
+// ->
+{
+  "@context": "https://w3id.org/security/v2",
+  "id": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6LSmNXTNXTkUPL6UHaBCDJhtvNTTzCgcUQ6kM6S7zngPFPj",
+  "type": "X25519KeyAgreementKey2019",
+  "controller": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
+  "publicKeyBase58": "AhMHrDetNvcMNuCQfZnkaL9ycqfZusDwsNNkdY99fscy"
+}
+```
 
 ## Contribute
 

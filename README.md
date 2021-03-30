@@ -50,35 +50,36 @@ That DID would correspond to the following DID Document:
 {
   "@context": [
     "https://www.w3.org/ns/did/v1",
-    "https://w3id.org/security/suites/ed25519-2020/v1"
+    "https://w3id.org/security/suites/ed25519-2020/v1",
+    "https://w3id.org/security/suites/x25519-2020/v1"
   ],
-  "id": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
+  "id": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
   "verificationMethod": [
     {
-      "id": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
+      "id": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
       "type": "Ed25519VerificationKey2020",
-      "controller": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
-      "publicKeyMultibase": "zrS3jcoWtFYvEmdjKkYeXQqgzvTR3FwU3VTyL7gX2Z2S"
+      "controller": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
+      "publicKeyMultibase": "zFj5p9C2Sfqth6g6DEXtw5dWFqrtpFn4TCBBPJHGnwKzY"
     }
   ],
   "authentication": [
-    "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop"
+    "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv"
   ],
   "assertionMethod": [
-    "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop"
+    "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv"
   ],
   "capabilityDelegation": [
-    "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop"
+    "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv"
   ],
   "capabilityInvocation": [
-    "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop"
+    "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv"
   ],
   "keyAgreement": [
     {
-      "id": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6LSmNXTNXTkUPL6UHaBCDJhtvNTTzCgcUQ6kM6S7zngPFPj",
-      "type": "X25519KeyAgreementKey2019",
-      "controller": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
-      "publicKeyBase58": "AhMHrDetNvcMNuCQfZnkaL9ycqfZusDwsNNkdY99fscy"
+      "id": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6LSeYpKdHsRV4rCh3r6yo7moGbeRm1rmBbptBcAP3HCu4jC",
+      "type": "X25519KeyAgreementKey2020",
+      "controller": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
+      "publicKeyMultibase": "z3seA6z4ZPc8TbfULT9bpUgPAacUk4aRg1CtUtadgBgxS"
     }
   ]
 }
@@ -130,22 +131,24 @@ const {
 console.log(JSON.stringify(didDocument, null, 2));
 
 // keyPairs will be set like so ->
-Map(
-    {
-      "id": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
-      "type": "Ed25519VerificationKey2020",
-      "controller": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
-      "publicKeyMultibase": "zrS3jcoWtFYvEmdjKkYeXQqgzvTR3FwU3VTyL7gX2Z2S",
-      "privateKeyMultibase": "zAikBWSMGw5qsBZ5oz99dZhLUyheEamiKyeyJCMnchnFn1zXapmditR7NY317ajE5KrxGp7FpakADViDFeWhm8C2"
-    },
-    {
-      "id": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6LSmNXTNXTkUPL6UHaBCDJhtvNTTzCgcUQ6kM6S7zngPFPj",
-      "type": "X25519KeyAgreementKey2019",
-      "controller": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
-      "publicKeyBase58": "AhMHrDetNvcMNuCQfZnkaL9ycqfZusDwsNNkdY99fscy",
-      "privateKeyBase58": "HBxPbDj1ZteHV1t63bwwvEFsssG6u7pGzVEPsHMFyhGz"
-    }
-);
+Map(2) {
+  'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv' => Ed25519VerificationKey2020 {
+    id: 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv',
+    controller: 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv',
+    type: 'Ed25519VerificationKey2020',
+    publicKeyMultibase: 'zFj5p9C2Sfqth6g6DEXtw5dWFqrtpFn4TCBBPJHGnwKzY',
+    privateKeyMultibase: 'z3zDo1wXuXGcFkJa9SPE7VYpdutmHq8gJsvFRMKJckTWMykoHsAjWNbHXqzrZ8qa7aWdDTjmJNJ1amYEG2mCvZZeY'
+  },
+  'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6LSeYpKdHsRV4rCh3r6yo7moGbeRm1rmBbptBcAP3HCu4jC' => X25519KeyAgreementKey2020 {
+    id: 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6LSeYpKdHsRV4rCh3r6yo7moGbeRm1rmBbptBcAP3HCu4jC',
+    controller: 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv',
+    type: 'X25519KeyAgreementKey2020',
+    publicKeyMultibase: 'z3seA6z4ZPc8TbfULT9bpUgPAacUk4aRg1CtUtadgBgxS',
+    privateKeyMultibase: 'z8YKTeHC5WzYNV7k8Nq7Mbv5cVrWDoyp7RqGMWaaYfvHM'
+  }
+}
+
+
 ```
 
 `methodFor` is a convenience function that returns a key pair instance for a 
@@ -169,7 +172,7 @@ const keyAgreementPair = methodFor({purpose: 'keyAgreement'});
 To get a DID Document for an existing `did:key` DID:
 
 ```js
-const did = 'did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop';
+const did = 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv';
 const didDocument = await didKeyDriver.get({did});
 ```
 
@@ -180,16 +183,26 @@ for constructing `documentLoader`s for JSON-LD Signature libs, and the resulting
 key does include the appropriate `@context`).
 
 ```js
-
-const verificationKeyId = 'did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6LSmNXTNXTkUPL6UHaBCDJhtvNTTzCgcUQ6kM6S7zngPFPj';
-await didKeyDriver.get({url: verificationKeyId});
+const verificationKeyId = 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv';
+await didKeyDriver.get({url: keyAgreementKeyId});
 // ->
 {
-  "@context": "https://w3id.org/security/v2",
+  "@context": "https://w3id.org/security/suites/ed25519-2020/v1",
+        "id": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
+        "type": "Ed25519VerificationKey2020",
+        "controller": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
+        "publicKeyMultibase": "zFj5p9C2Sfqth6g6DEXtw5dWFqrtpFn4TCBBPJHGnwKzY"
+}
+
+const keyAgreementKeyId = 'did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6LSmNXTNXTkUPL6UHaBCDJhtvNTTzCgcUQ6kM6S7zngPFPj';
+await didKeyDriver.get({url: keyAgreementKeyId});
+// ->
+{
+  "@context": "https://w3id.org/security/suites/x25519-2020/v1",
   "id": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6LSmNXTNXTkUPL6UHaBCDJhtvNTTzCgcUQ6kM6S7zngPFPj",
-  "type": "X25519KeyAgreementKey2019",
+  "type": "X25519KeyAgreementKey2020",
   "controller": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
-  "publicKeyBase58": "AhMHrDetNvcMNuCQfZnkaL9ycqfZusDwsNNkdY99fscy"
+  "publicKeyMultibase": "zAhMHrDetNvcMNuCQfZnkaL9ycqfZusDwsNNkdY99fscy"
 }
 ```
 

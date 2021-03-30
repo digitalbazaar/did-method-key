@@ -114,6 +114,8 @@ npm install
 
 ## Usage
 
+### `generate()`
+
 To generate a new key and get its corresponding `did:key` method DID Document:
 
 ```js
@@ -121,7 +123,7 @@ const didKeyDriver = require('@digitalbazaar/did-method-key').driver();
 
 // generate did:key using Ed25519 key type by default
 const {
-  didDocument, keyPairs
+  didDocument, keyPairs, methodFor
 } = await didKeyDriver.generate();
 
 // print the DID Document above
@@ -145,6 +147,24 @@ Map(
     }
 );
 ```
+
+`methodFor` is a convenience function that returns a key pair instance for a 
+given purpose. For example, a verification key (containing a `signer()` and 
+`verifier()` functions) are frequently useful for 
+[`jsonld-signatures`](https://github.com/digitalbazaar/jsonld-signatures) or
+[`vc-js`](https://github.com/digitalbazaar/vc-js) operations. After generating
+a new did:key DID, you can do:
+
+```js
+// For signing Verifiable Credentials
+const verificationKeyPair = methodFor({purpose: 'assertionMethod'});
+// For Authorization Capabilities (zCaps)
+const invocationKeyPair = methodFor({purpose: 'capabilityInvocation'});
+// For Encryption using `@digitalbazaar/minimal-cipher`
+const keyAgreementPair = methodFor({purpose: 'keyAgreement'});
+```
+
+### `get()`
 
 To get a DID Document for an existing `did:key` DID:
 

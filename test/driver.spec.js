@@ -78,10 +78,13 @@ describe('did:key method driver', () => {
   describe('generate', async () => {
     it('should generate and get round trip', async () => {
       const {
-        didDocument, keyPairs, verificationKeyPair, keyAgreementKeyPair
+        didDocument, keyPairs, methodFor
       } = await didKeyDriver.generate();
       const did = didDocument.id;
       const keyId = didDocument.authentication[0];
+
+      const verificationKeyPair = methodFor({purpose: 'assertionMethod'});
+      const keyAgreementKeyPair = methodFor({purpose: 'keyAgreement'});
 
       expect(keyId).to.equal(verificationKeyPair.id);
       expect(keyAgreementKeyPair.type).to.equal('X25519KeyAgreementKey2019');

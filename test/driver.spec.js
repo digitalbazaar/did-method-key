@@ -20,7 +20,8 @@ describe('did:key method driver', () => {
       expect(didDocument.id).to.equal(did);
       expect(didDocument['@context']).to.eql([
         'https://www.w3.org/ns/did/v1',
-        'https://w3id.org/security/suites/ed25519-2020/v1'
+        'https://w3id.org/security/suites/ed25519-2020/v1',
+        'https://w3id.org/security/suites/x25519-2020/v1'
       ]);
       expect(didDocument.authentication).to.eql([keyId]);
       expect(didDocument.assertionMethod).to.eql([keyId]);
@@ -37,10 +38,10 @@ describe('did:key method driver', () => {
       const [kak] = didDocument.keyAgreement;
       expect(kak.id).to.equal(did +
         '#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc');
-      expect(kak.type).to.equal('X25519KeyAgreementKey2019');
+      expect(kak.type).to.equal('X25519KeyAgreementKey2020');
       expect(kak.controller).to.equal(did);
-      expect(kak.publicKeyBase58).to
-        .equal('JhNWeSVLMYccCk7iopQW4guaSJTojqpMEELgSLhKwRr');
+      expect(kak.publicKeyMultibase).to
+        .equal('zJhNWeSVLMYccCk7iopQW4guaSJTojqpMEELgSLhKwRr');
     });
 
     it('should resolve an individual key within the DID Doc', async () => {
@@ -65,12 +66,12 @@ describe('did:key method driver', () => {
       const key = await didKeyDriver.get({did: kakKeyId});
 
       expect(key).to.eql({
-        '@context': 'https://w3id.org/security/v2',
+        '@context': 'https://w3id.org/security/suites/x25519-2020/v1',
         // eslint-disable-next-line max-len
         id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc',
-        type: 'X25519KeyAgreementKey2019',
+        type: 'X25519KeyAgreementKey2020',
         controller: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-        publicKeyBase58: 'JhNWeSVLMYccCk7iopQW4guaSJTojqpMEELgSLhKwRr'
+        publicKeyMultibase: 'zJhNWeSVLMYccCk7iopQW4guaSJTojqpMEELgSLhKwRr'
       });
     });
   });
@@ -87,7 +88,7 @@ describe('did:key method driver', () => {
       const keyAgreementKeyPair = methodFor({purpose: 'keyAgreement'});
 
       expect(keyId).to.equal(verificationKeyPair.id);
-      expect(keyAgreementKeyPair.type).to.equal('X25519KeyAgreementKey2019');
+      expect(keyAgreementKeyPair.type).to.equal('X25519KeyAgreementKey2020');
 
       expect(keyPairs.get(keyId).controller).to.equal(did);
       expect(keyPairs.get(keyId).id).to.equal(keyId);

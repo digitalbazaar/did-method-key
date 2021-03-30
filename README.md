@@ -157,7 +157,7 @@ a new did:key DID, you can do:
 
 ```js
 // For signing Verifiable Credentials
-const verificationKeyPair = methodFor({purpose: 'assertionMethod'});
+const assertionKeyPair = methodFor({purpose: 'assertionMethod'});
 // For Authorization Capabilities (zCaps)
 const invocationKeyPair = methodFor({purpose: 'capabilityInvocation'});
 // For Encryption using `@digitalbazaar/minimal-cipher`

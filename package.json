@@ -22,11 +22,11 @@
   "dependencies": {
     "@digitalbazaar/did-io": "digitalbazaar/did-io#v0.9.x",
     "@digitalbazaar/ed25519-verification-key-2020": "^2.0.0",
-    "@digitalbazaar/x25519-key-agreement-key-2019": "^5.0.1",
+    "@digitalbazaar/x25519-key-agreement-key-2020": "digitalbazaar/x25519-key-agreement-key-2020#initial",
     "did-context": "digitalbazaar/did-context#did-core-cr",
     "ed25519-signature-2020-context": "^1.0.1",
     "esm": "^3.2.25",
-    "security-context": "^4.0.0"
+    "x25519-key-agreement-2020-context": "digitalbazaar/x25519-key-agreement-2020-context#v1.0.0"
   },
   "devDependencies": {
     "chai": "^4.3.4",

@@ -76,7 +76,7 @@ describe('did:key method driver', () => {
     });
   });
 
-  describe('generate', async () => {
+  describe('generate', () => {
     it('should generate and get round trip', async () => {
       const {
         didDocument, keyPairs, methodFor
@@ -98,7 +98,33 @@ describe('did:key method driver', () => {
     });
   });
 
-  describe('computeId', async () => {
+  describe('publicMethodFor', () => {
+    it('should find a key for a did doc and purpose', async () => {
+      const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      // First, get the did document
+      const didDocument = await didKeyDriver.get({did});
+      // Then publicMethodFor can be used to fetch key data
+      const keyAgreementData = didKeyDriver.publicMethodFor({
+        didDocument, purpose: 'keyAgreement'
+      });
+      expect(keyAgreementData).to.have
+        .property('type', 'X25519KeyAgreementKey2020');
+      expect(keyAgreementData).to.have
+        .property('publicKeyMultibase',
+          'zJhNWeSVLMYccCk7iopQW4guaSJTojqpMEELgSLhKwRr');
+
+      const authKeyData = didKeyDriver.publicMethodFor({
+        didDocument, purpose: 'authentication'
+      });
+      expect(authKeyData).to.have
+        .property('type', 'Ed25519VerificationKey2020');
+      expect(authKeyData).to.have
+        .property('publicKeyMultibase',
+          'zB12NYF8RrR3h41TDCTJojY59usg3mbtbjnFs7Eud1Y6u');
+    });
+  });
+
+  describe('computeId', () => {
     const keyPair = {fingerprint: () => '12345'};
 
     it('should set the key id based on fingerprint', async () => {

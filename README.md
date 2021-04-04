@@ -151,9 +151,9 @@ Map(2) {
 
 ```
 
-`methodFor` is a convenience function that returns a key pair instance for a 
-given purpose. For example, a verification key (containing a `signer()` and 
-`verifier()` functions) are frequently useful for 
+`methodFor` is a convenience function that returns a public/private key pair 
+instance for a given purpose. For example, a verification key (containing a 
+`signer()` and `verifier()` functions) are frequently useful for 
 [`jsonld-signatures`](https://github.com/digitalbazaar/jsonld-signatures) or
 [`vc-js`](https://github.com/digitalbazaar/vc-js) operations. After generating
 a new did:key DID, you can do:
@@ -167,7 +167,14 @@ const invocationKeyPair = methodFor({purpose: 'capabilityInvocation'});
 const keyAgreementPair = methodFor({purpose: 'keyAgreement'});
 ```
 
+Note that `methodFor` returns a key pair that contains both a public and private
+key pair (since it has access to the `keyPairs` map from `generate()`).
+This makes it useful for _signing_ and _encrypting_ operations (unlike the 
+`publicMethodFor` that's returned by `get()`, below).
+
 ### `get()`
+
+#### Getting a full DID Document from a `did:key` DID
 
 To get a DID Document for an existing `did:key` DID:
 
@@ -178,9 +185,11 @@ const didDocument = await didKeyDriver.get({did});
 
 (Results in the [example DID Doc](#example-did-document) above).
 
-You can also use a `.get()` to retrieve an individual key (this is useful
-for constructing `documentLoader`s for JSON-LD Signature libs, and the resulting
-key does include the appropriate `@context`).
+#### Getting just the key object by key id
+
+You can also use a `.get()` to retrieve an individual key, if you know it's id
+already (this is useful for constructing `documentLoader`s for JSON-LD Signature 
+libs, and the resulting key does include the appropriate `@context`).
 
 ```js
 const verificationKeyId = 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv';
@@ -204,6 +213,32 @@ await didKeyDriver.get({url: keyAgreementKeyId});
   "controller": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
   "publicKeyMultibase": "zAhMHrDetNvcMNuCQfZnkaL9ycqfZusDwsNNkdY99fscy"
 }
+```
+
+### `publicMethodFor()`
+
+Often, you have just a `did:key` DID, and you need to get a key for a
+particular _purpose_ from it, such as an `assertionMethod` key to verify a 
+VC signature, or a `keyAgreement` key to encrypt a document for that DID's
+controller.
+
+For that purpose, you can use a combination of `get()` and `publicMethodFor`:
+
+```js
+// Start with the DID
+const didDocument = await didKeyDriver.get({did});
+// This lets you use `publicMethodFor()` to get a key for a specific purpose
+const keyAgreementData = didKeyDriver.publicMethodFor({
+  didDocument, purpose: 'keyAgreement'
+});
+const assertionMethodData = didKeyDriver.publicMethodFor({
+  didDocument, purpose: 'assertionMethod'
+});
+
+// If you're using a `crypto-ld` driver harness, you can create key instances
+// which allow you to get access to a `verify()` function.
+const assertionMethodPublicKey = await cryptoLd.from(assertionMethodData);
+const {verify} = assertionMethodPublicKey.verifier();
 ```
 
 ## Contribute

@@ -20,7 +20,7 @@
   "main": "lib/index.js",
   "module": "lib/main.js",
   "dependencies": {
-    "@digitalbazaar/did-io": "digitalbazaar/did-io#v0.9.x",
+    "@digitalbazaar/did-io": "^1.0.0",
     "@digitalbazaar/ed25519-verification-key-2020": "^2.0.0",
     "@digitalbazaar/x25519-key-agreement-key-2020": "^1.0.0",
     "did-context": "^3.0.0",

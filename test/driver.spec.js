@@ -122,6 +122,17 @@ describe('did:key method driver', () => {
         .property('publicKeyMultibase',
           'zB12NYF8RrR3h41TDCTJojY59usg3mbtbjnFs7Eud1Y6u');
     });
+
+    it('should return undefined if key is not found for purpose', async () => {
+      const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      // First, get the did document
+      const didDocument = await didKeyDriver.get({did});
+      // Then publicMethodFor can be used to fetch key data
+      const result = didKeyDriver.publicMethodFor({
+        didDocument, purpose: 'invalidPurpose'
+      });
+      expect(result).to.be.undefined;
+    });
   });
 
   describe('computeId', () => {

@@ -241,6 +241,9 @@ const assertionMethodPublicKey = await cryptoLd.from(assertionMethodData);
 const {verify} = assertionMethodPublicKey.verifier();
 ```
 
+`publicMethodFor` will return `undefined` if no key is found for a given
+purpose.
+
 ## Contribute
 
 See [the contribute file](https://github.com/digitalbazaar/bedrock/blob/master/CONTRIBUTING.md)!

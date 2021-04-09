@@ -137,9 +137,9 @@ describe('did:key method driver', () => {
         error = e;
       }
 
-      expect(error).to.be.exist;
+      expect(error).to.exist;
       expect(error.message).to
-        .match(/No verification method found for purpose/);
+        .contain('No verification method found for purpose');
     });
   });
 

@@ -5,11 +5,13 @@
 ### Changed
 - **BREAKING**: Rename npm package from `did-method-key` to 
   `@digitalbazaar/did-method-key`.
-- **BREAKING**: Return {didDocument, keyPairs} from `generate()`.
-- **BREAKING**: Upgrade to crypto-ld 5.0
+- **BREAKING**: Return `{didDocument, keyPairs, methodFor}` from `generate()`.
+- **BREAKING**: Upgrade to `crypto-ld` v5.0 based key suites, update to use
+  `Ed25519VerificationKey2020` and `X25519KeyAgreementKey2020` crypto suites.
 - **BREAKING**: Rename `computeKeyId()` -> `computeId()`.
 - Avoid mutation of ed25519 key passed into keyToDidDoc.
 - Use underscores for utility functions.
+- Add `methodFor` and `publicMethodFor` convenience functions.
 
 ## 0.7.0 - 2020-09-23
 

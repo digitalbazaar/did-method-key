@@ -1,6 +1,6 @@
 # did:key driver ChangeLog
 
-## 1.0.0 - 
+## 1.0.0 - 2021-04-09
 
 ### Changed
 - **BREAKING**: Rename npm package from `did-method-key` to 
@@ -12,6 +12,7 @@
 - Avoid mutation of ed25519 key passed into keyToDidDoc.
 - Use underscores for utility functions.
 - Add `methodFor` and `publicMethodFor` convenience functions.
+- **BREAKING**: Move the lru-cache to `did-io`'s `CachedResolver` class.
 
 ## 0.7.0 - 2020-09-23
 

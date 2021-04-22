@@ -8,11 +8,88 @@
 - **BREAKING**: Return `{didDocument, keyPairs, methodFor}` from `generate()`.
 - **BREAKING**: Upgrade to `crypto-ld` v5.0 based key suites, update to use
   `Ed25519VerificationKey2020` and `X25519KeyAgreementKey2020` crypto suites.
+- **BREAKING**: DID Document context changed from `'https://w3id.org/did/v0.11'`
+  to the DID WG-published `https://www.w3.org/ns/did/v1`, plus the contexts
+  for the `Ed25519VerificationKey2020` and `X25519KeyAgreementKey2020` crypto
+  suites. See the "Example DID Document" section of the README.
 - **BREAKING**: Rename `computeKeyId()` -> `computeId()`.
 - Avoid mutation of ed25519 key passed into keyToDidDoc.
 - Use underscores for utility functions.
 - Add `methodFor` and `publicMethodFor` convenience functions.
 - **BREAKING**: Move the lru-cache to `did-io`'s `CachedResolver` class.
+- **BREAKING**: `keyToDidDoc` driver method removed. (See Upgrading notes
+  for alternatives.)
+- **BREAKING**: The `publicKey` property of the DID Document has been deprecated
+  by the DID Data Model, and is now renamed to `verificationMethod`.
+
+### Upgrading from <= v.0.7.0
+
+**1)** Check for the changed `generate()` return signature. The usage is now:
+
+```js
+const {didDocument, keyPairs, methodFor} = await didKeyDriver.generate();
+```
+
+Note that `keyPairs` is a js `Map` instance containing the public/private key
+pairs for both the signing key and the X25519 key agreement key.
+
+And the `methodFor` convenience function allows you to fetch a particular
+public/private key pair for a given purpose. For example:
+
+```js
+const {didDocument, keyPairs, methodFor} = await didKeyDriver.generate();
+const authenticationKeyPair = methodFor({purpose: 'authentication'});
+const keyAgreementKeyPair = methodFor({purpose: 'keyAgreement'});
+```
+
+**2)** Make sure to adjust your `documentLoader` to handle the new contexts.
+
+**3)** The `keyToDidDoc` function has been removed. What should you use instead?
+That partly depends on what you were using that function for, previously.
+
+The easiest way to convert a key to a `did:key` DID Document is via
+`didKeyDriver.get()`.
+
+For example, if you have a key description object (such as that returned by
+a KMS system's "generate key" operation):
+
+```js
+const keyDescription = {
+  "@context": "https://w3id.org/security/suites/ed25519-2020/v1",
+  "id": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
+  "type": "Ed25519VerificationKey2020",
+  "controller": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
+  "publicKeyMultibase": "zFj5p9C2Sfqth6g6DEXtw5dWFqrtpFn4TCBBPJHGnwKzY"
+};
+```
+
+If the key's ID or controller already contains the `did:key` DID, you can
+use `.get()` to turn it into a DID Document:
+
+```js
+const controller = keyDescription.controller;
+// or
+const [controller] = keyDescription.id.split('#'); 
+const didDocument = await didKeyDriver.get({did: controller});
+```
+
+Similarly, if you're starting with an `LDKeyPair` instance, you can use `.get()`
+like so:
+
+```js
+const keyPair = await Ed25529VerificationKey2020.generate();
+const did = `did:key:${keyPair.fingerprint()}`;
+const didDocument = await didKeyDriver.get({did});
+```
+
+Don't forget that you can use the `didKeyDriver.publicMethodFor({purpose})` 
+after turning a key to a DID Document with `.get()`:
+
+```js
+const didDocument = await didKeyDriver.get({did});
+const keyAgreementKey = didKeyDriver.publicMethodFor({didDocument, purpose: 'keyAgreement'});
+// Note that the resulting keyAgreementKey pair will only have the public key material, not private
+```
 
 ## 0.7.0 - 2020-09-23
 

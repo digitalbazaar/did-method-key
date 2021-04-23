@@ -1,5 +1,12 @@
 # did:key driver ChangeLog
 
+## 1.1.0 -
+
+### Added
+- Add `didKeyDriver.publicKeyToDidDoc({keyPair})` method. (This used to be 
+  the `keyToDidDoc()` method, in `<= v0.7.0`, removed in v1.0 and brought back
+  by popular demand.)
+
 ## 1.0.0 - 2021-04-09
 
 ### Changed
@@ -44,16 +51,12 @@ const keyAgreementKeyPair = methodFor({purpose: 'keyAgreement'});
 
 **2)** Make sure to adjust your `documentLoader` to handle the new contexts.
 
-**3)** The `keyToDidDoc` function has been removed. What should you use instead?
-That partly depends on what you were using that function for, previously.
-
-The easiest way to convert a key to a `did:key` DID Document is via
-`didKeyDriver.get()`.
-
-For example, if you have a key description object (such as that returned by
-a KMS system's "generate key" operation):
+**3)** The `keyToDidDoc` function has been renamed to `publicKeyToDidDoc()` (as
+of v1.1), and the return signature has changed.
 
 ```js
+// For example, if you have a key description object (such as that returned by
+// a KMS system's "generate key" operation):
 const keyDescription = {
   "@context": "https://w3id.org/security/suites/ed25519-2020/v1",
   "id": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
@@ -61,32 +64,17 @@ const keyDescription = {
   "controller": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
   "publicKeyMultibase": "zFj5p9C2Sfqth6g6DEXtw5dWFqrtpFn4TCBBPJHGnwKzY"
 };
-```
+const {didDocument} = await didKeyDriver.publicKeyToDidDoc({keyPair: keyDescription}); 
 
-If the key's ID or controller already contains the `did:key` DID, you can
-use `.get()` to turn it into a DID Document:
-
-```js
-const controller = keyDescription.controller;
-// or
-const [controller] = keyDescription.id.split('#'); 
-const didDocument = await didKeyDriver.get({did: controller});
-```
-
-Similarly, if you're starting with an `LDKeyPair` instance, you can use `.get()`
-like so:
-
-```js
+// Or, you can start with an `LDKeyPair` instance:
 const keyPair = await Ed25529VerificationKey2020.generate();
-const did = `did:key:${keyPair.fingerprint()}`;
-const didDocument = await didKeyDriver.get({did});
+const {didDocument} = await didKeyDriver.publicKeyToDidDoc({keyPair}); 
 ```
 
-Don't forget that you can use the `didKeyDriver.publicMethodFor({purpose})` 
-after turning a key to a DID Document with `.get()`:
+Don't forget that you can use the `didKeyDriver.publicMethodFor({purpose})`
+method to fetch a particular key, after creating the did document.
 
 ```js
-const didDocument = await didKeyDriver.get({did});
 const keyAgreementKey = didKeyDriver.publicMethodFor({didDocument, purpose: 'keyAgreement'});
 // Note that the resulting keyAgreementKey pair will only have the public key material, not private
 ```

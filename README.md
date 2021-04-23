@@ -172,6 +172,16 @@ key pair (since it has access to the `keyPairs` map from `generate()`).
 This makes it useful for _signing_ and _encrypting_ operations (unlike the 
 `publicMethodFor` that's returned by `get()`, below).
 
+### `publicKeyToDidDoc()`
+
+If you already have an `Ed25519VerificationKey2020` public key object (as an 
+LDKeyPair instance, or a plain key description object), you can turn it into 
+a DID Document:
+
+```js
+const {didDocument} = await didKeyDriver.publicKeyToDidDoc({keyPair: keyDescription}); 
+```
+
 ### `get()`
 
 #### Getting a full DID Document from a `did:key` DID

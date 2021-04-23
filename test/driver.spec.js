@@ -5,6 +5,8 @@ import chai from 'chai';
 chai.should();
 const {expect} = chai;
 
+import {Ed25519VerificationKey2020} from
+  '@digitalbazaar/ed25519-verification-key-2020';
 import {driver} from '../';
 
 const didKeyDriver = driver();
@@ -95,6 +97,38 @@ describe('did:key method driver', () => {
 
       const fetchedDidDoc = await didKeyDriver.get({did});
       expect(fetchedDidDoc).to.eql(didDocument);
+    });
+  });
+
+  describe('publicKeyToDidDoc', () => {
+    it('should convert a key pair instance into a did doc', async () => {
+      // Note that a freshly-generated key pair does not have a controller
+      // or key id
+      const keyPair = await Ed25519VerificationKey2020.generate();
+      const {didDocument} = await didKeyDriver.publicKeyToDidDoc({keyPair});
+
+      expect(didDocument).to.exist;
+      expect(didDocument).to.have.property('@context');
+      expect(didDocument.id).to.equal(`did:key:${keyPair.fingerprint()}`);
+    });
+
+    it('should convert a plain object to a did doc', async () => {
+      const keyDescription = {
+        '@context': 'https://w3id.org/security/suites/ed25519-2020/v1',
+        id: 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#' +
+          'z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv',
+        type: 'Ed25519VerificationKey2020',
+        controller: 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv',
+        publicKeyMultibase: 'zFj5p9C2Sfqth6g6DEXtw5dWFqrtpFn4TCBBPJHGnwKzY'
+      };
+      const {didDocument} = await didKeyDriver
+        .publicKeyToDidDoc({keyPair: keyDescription});
+
+      expect(didDocument).to.exist;
+      expect(didDocument).to.have.property('@context');
+      expect(didDocument.id).to.equal(
+        'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv'
+      );
     });
   });
 

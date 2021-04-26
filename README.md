@@ -179,7 +179,7 @@ LDKeyPair instance, or a plain key description object), you can turn it into
 a DID Document:
 
 ```js
-const {didDocument} = await didKeyDriver.publicKeyToDidDoc({keyPair: keyDescription}); 
+const {didDocument} = await didKeyDriver.publicKeyToDidDoc({publicKeyDescription}); 
 ```
 
 ### `get()`

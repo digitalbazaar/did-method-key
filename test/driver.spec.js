@@ -105,7 +105,9 @@ describe('did:key method driver', () => {
       // Note that a freshly-generated key pair does not have a controller
       // or key id
       const keyPair = await Ed25519VerificationKey2020.generate();
-      const {didDocument} = await didKeyDriver.publicKeyToDidDoc({keyPair});
+      const {didDocument} = await didKeyDriver.publicKeyToDidDoc({
+        publicKeyDescription: keyPair
+      });
 
       expect(didDocument).to.exist;
       expect(didDocument).to.have.property('@context');
@@ -113,7 +115,7 @@ describe('did:key method driver', () => {
     });
 
     it('should convert a plain object to a did doc', async () => {
-      const keyDescription = {
+      const publicKeyDescription = {
         '@context': 'https://w3id.org/security/suites/ed25519-2020/v1',
         id: 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#' +
           'z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv',
@@ -122,7 +124,7 @@ describe('did:key method driver', () => {
         publicKeyMultibase: 'zFj5p9C2Sfqth6g6DEXtw5dWFqrtpFn4TCBBPJHGnwKzY'
       };
       const {didDocument} = await didKeyDriver
-        .publicKeyToDidDoc({keyPair: keyDescription});
+        .publicKeyToDidDoc({publicKeyDescription});
 
       expect(didDocument).to.exist;
       expect(didDocument).to.have.property('@context');

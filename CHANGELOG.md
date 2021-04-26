@@ -57,18 +57,18 @@ of v1.1), and the return signature has changed.
 ```js
 // For example, if you have a key description object (such as that returned by
 // a KMS system's "generate key" operation):
-const keyDescription = {
+const publicKeyDescription = {
   "@context": "https://w3id.org/security/suites/ed25519-2020/v1",
   "id": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
   "type": "Ed25519VerificationKey2020",
   "controller": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
   "publicKeyMultibase": "zFj5p9C2Sfqth6g6DEXtw5dWFqrtpFn4TCBBPJHGnwKzY"
 };
-const {didDocument} = await didKeyDriver.publicKeyToDidDoc({keyPair: keyDescription}); 
+const {didDocument} = await didKeyDriver.publicKeyToDidDoc({publicKeyDescription});
 
 // Or, you can start with an `LDKeyPair` instance:
 const keyPair = await Ed25529VerificationKey2020.generate();
-const {didDocument} = await didKeyDriver.publicKeyToDidDoc({keyPair}); 
+const {didDocument} = await didKeyDriver.publicKeyToDidDoc({publicKeyDescription: keyPair});
 ```
 
 Don't forget that you can use the `didKeyDriver.publicMethodFor({purpose})`

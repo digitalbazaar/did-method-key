@@ -1,16 +1,16 @@
 # did:key driver ChangeLog
 
-## 1.1.0 -
+## 1.1.0 - 2021-05-04
 
 ### Added
-- Add `didKeyDriver.publicKeyToDidDoc({keyPair})` method. (This used to be 
+- Add `didKeyDriver.publicKeyToDidDoc({keyPair})` method. (This used to be
   the `keyToDidDoc()` method, in `<= v0.7.0`, removed in v1.0 and brought back
   by popular demand.)
 
 ## 1.0.0 - 2021-04-09
 
 ### Changed
-- **BREAKING**: Rename npm package from `did-method-key` to 
+- **BREAKING**: Rename npm package from `did-method-key` to
   `@digitalbazaar/did-method-key`.
 - **BREAKING**: Return `{didDocument, keyPairs, methodFor}` from `generate()`.
 - **BREAKING**: Upgrade to `crypto-ld` v5.0 based key suites, update to use

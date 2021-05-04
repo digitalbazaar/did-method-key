@@ -72,7 +72,7 @@ const {didDocument} = await didKeyDriver.publicKeyToDidDoc({publicKeyDescription
 ```
 
 Don't forget that you can use the `didKeyDriver.publicMethodFor({purpose})`
-method to fetch a particular key, after creating the did document.
+method to fetch a particular key, after creating the DID Document.
 
 ```js
 const keyAgreementKey = didKeyDriver.publicMethodFor({didDocument, purpose: 'keyAgreement'});

@@ -17,16 +17,29 @@
     "email": "support@digitalbazaar.com"
   },
   "license": "BSD-3-Clause",
-  "main": "lib/index.js",
-  "module": "lib/main.js",
+  "files": [
+    "dist",
+    "lib",
+    "rollup.config.js",
+    "build-dist.sh",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/esm/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/esm/index.js"
+    }
+  },
   "dependencies": {
-    "@digitalbazaar/did-io": "^1.0.0",
-    "@digitalbazaar/ed25519-verification-key-2020": "^2.1.1",
-    "@digitalbazaar/x25519-key-agreement-key-2020": "^1.0.0",
-    "did-context": "^3.0.0",
+    "@digitalbazaar/did-io": "digitalbazaar/did-io#noesm",
+    "@digitalbazaar/ed25519-verification-key-2020": "digitalbazaar/ed25519-verification-key-2020#noesm",
+    "@digitalbazaar/x25519-key-agreement-key-2020": "digitalbazaar/x25519-key-agreement-key-2020#noesm",
+    "did-context": "digitalbazaar/did-context#nofs",
     "ed25519-signature-2020-context": "^1.0.1",
-    "esm": "^3.2.25",
-    "x25519-key-agreement-2020-context": "^1.0.0"
+    "x25519-key-agreement-2020-context": "digitalbazaar/x25519-key-agreement-2020-context#nofs"
   },
   "devDependencies": {
     "chai": "^4.3.4",
@@ -34,6 +47,7 @@
     "eslint": "^7.22.0",
     "eslint-config-digitalbazaar": "^2.6.1",
     "eslint-plugin-jsdoc": "^32.3.0",
+    "esm": "^3.2.25",
     "karma": "^6.3.1",
     "karma-babel-preprocessor": "^8.0.1",
     "karma-chai": "^0.1.0",
@@ -45,6 +59,8 @@
     "mocha": "^8.3.2",
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^15.1.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.47.0",
     "webpack": "^5.28.0",
     "webpack-bundle-analyzer": "^4.4.0",
     "webpack-cli": "^4.5.0"
@@ -72,6 +88,11 @@
     "DID"
   ],
   "scripts": {
+    "rollup": "rollup -c rollup.config.js",
+    "build": "npm run clear && npm run rollup && ./build-dist.sh",
+    "clear": "rimraf dist/ && mkdir dist",
+    "prepare": "npm run build",
+    "rebuild": "npm run clear && npm run build",
     "test": "npm run lint && npm run test-node && npm run test-karma",
     "test-node": "cross-env NODE_ENV=test mocha -r esm --preserve-symlinks -t 10000 test/*.spec.js",
     "test-karma": "karma start karma.conf.js",

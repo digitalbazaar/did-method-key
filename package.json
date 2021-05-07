@@ -31,7 +31,8 @@
     ".": {
       "require": "./dist/index.js",
       "import": "./dist/esm/index.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "dependencies": {
     "@digitalbazaar/did-io": "digitalbazaar/did-io#noesm",

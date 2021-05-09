@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@digitalbazaar/did-io": "digitalbazaar/did-io#noesm",
-    "@digitalbazaar/ed25519-verification-key-2020": "digitalbazaar/ed25519-verification-key-2020#noesm",
+    "@digitalbazaar/ed25519-verification-key-2020": "digitalbazaar/ed25519-verification-key-2020#v2.1.2-rc1",
     "@digitalbazaar/x25519-key-agreement-key-2020": "digitalbazaar/x25519-key-agreement-key-2020#noesm",
     "did-context": "digitalbazaar/did-context#nofs",
     "ed25519-signature-2020-context": "^1.0.1",

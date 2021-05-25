@@ -254,6 +254,44 @@ const {verify} = assertionMethodPublicKey.verifier();
 `publicMethodFor` will return `undefined` if no key is found for a given
 purpose.
 
+### Backwards Compatibility with the 2018/2019 Crypto Suites
+
+By default, this did key driver returns DID Documents that have the 2020
+crypto suites for verification and key agreement.
+If you need DID Documents that are using the 2018/2019 crypto suites,
+you can customize the driver as follows.
+
+```js
+const didKeyDriver2018 = driver({
+ verificationSuite: Ed25519VerificationKey2018
+});
+
+const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+await didKeyDriver2018.get({did});
+// -> 
+{
+  '@context': [
+    'https://www.w3.org/ns/did/v1',
+    'https://w3id.org/security/suites/ed25519-2018/v1',
+    'https://w3id.org/security/suites/x25519-2019/v1'
+  ],
+  id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
+  verificationMethod: [{
+    id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
+    type: 'Ed25519VerificationKey2018',
+    controller: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
+    publicKeyBase58: 'B12NYF8RrR3h41TDCTJojY59usg3mbtbjnFs7Eud1Y6u'
+  }],
+  // etc,
+  keyAgreement: [{
+    id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc',
+    type: 'X25519KeyAgreementKey2019',
+    controller: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
+    publicKeyBase58: 'JhNWeSVLMYccCk7iopQW4guaSJTojqpMEELgSLhKwRr'
+  }]
+}
+```
+
 ## Contribute
 
 See [the contribute file](https://github.com/digitalbazaar/bedrock/blob/master/CONTRIBUTING.md)!

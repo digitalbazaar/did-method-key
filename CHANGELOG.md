@@ -1,5 +1,11 @@
 # did:key driver ChangeLog
 
+## 1.2.0 -
+
+### Added
+- Add backwards compatibility, allow returning the `did:key` document using
+  the `Ed25519VerificationKey2018` and `X25519KeyAgreementKey2019` suites.
+
 ## 1.1.0 - 2021-05-04
 
 ### Added

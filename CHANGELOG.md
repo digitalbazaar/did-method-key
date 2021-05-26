@@ -1,6 +1,6 @@
 # did:key driver ChangeLog
 
-## 1.2.0 -
+## 1.2.0 - 2021-05-26
 
 ### Added
 - Add backwards compatibility, allow returning the `did:key` document using

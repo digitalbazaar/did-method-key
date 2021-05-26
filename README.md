@@ -256,7 +256,7 @@ purpose.
 
 ### Backwards Compatibility with the 2018/2019 Crypto Suites
 
-By default, this did key driver returns DID Documents that have the 2020
+By default, this `did:key` driver returns DID Documents that have the 2020
 crypto suites for verification and key agreement.
 If you need DID Documents that are using the 2018/2019 crypto suites,
 you can customize the driver as follows.

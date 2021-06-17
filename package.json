@@ -21,9 +21,9 @@
   "module": "lib/main.js",
   "dependencies": {
     "@digitalbazaar/did-io": "^1.0.0",
-    "@digitalbazaar/ed25519-verification-key-2020": "^2.1.1",
+    "@digitalbazaar/ed25519-verification-key-2020": "digitalbazaar/ed25519-verification-key-2020#v1-dingo-rc1-multicodec",
     "@digitalbazaar/x25519-key-agreement-key-2019": "^5.1.1",
-    "@digitalbazaar/x25519-key-agreement-key-2020": "^1.0.0",
+    "@digitalbazaar/x25519-key-agreement-key-2020": "digitalbazaar/x25519-key-agreement-key-2020#v1-dingo-rc1-multicodec",
     "esm": "^3.2.25"
   },
   "devDependencies": {

@@ -53,35 +53,31 @@ That DID would correspond to the following DID Document:
     "https://w3id.org/security/suites/ed25519-2020/v1",
     "https://w3id.org/security/suites/x25519-2020/v1"
   ],
-  "id": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
-  "verificationMethod": [
-    {
-      "id": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
-      "type": "Ed25519VerificationKey2020",
-      "controller": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
-      "publicKeyMultibase": "zFj5p9C2Sfqth6g6DEXtw5dWFqrtpFn4TCBBPJHGnwKzY"
-    }
-  ],
+  "id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+  "verificationMethod": [{
+    "id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK#z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+    "type": "Ed25519VerificationKey2020",
+    "controller": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+    "publicKeyMultibase": "z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK"
+  }],
   "authentication": [
-    "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv"
+    "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK#z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK"
   ],
   "assertionMethod": [
-    "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv"
+    "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK#z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK"
   ],
   "capabilityDelegation": [
-    "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv"
+    "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK#z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK"
   ],
   "capabilityInvocation": [
-    "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv"
+    "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK#z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK"
   ],
-  "keyAgreement": [
-    {
-      "id": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6LSeYpKdHsRV4rCh3r6yo7moGbeRm1rmBbptBcAP3HCu4jC",
-      "type": "X25519KeyAgreementKey2020",
-      "controller": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
-      "publicKeyMultibase": "z3seA6z4ZPc8TbfULT9bpUgPAacUk4aRg1CtUtadgBgxS"
-    }
-  ]
+  "keyAgreement": [{
+    "id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK#z6LSj72tK8brWgZja8NLRwPigth2T9QRiG1uH9oKZuKjdh9p",
+    "type": "X25519KeyAgreementKey2020",
+    "controller": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+    "publicKeyMultibase": "z6LSj72tK8brWgZja8NLRwPigth2T9QRiG1uH9oKZuKjdh9p"
+  }]
 }
 ```
 
@@ -123,9 +119,7 @@ To generate a new key and get its corresponding `did:key` method DID Document:
 const didKeyDriver = require('@digitalbazaar/did-method-key').driver();
 
 // generate did:key using Ed25519 key type by default
-const {
-  didDocument, keyPairs, methodFor
-} = await didKeyDriver.generate();
+const {didDocument, keyPairs, methodFor} = await didKeyDriver.generate();
 
 // print the DID Document above
 console.log(JSON.stringify(didDocument, null, 2));
@@ -136,24 +130,22 @@ Map(2) {
     id: 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv',
     controller: 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv',
     type: 'Ed25519VerificationKey2020',
-    publicKeyMultibase: 'zFj5p9C2Sfqth6g6DEXtw5dWFqrtpFn4TCBBPJHGnwKzY',
+    publicKeyMultibase: 'z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv',
     privateKeyMultibase: 'z3zDo1wXuXGcFkJa9SPE7VYpdutmHq8gJsvFRMKJckTWMykoHsAjWNbHXqzrZ8qa7aWdDTjmJNJ1amYEG2mCvZZeY'
   },
-  'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6LSeYpKdHsRV4rCh3r6yo7moGbeRm1rmBbptBcAP3HCu4jC' => X25519KeyAgreementKey2020 {
-    id: 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6LSeYpKdHsRV4rCh3r6yo7moGbeRm1rmBbptBcAP3HCu4jC',
+  'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6LSeRSE5Em5oJpwdk3NBaLVERBS332ULC7EQq5EtMsmXhsM' => X25519KeyAgreementKey2020 {
+    id: 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6LSeRSE5Em5oJpwdk3NBaLVERBS332ULC7EQq5EtMsmXhsM',
     controller: 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv',
     type: 'X25519KeyAgreementKey2020',
-    publicKeyMultibase: 'z3seA6z4ZPc8TbfULT9bpUgPAacUk4aRg1CtUtadgBgxS',
-    privateKeyMultibase: 'z8YKTeHC5WzYNV7k8Nq7Mbv5cVrWDoyp7RqGMWaaYfvHM'
+    publicKeyMultibase: 'z6LSeRSE5Em5oJpwdk3NBaLVERBS332ULC7EQq5EtMsmXhsM',
+    privateKeyMultibase: 'z3weeMD56C1T347EmB6kYNS7trpQwjvtQCpCYRpqGz6mcemT'
   }
 }
-
-
 ```
 
-`methodFor` is a convenience function that returns a public/private key pair 
-instance for a given purpose. For example, a verification key (containing a 
-`signer()` and `verifier()` functions) are frequently useful for 
+`methodFor` is a convenience function that returns a public/private key pair
+instance for a given purpose. For example, a verification key (containing a
+`signer()` and `verifier()` functions) are frequently useful for
 [`jsonld-signatures`](https://github.com/digitalbazaar/jsonld-signatures) or
 [`vc-js`](https://github.com/digitalbazaar/vc-js) operations. After generating
 a new did:key DID, you can do:
@@ -169,17 +161,17 @@ const keyAgreementPair = methodFor({purpose: 'keyAgreement'});
 
 Note that `methodFor` returns a key pair that contains both a public and private
 key pair (since it has access to the `keyPairs` map from `generate()`).
-This makes it useful for _signing_ and _encrypting_ operations (unlike the 
+This makes it useful for _signing_ and _encrypting_ operations (unlike the
 `publicMethodFor` that's returned by `get()`, below).
 
 ### `publicKeyToDidDoc()`
 
-If you already have an `Ed25519VerificationKey2020` public key object (as an 
-LDKeyPair instance, or a plain key description object), you can turn it into 
+If you already have an `Ed25519VerificationKey2020` public key object (as an
+LDKeyPair instance, or a plain key description object), you can turn it into
 a DID Document:
 
 ```js
-const {didDocument} = await didKeyDriver.publicKeyToDidDoc({publicKeyDescription}); 
+const {didDocument} = await didKeyDriver.publicKeyToDidDoc({publicKeyDescription});
 ```
 
 ### `get()`
@@ -189,7 +181,7 @@ const {didDocument} = await didKeyDriver.publicKeyToDidDoc({publicKeyDescription
 To get a DID Document for an existing `did:key` DID:
 
 ```js
-const did = 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv';
+const did = 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T';
 const didDocument = await didKeyDriver.get({did});
 ```
 
@@ -198,37 +190,37 @@ const didDocument = await didKeyDriver.get({did});
 #### Getting just the key object by key id
 
 You can also use a `.get()` to retrieve an individual key, if you know it's id
-already (this is useful for constructing `documentLoader`s for JSON-LD Signature 
+already (this is useful for constructing `documentLoader`s for JSON-LD Signature
 libs, and the resulting key does include the appropriate `@context`).
 
 ```js
-const verificationKeyId = 'did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv';
-await didKeyDriver.get({url: keyAgreementKeyId});
+const verificationKeyId = 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T#z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T';
+await didKeyDriver.get({url: verificationKeyId});
 // ->
 {
   "@context": "https://w3id.org/security/suites/ed25519-2020/v1",
-  "id": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv#z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
+  "id": "did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T#z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T",
   "type": "Ed25519VerificationKey2020",
-  "controller": "did:key:z6MkuBLrjSGt1PPADAvuv6rmvj4FfSAfffJotC6K8ZEorYmv",
-  "publicKeyMultibase": "zFj5p9C2Sfqth6g6DEXtw5dWFqrtpFn4TCBBPJHGnwKzY"
+  "controller": "did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T",
+  "publicKeyMultibase": "z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T"
 }
 
-const keyAgreementKeyId = 'did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6LSmNXTNXTkUPL6UHaBCDJhtvNTTzCgcUQ6kM6S7zngPFPj';
+const keyAgreementKeyId = 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T#z6LSotGbgPCJD2Y6TSvvgxERLTfVZxCh9KSrez3WNrNp7vKW';
 await didKeyDriver.get({url: keyAgreementKeyId});
 // ->
 {
   "@context": "https://w3id.org/security/suites/x25519-2020/v1",
-  "id": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop#z6LSmNXTNXTkUPL6UHaBCDJhtvNTTzCgcUQ6kM6S7zngPFPj",
+  "id": "did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T#z6LSotGbgPCJD2Y6TSvvgxERLTfVZxCh9KSrez3WNrNp7vKW",
   "type": "X25519KeyAgreementKey2020",
-  "controller": "did:key:z6MkfJh6Ks3xDo3PMGUS1KWVNWPgpVjGT9BpjWNuAPeXwmop",
-  "publicKeyMultibase": "zAhMHrDetNvcMNuCQfZnkaL9ycqfZusDwsNNkdY99fscy"
+  "controller": "did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T",
+  "publicKeyMultibase": "z6LSotGbgPCJD2Y6TSvvgxERLTfVZxCh9KSrez3WNrNp7vKW"
 }
 ```
 
 ### `publicMethodFor()`
 
 Often, you have just a `did:key` DID, and you need to get a key for a
-particular _purpose_ from it, such as an `assertionMethod` key to verify a 
+particular _purpose_ from it, such as an `assertionMethod` key to verify a
 VC signature, or a `keyAgreement` key to encrypt a document for that DID's
 controller.
 
@@ -273,7 +265,7 @@ const didKeyDriver2018 = didKey.driver({
 
 const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
 await didKeyDriver2018.get({did});
-// -> 
+// ->
 {
   '@context': [
     'https://www.w3.org/ns/did/v1',

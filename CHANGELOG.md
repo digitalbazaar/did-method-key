@@ -1,5 +1,10 @@
 # did:key driver ChangeLog
 
+## 2.0.0 - 2021-06-19
+
+### Changed
+- **BREAKING**: Update 2020 cryptosuites to use multicodec encoding for keys.
+
 ## 1.2.0 - 2021-05-26
 
 ### Added

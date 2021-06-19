@@ -1,8 +1,8 @@
 # did:key method driver _(@digitalbazaar/did-method-key)_
 
-[![Node.js CI](https://github.com/digitalbazaar/did-method-key/workflows/Node.js%20CI/badge.svg)](https://github.com/digitalbazaar/did-method-key/actions?query=workflow%3A%22Node.js+CI%22)
-[![Coverage status](https://img.shields.io/codecov/c/github/digitalbazaar/did-method-key)](https://codecov.io/gh/digitalbazaar/did-method-key)
-[![NPM Version](https://img.shields.io/npm/v/digitalbazaar/did-method-key)](https://www.npmjs.com/package/@digitalbazaar/did-method-key)
+[![Node.js CI](https://github.com/digitalbazaar/did-method-key-js/workflows/Node.js%20CI/badge.svg)](https://github.com/digitalbazaar/did-method-key-js/actions?query=workflow%3A%22Node.js+CI%22)
+[![Coverage status](https://img.shields.io/codecov/c/github/digitalbazaar/did-method-key-js)](https://codecov.io/gh/digitalbazaar/did-method-key-js)
+[![NPM Version](https://img.shields.io/npm/v/digitalbazaar/did-method-key-js)](https://www.npmjs.com/package/@digitalbazaar/did-method-key-js)
 
 > A [DID](https://w3c.github.io/did-core) (Decentralized Identifier) method driver for the `did-io` library and for standalone use
 

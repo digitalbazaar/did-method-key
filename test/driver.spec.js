@@ -13,6 +13,10 @@ import {driver} from '../';
 
 const didKeyDriver = driver();
 
+// eslint-disable-next-line max-len
+const TEST_SEED = '8c2114a150a16209c653817acc7f3e7e9c6c6290ae93d6689cbd61bb038cd31b';
+const EXPECTED_DID_DOC = require('./expected-did-doc.json');
+
 describe('did:key method driver', () => {
   describe('get', () => {
     it('should get the DID Document for a did:key DID', async () => {
@@ -193,6 +197,17 @@ describe('did:key method driver', () => {
 
       const fetchedDidDoc = await didKeyDriver.get({did});
       expect(fetchedDidDoc).to.eql(didDocument);
+    });
+    it('should generate a DID document from seed', async () => {
+      const seedBytes = (new TextEncoder()).encode(TEST_SEED).slice(0, 32);
+      const {didDocument} = await didKeyDriver.generate({seed: seedBytes});
+      expect(didDocument).to.exist;
+      expect(didDocument).to.have.keys([
+        '@context', 'id', 'authentication', 'assertionMethod',
+        'capabilityDelegation', 'capabilityInvocation', 'keyAgreement',
+        'verificationMethod'
+      ]);
+      expect(didDocument).eql(EXPECTED_DID_DOC);
     });
   });
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2021-2022 Digital Bazaar, Inc. All rights reserved.
  */
 module.exports = function(config) {
 
@@ -26,17 +26,8 @@ module.exports = function(config) {
     },
 
     webpack: {
-      //mode: 'production',
       mode: 'development',
       devtool: 'inline-source-map',
-      node: false,
-      resolve: {
-        fallback: {
-          url: false,
-          crypto: false,
-          global: false
-        }
-      }
     },
 
     // test results reporter to use

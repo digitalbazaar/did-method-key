@@ -9,13 +9,16 @@ import {Ed25519VerificationKey2020} from
   '@digitalbazaar/ed25519-verification-key-2020';
 import {Ed25519VerificationKey2018} from
   '@digitalbazaar/ed25519-verification-key-2018';
-import {driver} from '../';
+import {driver} from '../lib/index.js';
 
 const didKeyDriver = driver();
 
 // eslint-disable-next-line max-len
 const TEST_SEED = '8c2114a150a16209c653817acc7f3e7e9c6c6290ae93d6689cbd61bb038cd31b';
-const EXPECTED_DID_DOC = require('./expected-did-doc.json');
+
+// TODO
+//import EXPECTED_DID_DOC from './expected-did-doc.json' assert {type: 'json'};
+import {expectedDidDoc as EXPECTED_DID_DOC} from './expected-data.js';
 
 describe('did:key method driver', () => {
   describe('get', () => {

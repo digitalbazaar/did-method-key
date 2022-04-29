@@ -1,4 +1,5 @@
-{
+/* eslint-disable */
+export const expectedDidDoc = {
   "@context": [
     "https://www.w3.org/ns/did/v1",
     "https://w3id.org/security/suites/ed25519-2020/v1",
@@ -33,4 +34,5 @@
       "publicKeyMultibase": "z6LSgxJr5q1pwHPbiK7u8Pw1GvnfMTZSMxkhaorQ1aJYWFz3"
     }
   ]
-}
+};
+/* eslint-enable */

@@ -19,6 +19,9 @@
   "license": "BSD-3-Clause",
   "type": "module",
   "exports": "./lib/index.js",
+  "files": [
+    "lib"
+  ],
   "dependencies": {
     "@digitalbazaar/did-io": "^2.0.0",
     "@digitalbazaar/ed25519-verification-key-2020": "^4.0.0",

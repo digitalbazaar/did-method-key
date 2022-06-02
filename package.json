@@ -25,7 +25,7 @@
     "util": false
   },
   "files": [
-    "lib"
+    "lib/**/*.js"
   ],
   "dependencies": {
     "@digitalbazaar/did-io": "^2.0.0",

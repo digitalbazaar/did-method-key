@@ -93,7 +93,7 @@ that this is safe to do.
 
 ## Install
 
-Requires Node.js 12+
+Requires Node.js 14+
 
 To install from `npm`:
 
@@ -116,7 +116,8 @@ npm install
 To generate a new key and get its corresponding `did:key` method DID Document:
 
 ```js
-const didKeyDriver = require('@digitalbazaar/did-method-key').driver();
+import {driver} from '@digitalbazaar/did-method-key';
+const didKeyDriver = driver();
 
 // generate did:key using Ed25519 key type by default
 const {didDocument, keyPairs, methodFor} = await didKeyDriver.generate();

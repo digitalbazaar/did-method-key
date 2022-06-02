@@ -55,12 +55,10 @@
     "webpack": "^5.72.0"
   },
   "c8": {
-    "exclude": [
-      "test"
-    ],
     "reporter": [
-      "html",
-      "text-summary"
+      "lcov",
+      "text-summary",
+      "text"
     ]
   },
   "engines": {
@@ -75,8 +73,8 @@
     "test": "npm run lint && npm run test-node && npm run test-karma",
     "test-node": "cross-env NODE_ENV=test mocha --preserve-symlinks -t 10000 test/*.spec.js",
     "test-karma": "karma start karma.conf.cjs",
-    "coverage": "cross-env NODE_ENV=test c8 --reporter=lcov --reporter=text-summary npm run test-node",
-    "coverage-ci": "cross-env NODE_ENV=test c8 --reporter=lcovonly --reporter=text npm run test-node",
+    "coverage": "cross-env NODE_ENV=test c8 npm run test-node",
+    "coverage-ci": "cross-env NODE_ENV=test c8 --reporter=lcovonly --reporter=text-summary --reporter=text npm run test-node",
     "coverage-report": "c8 report",
     "lint": "eslint ."
   }

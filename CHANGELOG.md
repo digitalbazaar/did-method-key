@@ -1,6 +1,6 @@
 # did:key driver ChangeLog
 
-## 3.0.0 - 2022-xx-xx
+## 3.0.0 - 2022-06-02
 
 ### Changed
 - **BREAKING**: Convert to module (ESM).

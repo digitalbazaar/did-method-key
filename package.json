@@ -34,7 +34,7 @@
     "chai": "^4.3.6",
     "cross-env": "^7.0.3",
     "eslint": "^8.16.0",
-    "eslint-config-digitalbazaar": "^3.0.0",
+    "eslint-config-digitalbazaar": "^4.1.0",
     "eslint-plugin-jsdoc": "^39.3.2",
     "eslint-plugin-unicorn": "^42.0.0",
     "karma": "^6.3.20",

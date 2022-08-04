@@ -2,15 +2,14 @@
  * Copyright (c) 2019-20201 Digital Bazaar, Inc. All rights reserved.
  */
 import chai from 'chai';
-chai.should();
-const {expect} = chai;
-
-import {Ed25519VerificationKey2020} from
-  '@digitalbazaar/ed25519-verification-key-2020';
+import {driver} from '../lib/index.js';
 import {Ed25519VerificationKey2018} from
   '@digitalbazaar/ed25519-verification-key-2018';
-import {driver} from '../lib/index.js';
+import {Ed25519VerificationKey2020} from
+  '@digitalbazaar/ed25519-verification-key-2020';
 
+chai.should();
+const {expect} = chai;
 const didKeyDriver = driver();
 
 // eslint-disable-next-line max-len

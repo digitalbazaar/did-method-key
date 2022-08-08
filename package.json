@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "@digitalbazaar/did-io": "digitalbazaar/did-io#add-did-key-spec-7-validators",
-    "@digitalbazaar/ed25519-verification-key-2020": "digitalbazaar/ed25519-verification-key-2020#add-did-key-error-codes",
+    "@digitalbazaar/ed25519-verification-key-2020": "digitalbazaar/ed25519-verification-key-2020",
     "@digitalbazaar/x25519-key-agreement-key-2019": "^6.0.0",
     "@digitalbazaar/x25519-key-agreement-key-2020": "^3.0.0"
   },

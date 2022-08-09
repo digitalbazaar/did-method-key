@@ -1,5 +1,12 @@
 # did:key driver ChangeLog
 
+## 4.0.0 -
+
+### Added
+- **BREAKING**: Implemented validators in did resolver.
+- **BREAKING**: Added added validators  for didDocument creation.
+- Added options for didDocument creation.
+
 ## 3.0.0 - 2022-06-02
 
 ### Changed

@@ -3,9 +3,9 @@
  */
 import chai from 'chai';
 import {driver} from '../lib/index.js';
-import {noKaKDidDoc} from './expected-data.js';
 import {Ed25519VerificationKey2020} from
   '@digitalbazaar/ed25519-verification-key-2020';
+import {noKaKDidDoc} from './expected-data.js';
 
 chai.should();
 const {expect} = chai;

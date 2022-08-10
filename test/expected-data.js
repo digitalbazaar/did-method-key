@@ -35,7 +35,6 @@ export const expectedDidDoc = {
     }
   ]
 };
-/* eslint-enable */
 
 export const noKaKDidDoc = {
   '@context': [
@@ -63,3 +62,6 @@ export const noKaKDidDoc = {
     }
   ]
 };
+
+/* eslint-enable */
+

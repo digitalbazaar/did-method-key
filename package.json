@@ -24,12 +24,12 @@
   ],
   "dependencies": {
     "@digitalbazaar/did-io": "digitalbazaar/did-io#add-did-key-spec-7-validators",
+    "@digitalbazaar/ed25519-verification-key-2018": "^4.0.0",
     "@digitalbazaar/ed25519-verification-key-2020": "^4.1.0",
     "@digitalbazaar/x25519-key-agreement-key-2019": "^6.0.0",
     "@digitalbazaar/x25519-key-agreement-key-2020": "^3.0.0"
   },
   "devDependencies": {
-    "@digitalbazaar/ed25519-verification-key-2018": "^4.0.0",
     "c8": "^7.11.3",
     "chai": "^4.3.6",
     "cross-env": "^7.0.3",

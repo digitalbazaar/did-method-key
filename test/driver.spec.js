@@ -61,7 +61,8 @@ describe('did:key method driver', () => {
       });
       // Note: Testing same keys as previous (2020 mode) test
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const didDocument = await didKeyDriver2018.get({did});
+      const options = {enableExperimentalPublicKeyTypes: true};
+      const didDocument = await didKeyDriver2018.get({did, options});
 
       const expectedDidDoc = {
         '@context': [
@@ -132,7 +133,8 @@ describe('did:key method driver', () => {
       });
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
       const keyId = did + '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const key = await didKeyDriver2018.get({did: keyId});
+      const options = {enableExperimentalPublicKeyTypes: true};
+      const key = await didKeyDriver2018.get({did: keyId, options});
 
       expect(key).to.eql({
         '@context': 'https://w3id.org/security/suites/ed25519-2018/v1',
@@ -167,7 +169,8 @@ describe('did:key method driver', () => {
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
       const kakKeyId =
         `${did}#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc`;
-      const key = await didKeyDriver2018.get({did: kakKeyId});
+      const options = {enableExperimentalPublicKeyTypes: true};
+      const key = await didKeyDriver2018.get({did: kakKeyId, options});
 
       expect(key).to.eql({
         '@context': 'https://w3id.org/security/suites/x25519-2019/v1',

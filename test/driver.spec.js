@@ -3,8 +3,6 @@
  */
 import chai from 'chai';
 import {driver} from '../lib/index.js';
-import {Ed25519VerificationKey2018} from
-  '@digitalbazaar/ed25519-verification-key-2018';
 import {Ed25519VerificationKey2020} from
   '@digitalbazaar/ed25519-verification-key-2020';
 
@@ -55,13 +53,15 @@ describe('did:key method driver', () => {
         .equal('z6LSotGbgPCJD2Y6TSvvgxERLTfVZxCh9KSrez3WNrNp7vKW');
     });
 
-    it('should get the DID Doc in 2018 mode', async () => {
-      const didKeyDriver2018 = driver({
-        verificationSuite: Ed25519VerificationKey2018
-      });
+    it('should get the DID Doc in with publicKeyFormat ' +
+      'Ed25519VerificationKey2018', async () => {
+      const didKeyDriver2018 = driver();
       // Note: Testing same keys as previous (2020 mode) test
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const options = {enableExperimentalPublicKeyTypes: true};
+      const options = {
+        publicKeyFormat: 'Ed25519VerificationKey2018',
+        enableExperimentalPublicKeyTypes: true
+      };
       const didDocument = await didKeyDriver2018.get({did, options});
 
       const expectedDidDoc = {
@@ -127,13 +127,15 @@ describe('did:key method driver', () => {
       });
     });
 
-    it('should resolve an individual key in 2018 mode', async () => {
-      const didKeyDriver2018 = driver({
-        verificationSuite: Ed25519VerificationKey2018
-      });
+    it('should resolve an individual key with publicKeyFormat ' +
+      'Ed25519VerificationKey2018', async () => {
+      const didKeyDriver2018 = driver();
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
       const keyId = did + '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const options = {enableExperimentalPublicKeyTypes: true};
+      const options = {
+        publicKeyFormat: 'Ed25519VerificationKey2018',
+        enableExperimentalPublicKeyTypes: true
+      };
       const key = await didKeyDriver2018.get({did: keyId, options});
 
       expect(key).to.eql({
@@ -162,14 +164,16 @@ describe('did:key method driver', () => {
       });
     });
 
-    it('should resolve an individual key agreement key (2018)', async () => {
-      const didKeyDriver2018 = driver({
-        verificationSuite: Ed25519VerificationKey2018
-      });
+    it('should resolve an individual key agreement key using publicKeyFormat ' +
+      'Ed25519VerificationKey2018', async () => {
+      const didKeyDriver2018 = driver();
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
       const kakKeyId =
         `${did}#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc`;
-      const options = {enableExperimentalPublicKeyTypes: true};
+      const options = {
+        publicKeyFormat: 'Ed25519VerificationKey2018',
+        enableExperimentalPublicKeyTypes: true
+      };
       const key = await didKeyDriver2018.get({did: kakKeyId, options});
 
       expect(key).to.eql({

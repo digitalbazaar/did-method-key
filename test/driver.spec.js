@@ -115,6 +115,42 @@ describe('did:key method driver', () => {
         );
         expect(error.code).to.equal('invalidDid');
       });
+    it('should get a didDocument from a did with a version',
+      async () => {
+        const did = 'did:key:3:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpM' +
+          'vtuVMy53T';
+        let error;
+        let didDocument;
+        try {
+          didDocument = await didKeyDriver.get({did});
+        } catch(e) {
+          error = e;
+        }
+        expect(didDocument, 'Expected driver to return a didDocument').exist;
+        expect(error).to.not.exist;
+      });
+    it('should throw invalidDid if version is negative',
+      async () => {
+        const did = 'did:key:-3:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpM' +
+          'vtuVMy53T';
+        let error;
+        let didDocument;
+        try {
+          didDocument = await didKeyDriver.get({did});
+        } catch(e) {
+          error = e;
+        }
+        expect(
+          didDocument,
+          'Expected driver to return a didDocument'
+        ).not.exist;
+        expect(error).to.exist;
+        expect(error).to.be.an.instanceof(
+          DidResolverError,
+          'Expected a DidResolverError'
+        );
+        expect(error.code).to.equal('invalidDid');
+      });
 
     it('should throw representationNotSupported if publicKeyFormat is Multikey',
       async () => {

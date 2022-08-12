@@ -244,7 +244,7 @@ describe('did:key method driver', () => {
       );
       expect(error.code).to.equal('invalidPublicKeyType');
     });
-    it('should get the DID Doc in with publicKeyFormat ' +
+    it('should get the DID Doc with publicKeyFormat ' +
       'Ed25519VerificationKey2018', async () => {
       // Note: Testing same keys as previous (2020 mode) test
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';

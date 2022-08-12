@@ -2,6 +2,7 @@
  * Copyright (c) 2019-20201 Digital Bazaar, Inc. All rights reserved.
  */
 import chai from 'chai';
+import {DidResolverError} from '@digitalbazaar/did-io';
 import {driver} from '../lib/index.js';
 import {Ed25519VerificationKey2020} from
   '@digitalbazaar/ed25519-verification-key-2020';
@@ -53,7 +54,78 @@ describe('did:key method driver', () => {
       expect(kak.publicKeyMultibase).to
         .equal('z6LSotGbgPCJD2Y6TSvvgxERLTfVZxCh9KSrez3WNrNp7vKW');
     });
+    it('should throw representationNotSupported if publicKeyFormat is Multikey',
+      async () => {
+        const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+        const options = {publicKeyFormat: 'Multikey'};
+        let error;
+        let didDocument;
+        try {
+          didDocument = await didKeyDriver.get({did, options});
+        } catch(e) {
+          error = e;
+        }
+        expect(
+          didDocument,
+          'Expected driver to throw not return a didDocument'
+        ).to.not.exist;
+        expect(error).to.exist;
+        expect(error).to.be.an.instanceof(
+          DidResolverError,
+          'Expected a DidResolverError'
+        );
+        expect(error.code).to.equal('representationNotSupported');
+      });
+    it('should throw representationNotSupported if publicKeyFormat is ' +
+      'JsonWebKey2020', async () => {
+      const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      const options = {publicKeyFormat: 'JsonWebKey2020'};
+      let error;
+      let didDocument;
+      try {
+        didDocument = await didKeyDriver.get({did, options});
+      } catch(e) {
+        error = e;
+      }
+      expect(
+        didDocument,
+        'Expected driver to throw not return a didDocument'
+      ).to.not.exist;
+      expect(error).to.exist;
+      expect(error).to.be.an.instanceof(
+        DidResolverError,
+        'Expected a DidResolverError'
+      );
+      expect(error.code).to.equal('representationNotSupported');
+    });
 
+    it('should throw invalidPublicKeyType if publicKeyFormat is experimental' +
+      ' & enableExperimentalPublicKeyTypes is false', async () => {
+      // Note: Testing same keys as previous (2020 mode) test
+      const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      const options = {
+        publicKeyFormat: 'Ed25519VerificationKey2018',
+        // this is the default value of false
+        enableExperimentalPublicKeyTypes: false
+      };
+      let error;
+      let didDocument;
+      try {
+        didDocument = await didKeyDriver.get({did, options});
+      } catch(e) {
+        error = e;
+      }
+      expect(
+        didDocument,
+        'Expected driver to throw not return a didDocument'
+      ).to.not.exist;
+      expect(error).to.exist;
+      expect(error).to.be.an.instanceof(
+        DidResolverError,
+        'Expected a DidResolverError'
+      );
+      expect(error.code).to.equal('invalidPublicKeyType');
+    });
     it('should get the DID Doc in with publicKeyFormat ' +
       'Ed25519VerificationKey2018', async () => {
       // Note: Testing same keys as previous (2020 mode) test

@@ -55,7 +55,7 @@ describe('did:key method driver', () => {
         .equal('z6LSotGbgPCJD2Y6TSvvgxERLTfVZxCh9KSrez3WNrNp7vKW');
     });
     it('should throw invalidDid if scheme is not did', async () => {
-      const did = 'key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      const did = 'notdid:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
       let error;
       let didDocument;
       try {
@@ -75,7 +75,7 @@ describe('did:key method driver', () => {
       expect(error.code).to.equal('invalidDid');
     });
     it('should throw invalidDid if method is not key', async () => {
-      const did = 'did:notKey:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      const did = 'did:notkey:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
       let error;
       let didDocument;
       try {
@@ -151,7 +151,6 @@ describe('did:key method driver', () => {
         );
         expect(error.code).to.equal('invalidDid');
       });
-
     it('should throw representationNotSupported if publicKeyFormat is Multikey',
       async () => {
         const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';

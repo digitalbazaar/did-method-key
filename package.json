@@ -66,7 +66,7 @@
   ],
   "scripts": {
     "test": "npm run test-node",
-    "test-node": "cross-env NODE_ENV=test mocha --preserve-symlinks -t 10000 test/*.spec.js",
+    "test-node": "cross-env NODE_ENV=test mocha --preserve-symlinks --full-trace --check-leaks -t 10000 test/*.spec.js",
     "test-karma": "karma start karma.conf.cjs",
     "coverage": "cross-env NODE_ENV=test c8 npm run test-node",
     "coverage-ci": "cross-env NODE_ENV=test c8 --reporter=lcovonly --reporter=text-summary --reporter=text npm run test-node",

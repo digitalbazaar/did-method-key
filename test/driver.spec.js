@@ -195,7 +195,28 @@ describe('did:key method driver', () => {
       );
       expect(error.code).to.equal('representationNotSupported');
     });
-
+    it('should throw unsupportedPublicKeyType if publicKeyFormat is unknown',
+      async () => {
+        const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+        const options = {publicKeyFormat: 'UnknownFormat2020'};
+        let error;
+        let didDocument;
+        try {
+          didDocument = await didKeyDriver.get({did, options});
+        } catch(e) {
+          error = e;
+        }
+        expect(
+          didDocument,
+          'Expected driver to throw not return a didDocument'
+        ).to.not.exist;
+        expect(error).to.exist;
+        expect(error).to.be.an.instanceof(
+          DidResolverError,
+          'Expected a DidResolverError'
+        );
+        expect(error.code).to.equal('unsupportedPublicKeyType');
+      });
     it('should throw invalidPublicKeyType if publicKeyFormat is experimental' +
       ' & enableExperimentalPublicKeyTypes is false', async () => {
       // Note: Testing same keys as previous (2020 mode) test

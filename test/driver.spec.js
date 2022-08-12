@@ -54,6 +54,68 @@ describe('did:key method driver', () => {
       expect(kak.publicKeyMultibase).to
         .equal('z6LSotGbgPCJD2Y6TSvvgxERLTfVZxCh9KSrez3WNrNp7vKW');
     });
+    it('should throw invalidDid if scheme is not did', async () => {
+      const did = 'key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      let error;
+      let didDocument;
+      try {
+        didDocument = await didKeyDriver.get({did});
+      } catch(e) {
+        error = e;
+      }
+      expect(
+        didDocument,
+        'Expected driver to throw not return a didDocument'
+      ).to.not.exist;
+      expect(error).to.exist;
+      expect(error).to.be.an.instanceof(
+        DidResolverError,
+        'Expected a DidResolverError'
+      );
+      expect(error.code).to.equal('invalidDid');
+    });
+    it('should throw invalidDid if method is not key', async () => {
+      const did = 'did:notKey:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      let error;
+      let didDocument;
+      try {
+        didDocument = await didKeyDriver.get({did});
+      } catch(e) {
+        error = e;
+      }
+      expect(
+        didDocument,
+        'Expected driver to throw not return a didDocument'
+      ).to.not.exist;
+      expect(error).to.exist;
+      expect(error).to.be.an.instanceof(
+        DidResolverError,
+        'Expected a DidResolverError'
+      );
+      expect(error.code).to.equal('invalidDid');
+    });
+    it('should throw invalidDid if identifier doesn\'t begin with z',
+      async () => {
+        const did = 'did:key:6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+        let error;
+        let didDocument;
+        try {
+          didDocument = await didKeyDriver.get({did});
+        } catch(e) {
+          error = e;
+        }
+        expect(
+          didDocument,
+          'Expected driver to throw not return a didDocument'
+        ).to.not.exist;
+        expect(error).to.exist;
+        expect(error).to.be.an.instanceof(
+          DidResolverError,
+          'Expected a DidResolverError'
+        );
+        expect(error.code).to.equal('invalidDid');
+      });
+
     it('should throw representationNotSupported if publicKeyFormat is Multikey',
       async () => {
         const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';

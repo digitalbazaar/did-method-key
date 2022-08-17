@@ -254,17 +254,17 @@ If you need DID Documents that are using the 2018/2019 crypto suites,
 you can customize the driver as follows.
 
 ```js
-import {
-  Ed25519VerificationKey2018
-} from '@digitalbazaar/ed25519-verification-key-2018';
 import * as didKey from '@digitalbazaar/did-method-key';
 
-const didKeyDriver2018 = didKey.driver({
- verificationSuite: Ed25519VerificationKey2018
-});
+const didKeyDriver = didKey.driver();
 
 const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-await didKeyDriver2018.get({did});
+const options = {
+  publicKeyFormat: 'Ed25519VerificationKey2018',
+  // this is the default value of false
+  enableExperimentalPublicKeyTypes: false
+};
+await didKeyDriver.get({did, options});
 // ->
 {
   '@context': [

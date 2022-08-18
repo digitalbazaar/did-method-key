@@ -184,8 +184,25 @@ To get a DID Document for an existing `did:key` DID:
 const did = 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T';
 const didDocument = await didKeyDriver.get({did});
 ```
-
 (Results in the [example DID Doc](#example-did-document) above).
+
+### options for `get()`, `publicKeyToDidDoc`, & `generate`
+`get`, `publicKeyToDidDoc`, and `generate` both take an options object with the following options:
+
+```js
+const options = {
+  // default publicKeyFormat
+  publicKeyFormat: 'Ed25519VerificationKey2020',
+  // this defaults to false
+  enableExperimentalPublicKeyTypes: false,
+  // the context for the resulting did document
+  // the default is the did context
+  defaultContext = [DID_CONTEXT_URL],
+  // if false no keyAgreementKey is included
+  // defaults to true
+  enableEncryptionKeyDerivation = true
+};
+```
 
 #### Getting just the key object by key id
 
@@ -261,8 +278,8 @@ const didKeyDriver = didKey.driver();
 const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
 const options = {
   publicKeyFormat: 'Ed25519VerificationKey2018',
-  // this is the default value of false
-  enableExperimentalPublicKeyTypes: false
+  // this defaults to false
+  enableExperimentalPublicKeyTypes: true
 };
 await didKeyDriver.get({did, options});
 // ->

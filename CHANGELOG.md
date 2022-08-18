@@ -8,6 +8,8 @@
 - Added option `publicKeyFormat` to `DidKeyDriver` options.
 - Added option `enableEncryptionKeyDerivation` to `DidKeyDriver` options.
 - Added option `enableExperimentalPublicKeyTypes` to `DidKeyDriver` options.
+- Added option `defaultContext` to `DidKeyDriver` options.
+
 
 ### Changed
 - **BREAKING**: `DidKeyDriver` now accepts a Map of `verificationMethods` in the constructor.

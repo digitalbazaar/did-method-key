@@ -186,7 +186,7 @@ const didDocument = await didKeyDriver.get({did});
 ```
 (Results in the [example DID Doc](#example-did-document) above).
 
-### options for `get()`, `publicKeyToDidDoc`, & `generate`
+### options for `get`, `publicKeyToDidDoc`, & `generate`
 `get`, `publicKeyToDidDoc`, and `generate` both take an options object with the following options:
 
 ```js
@@ -202,6 +202,9 @@ const options = {
   // defaults to true
   enableEncryptionKeyDerivation = true
 };
+
+const did = 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T';
+const didDoc = await didKeyDriver.get({did, options});
 ```
 
 #### Getting just the key object by key id

@@ -198,7 +198,7 @@ const options = {
   enableExperimentalPublicKeyTypes: false,
   // the context for the resulting did document
   // the default is the did context
-  defaultContext = [DID_CONTEXT_URL],
+  defaultContext: [DID_CONTEXT_URL],
   // if false no keyAgreementKey is included
   // defaults to true
   enableEncryptionKeyDerivation = true

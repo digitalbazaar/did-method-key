@@ -201,7 +201,7 @@ const options = {
   defaultContext: [DID_CONTEXT_URL],
   // if false no keyAgreementKey is included
   // defaults to true
-  enableEncryptionKeyDerivation = true
+  enableEncryptionKeyDerivation: true
 };
 
 const did = 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T';

@@ -186,7 +186,8 @@ const didDocument = await didKeyDriver.get({did});
 ```
 (Results in the [example DID Doc](#example-did-document) above).
 
-### options for `get`, `publicKeyToDidDoc`, & `generate`
+### Options for `get`, `publicKeyToDidDoc`, and `generate`
+
 `get`, `publicKeyToDidDoc`, and `generate` both take an options object with the following options:
 
 ```js

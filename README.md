@@ -192,12 +192,13 @@ const didDocument = await didKeyDriver.get({did});
 
 ```js
 const options = {
-  // default publicKeyFormat
+  // default publicKeyFormat for the keys in the didDocument
   publicKeyFormat: 'Ed25519VerificationKey2020',
-  // this defaults to false
+  // enableExperimentalPublicKeyTypes defaults to false. Setting it to true enables
+  // the use of key types that are not Multikey, JsonWebKey2020, or Ed25519VerificationKey2020.
   enableExperimentalPublicKeyTypes: false,
   // the context for the resulting did document
-  // the default is the did context
+  // the default is just the did context
   defaultContext: [DID_CONTEXT_URL],
   // if false no keyAgreementKey is included
   // defaults to true

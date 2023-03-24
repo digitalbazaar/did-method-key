@@ -1,5 +1,21 @@
 # did:key driver ChangeLog
 
+## 4.0.0 -
+
+### Added
+- **BREAKING**: Added validators for didDocument creation.
+- Added a `DidKeyDriver` options parameter to `didKeyDriver.{get, publicKeyToDidDoc, generate}`.
+- Added option `publicKeyFormat` to `DidKeyDriver` options.
+- Added option `enableEncryptionKeyDerivation` to `DidKeyDriver` options.
+- Added option `enableExperimentalPublicKeyTypes` to `DidKeyDriver` options.
+- Added option `defaultContext` to `DidKeyDriver` options.
+
+### Changed
+- **BREAKING**: `DidKeyDriver` now accepts a Map of `verificationMethods` in the constructor.
+
+### Removed
+- **BREAKING**: `DidKeyDriver` no longer takes a `verificationSuite` in the constructor.
+
 ## 3.0.0 - 2022-06-02
 
 ### Changed

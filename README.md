@@ -184,8 +184,30 @@ To get a DID Document for an existing `did:key` DID:
 const did = 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T';
 const didDocument = await didKeyDriver.get({did});
 ```
-
 (Results in the [example DID Doc](#example-did-document) above).
+
+### Options for `get`, `publicKeyToDidDoc`, and `generate`
+
+`get`, `publicKeyToDidDoc`, and `generate` both take an options object with the following options:
+
+```js
+const options = {
+  // default publicKeyFormat for the keys in the didDocument
+  publicKeyFormat: 'Ed25519VerificationKey2020',
+  // enableExperimentalPublicKeyTypes defaults to false. Setting it to true enables
+  // the use of key types that are not Multikey, JsonWebKey2020, or Ed25519VerificationKey2020.
+  enableExperimentalPublicKeyTypes: false,
+  // the context for the resulting did document
+  // the default is just the did context
+  defaultContext: [DID_CONTEXT_URL],
+  // if false no keyAgreementKey is included
+  // defaults to true
+  enableEncryptionKeyDerivation: true
+};
+
+const did = 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T';
+const didDoc = await didKeyDriver.get({did, options});
+```
 
 #### Getting just the key object by key id
 
@@ -254,17 +276,17 @@ If you need DID Documents that are using the 2018/2019 crypto suites,
 you can customize the driver as follows.
 
 ```js
-import {
-  Ed25519VerificationKey2018
-} from '@digitalbazaar/ed25519-verification-key-2018';
 import * as didKey from '@digitalbazaar/did-method-key';
 
-const didKeyDriver2018 = didKey.driver({
- verificationSuite: Ed25519VerificationKey2018
-});
+const didKeyDriver = didKey.driver();
 
 const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-await didKeyDriver2018.get({did});
+const options = {
+  publicKeyFormat: 'Ed25519VerificationKey2018',
+  // this defaults to false
+  enableExperimentalPublicKeyTypes: true
+};
+await didKeyDriver.get({did, options});
 // ->
 {
   '@context': [

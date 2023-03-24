@@ -2,15 +2,14 @@
  * Copyright (c) 2019-20201 Digital Bazaar, Inc. All rights reserved.
  */
 import chai from 'chai';
-chai.should();
-const {expect} = chai;
-
+import {DidResolverError} from '@digitalbazaar/did-io';
+import {driver} from '../lib/index.js';
 import {Ed25519VerificationKey2020} from
   '@digitalbazaar/ed25519-verification-key-2020';
-import {Ed25519VerificationKey2018} from
-  '@digitalbazaar/ed25519-verification-key-2018';
-import {driver} from '../lib/index.js';
+import {noKaKDidDoc} from './expected-data.js';
 
+chai.should();
+const {expect} = chai;
 const didKeyDriver = driver();
 
 // eslint-disable-next-line max-len
@@ -55,14 +54,205 @@ describe('did:key method driver', () => {
       expect(kak.publicKeyMultibase).to
         .equal('z6LSotGbgPCJD2Y6TSvvgxERLTfVZxCh9KSrez3WNrNp7vKW');
     });
-
-    it('should get the DID Doc in 2018 mode', async () => {
-      const didKeyDriver2018 = driver({
-        verificationSuite: Ed25519VerificationKey2018
+    it('should throw invalidDid if scheme is not did', async () => {
+      const did = 'notdid:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      let error;
+      let didDocument;
+      try {
+        didDocument = await didKeyDriver.get({did});
+      } catch(e) {
+        error = e;
+      }
+      expect(
+        didDocument,
+        'Expected driver to throw not return a didDocument'
+      ).to.not.exist;
+      expect(error).to.exist;
+      expect(error).to.be.an.instanceof(
+        DidResolverError,
+        'Expected a DidResolverError'
+      );
+      expect(error.code).to.equal('invalidDid');
+    });
+    it('should throw invalidDid if method is not key', async () => {
+      const did = 'did:notkey:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      let error;
+      let didDocument;
+      try {
+        didDocument = await didKeyDriver.get({did});
+      } catch(e) {
+        error = e;
+      }
+      expect(
+        didDocument,
+        'Expected driver to throw not return a didDocument'
+      ).to.not.exist;
+      expect(error).to.exist;
+      expect(error).to.be.an.instanceof(
+        DidResolverError,
+        'Expected a DidResolverError'
+      );
+      expect(error.code).to.equal('invalidDid');
+    });
+    it('should throw invalidDid if identifier doesn\'t begin with z',
+      async () => {
+        const did = 'did:key:6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+        let error;
+        let didDocument;
+        try {
+          didDocument = await didKeyDriver.get({did});
+        } catch(e) {
+          error = e;
+        }
+        expect(
+          didDocument,
+          'Expected driver to throw not return a didDocument'
+        ).to.not.exist;
+        expect(error).to.exist;
+        expect(error).to.be.an.instanceof(
+          DidResolverError,
+          'Expected a DidResolverError'
+        );
+        expect(error.code).to.equal('invalidDid');
       });
+    it('should get a didDocument from a did with a version',
+      async () => {
+        const did = 'did:key:3:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpM' +
+          'vtuVMy53T';
+        let error;
+        let didDocument;
+        try {
+          didDocument = await didKeyDriver.get({did});
+        } catch(e) {
+          error = e;
+        }
+        expect(didDocument, 'Expected driver to return a didDocument').exist;
+        expect(error).to.not.exist;
+      });
+    it('should throw invalidDid if version is negative',
+      async () => {
+        const did = 'did:key:-3:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpM' +
+          'vtuVMy53T';
+        let error;
+        let didDocument;
+        try {
+          didDocument = await didKeyDriver.get({did});
+        } catch(e) {
+          error = e;
+        }
+        expect(
+          didDocument,
+          'Expected driver to return a didDocument'
+        ).not.exist;
+        expect(error).to.exist;
+        expect(error).to.be.an.instanceof(
+          DidResolverError,
+          'Expected a DidResolverError'
+        );
+        expect(error.code).to.equal('invalidDid');
+      });
+    it('should throw representationNotSupported if publicKeyFormat is Multikey',
+      async () => {
+        const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+        const options = {publicKeyFormat: 'Multikey'};
+        let error;
+        let didDocument;
+        try {
+          didDocument = await didKeyDriver.get({did, options});
+        } catch(e) {
+          error = e;
+        }
+        expect(
+          didDocument,
+          'Expected driver to throw not return a didDocument'
+        ).to.not.exist;
+        expect(error).to.exist;
+        expect(error).to.be.an.instanceof(
+          DidResolverError,
+          'Expected a DidResolverError'
+        );
+        expect(error.code).to.equal('representationNotSupported');
+      });
+    it('should throw representationNotSupported if publicKeyFormat is ' +
+      'JsonWebKey2020', async () => {
+      const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      const options = {publicKeyFormat: 'JsonWebKey2020'};
+      let error;
+      let didDocument;
+      try {
+        didDocument = await didKeyDriver.get({did, options});
+      } catch(e) {
+        error = e;
+      }
+      expect(
+        didDocument,
+        'Expected driver to throw not return a didDocument'
+      ).to.not.exist;
+      expect(error).to.exist;
+      expect(error).to.be.an.instanceof(
+        DidResolverError,
+        'Expected a DidResolverError'
+      );
+      expect(error.code).to.equal('representationNotSupported');
+    });
+    it('should throw unsupportedPublicKeyType if publicKeyFormat is unknown',
+      async () => {
+        const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+        const options = {publicKeyFormat: 'UnknownFormat2020'};
+        let error;
+        let didDocument;
+        try {
+          didDocument = await didKeyDriver.get({did, options});
+        } catch(e) {
+          error = e;
+        }
+        expect(
+          didDocument,
+          'Expected driver to throw not return a didDocument'
+        ).to.not.exist;
+        expect(error).to.exist;
+        expect(error).to.be.an.instanceof(
+          DidResolverError,
+          'Expected a DidResolverError'
+        );
+        expect(error.code).to.equal('unsupportedPublicKeyType');
+      });
+    it('should throw invalidPublicKeyType if publicKeyFormat is experimental' +
+      ' & enableExperimentalPublicKeyTypes is false', async () => {
       // Note: Testing same keys as previous (2020 mode) test
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const didDocument = await didKeyDriver2018.get({did});
+      const options = {
+        publicKeyFormat: 'Ed25519VerificationKey2018',
+        // this is the default value of false
+        enableExperimentalPublicKeyTypes: false
+      };
+      let error;
+      let didDocument;
+      try {
+        didDocument = await didKeyDriver.get({did, options});
+      } catch(e) {
+        error = e;
+      }
+      expect(
+        didDocument,
+        'Expected driver to throw not return a didDocument'
+      ).to.not.exist;
+      expect(error).to.exist;
+      expect(error).to.be.an.instanceof(
+        DidResolverError,
+        'Expected a DidResolverError'
+      );
+      expect(error.code).to.equal('invalidPublicKeyType');
+    });
+    it('should get the DID Doc with publicKeyFormat ' +
+      'Ed25519VerificationKey2018', async () => {
+      // Note: Testing same keys as previous (2020 mode) test
+      const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      const options = {
+        publicKeyFormat: 'Ed25519VerificationKey2018',
+        enableExperimentalPublicKeyTypes: true
+      };
+      const didDocument = await didKeyDriver.get({did, options});
 
       const expectedDidDoc = {
         '@context': [
@@ -127,13 +317,15 @@ describe('did:key method driver', () => {
       });
     });
 
-    it('should resolve an individual key in 2018 mode', async () => {
-      const didKeyDriver2018 = driver({
-        verificationSuite: Ed25519VerificationKey2018
-      });
+    it('should resolve an individual key with publicKeyFormat ' +
+      'Ed25519VerificationKey2018', async () => {
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
       const keyId = did + '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const key = await didKeyDriver2018.get({did: keyId});
+      const options = {
+        publicKeyFormat: 'Ed25519VerificationKey2018',
+        enableExperimentalPublicKeyTypes: true
+      };
+      const key = await didKeyDriver.get({did: keyId, options});
 
       expect(key).to.eql({
         '@context': 'https://w3id.org/security/suites/ed25519-2018/v1',
@@ -161,14 +353,23 @@ describe('did:key method driver', () => {
       });
     });
 
-    it('should resolve an individual key agreement key (2018)', async () => {
-      const didKeyDriver2018 = driver({
-        verificationSuite: Ed25519VerificationKey2018
-      });
+    it('should resolve a DID doc with out an encryption method', async () => {
+      const did = 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T';
+      const options = {enableEncryptionKeyDerivation: false};
+      const key = await didKeyDriver.get({did, options});
+      expect(key).to.eql(noKaKDidDoc);
+    });
+
+    it('should resolve an individual key agreement key using publicKeyFormat ' +
+      'Ed25519VerificationKey2018', async () => {
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
       const kakKeyId =
         `${did}#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc`;
-      const key = await didKeyDriver2018.get({did: kakKeyId});
+      const options = {
+        publicKeyFormat: 'Ed25519VerificationKey2018',
+        enableExperimentalPublicKeyTypes: true
+      };
+      const key = await didKeyDriver.get({did: kakKeyId, options});
 
       expect(key).to.eql({
         '@context': 'https://w3id.org/security/suites/x25519-2019/v1',

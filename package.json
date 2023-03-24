@@ -23,18 +23,18 @@
     "lib/**/*.js"
   ],
   "dependencies": {
-    "@digitalbazaar/did-io": "^2.0.0",
-    "@digitalbazaar/ed25519-verification-key-2020": "^4.0.0",
+    "@digitalbazaar/did-io": "digitalbazaar/did-io#add-did-key-spec-7-validators",
+    "@digitalbazaar/ed25519-verification-key-2018": "^4.0.0",
+    "@digitalbazaar/ed25519-verification-key-2020": "^4.1.0",
     "@digitalbazaar/x25519-key-agreement-key-2019": "^6.0.0",
     "@digitalbazaar/x25519-key-agreement-key-2020": "^3.0.0"
   },
   "devDependencies": {
-    "@digitalbazaar/ed25519-verification-key-2018": "^4.0.0",
     "c8": "^7.11.3",
     "chai": "^4.3.6",
     "cross-env": "^7.0.3",
     "eslint": "^8.16.0",
-    "eslint-config-digitalbazaar": "^3.0.0",
+    "eslint-config-digitalbazaar": "^4.1.0",
     "eslint-plugin-jsdoc": "^39.3.2",
     "eslint-plugin-unicorn": "^42.0.0",
     "karma": "^6.3.20",
@@ -66,7 +66,7 @@
   ],
   "scripts": {
     "test": "npm run test-node",
-    "test-node": "cross-env NODE_ENV=test mocha --preserve-symlinks -t 10000 test/*.spec.js",
+    "test-node": "cross-env NODE_ENV=test mocha --preserve-symlinks --full-trace --check-leaks -t 10000 test/*.spec.js",
     "test-karma": "karma start karma.conf.cjs",
     "coverage": "cross-env NODE_ENV=test c8 npm run test-node",
     "coverage-ci": "cross-env NODE_ENV=test c8 --reporter=lcovonly --reporter=text-summary --reporter=text npm run test-node",

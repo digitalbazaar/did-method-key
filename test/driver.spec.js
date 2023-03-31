@@ -166,9 +166,7 @@ describe('did:key method driver', () => {
       const did = 'did:key:zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR';
       const mutikeyDid =
         `${did}#zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR`;
-      const didKeyDriverMultikey = driver({
-        verificationSuite: EcdsaMultikey
-      });
+      const didKeyDriverMultikey = driver({verificationSuite: EcdsaMultikey});
       const key = await didKeyDriverMultikey.get({did: mutikeyDid});
       expect(key).to.eql({
         '@context': 'https://w3id.org/security/multikey/v1',
@@ -231,6 +229,18 @@ describe('did:key method driver', () => {
       ]);
       expect(didDocument).eql(EXPECTED_DID_DOC);
     });
+    it('should generate DID document using "EcdsaMultikey" verification suite',
+      async () => {
+        const didKeyDriverMultikey = driver({verificationSuite: EcdsaMultikey});
+        const {didDocument} = await didKeyDriverMultikey.generate({
+          curve: 'P-256'
+        });
+        expect(didDocument).to.exist;
+        expect(didDocument).to.have.keys([
+          '@context', 'id', 'authentication', 'assertionMethod',
+          'capabilityDelegation', 'capabilityInvocation', 'verificationMethod'
+        ]);
+      });
   });
 
   describe('publicKeyToDidDoc', () => {

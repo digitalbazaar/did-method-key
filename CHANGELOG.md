@@ -1,5 +1,13 @@
 # did:key driver ChangeLog
 
+## 4.0.0 - 2023-TBD
+
+### Added
+- Added ECDSA Multikey support.
+
+### Changed
+- **BREAKING**: Remove support for node <= 14.
+
 ## 3.0.0 - 2022-06-02
 
 ### Changed

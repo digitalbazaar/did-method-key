@@ -5,6 +5,7 @@ import chai from 'chai';
 chai.should();
 const {expect} = chai;
 
+import * as EcdsaMultikey from '@digitalbazaar/ecdsa-multikey';
 import {Ed25519VerificationKey2020} from
   '@digitalbazaar/ed25519-verification-key-2020';
 import {Ed25519VerificationKey2018} from
@@ -159,6 +160,25 @@ describe('did:key method driver', () => {
         controller: 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T',
         publicKeyMultibase: 'z6LSotGbgPCJD2Y6TSvvgxERLTfVZxCh9KSrez3WNrNp7vKW'
       });
+    });
+
+    it.only('should resolve an individual ecdsa multikey did', async () => {
+      const did = 'did:key:zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR';
+      const mutikeyDid =
+        `${did}#zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR`;
+      const didKeyDriverMultikey = driver({
+        verificationSuite: EcdsaMultikey
+      });
+      const key = await didKeyDriverMultikey.get({did: mutikeyDid});
+      console.log(key, '<><><>key');
+      // expect(key).to.eql({
+      //   '@context': 'https://w3id.org/security/suites/x25519-2020/v1',
+      //   id: 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T' +
+      //     '#z6LSotGbgPCJD2Y6TSvvgxERLTfVZxCh9KSrez3WNrNp7vKW',
+      //   type: 'X25519KeyAgreementKey2020',
+      //   controller: 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T',
+      //   publicKeyMultibase: 'z6LSotGbgPCJD2Y6TSvvgxERLTfVZxCh9KSrez3WNrNp7vKW'
+      // });
     });
 
     it('should resolve an individual key agreement key (2018)', async () => {

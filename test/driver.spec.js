@@ -1,17 +1,16 @@
 /*!
- * Copyright (c) 2019-20201 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2019-2023 Digital Bazaar, Inc. All rights reserved.
  */
-import chai from 'chai';
-chai.should();
-const {expect} = chai;
-
 import * as EcdsaMultikey from '@digitalbazaar/ecdsa-multikey';
+import chai from 'chai';
 import {Ed25519VerificationKey2020} from
   '@digitalbazaar/ed25519-verification-key-2020';
 import {Ed25519VerificationKey2018} from
   '@digitalbazaar/ed25519-verification-key-2018';
 import {driver} from '../lib/index.js';
 
+chai.should();
+const {expect} = chai;
 const didKeyDriver = driver();
 
 // eslint-disable-next-line max-len

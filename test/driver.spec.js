@@ -228,7 +228,7 @@ describe('did:key method driver', () => {
       ]);
       expect(didDocument).eql(EXPECTED_DID_DOC);
     });
-    it('should generate DID document using "EcdsaMultikey" verification suite',
+    it('should generate "EcdsaMultikey" DID document using keypair options',
       async () => {
         const didKeyDriverMultikey = driver({verificationSuite: EcdsaMultikey});
         const {didDocument} = await didKeyDriverMultikey.generate({

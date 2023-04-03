@@ -2,12 +2,12 @@
  * Copyright (c) 2019-2023 Digital Bazaar, Inc. All rights reserved.
  */
 import * as EcdsaMultikey from '@digitalbazaar/ecdsa-multikey';
+import {createVerificationSuite, driver} from '../lib/index.js';
 import chai from 'chai';
-import {Ed25519VerificationKey2020} from
-  '@digitalbazaar/ed25519-verification-key-2020';
 import {Ed25519VerificationKey2018} from
   '@digitalbazaar/ed25519-verification-key-2018';
-import {driver, createVerificationSuite} from '../lib/index.js';
+import {Ed25519VerificationKey2020} from
+  '@digitalbazaar/ed25519-verification-key-2020';
 
 chai.should();
 const {expect} = chai;

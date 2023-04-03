@@ -4,7 +4,7 @@
 
 ### Added
 - Added ECDSA Multikey support. Exports `createVerificationSuite()` utility
-  method that can be used to create a `verificationSuite` when creating a
+  function that can be used to create a `verificationSuite` when creating a
   a `DidKeyDriver` instance.
 
 ### Changed

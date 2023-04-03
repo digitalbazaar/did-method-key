@@ -7,7 +7,7 @@ import {Ed25519VerificationKey2020} from
   '@digitalbazaar/ed25519-verification-key-2020';
 import {Ed25519VerificationKey2018} from
   '@digitalbazaar/ed25519-verification-key-2018';
-import {driver} from '../lib/index.js';
+import {driver, createVerificationSuite} from '../lib/index.js';
 
 chai.should();
 const {expect} = chai;
@@ -165,7 +165,11 @@ describe('did:key method driver', () => {
       const did = 'did:key:zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR';
       const mutikeyDid =
         `${did}#zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR`;
-      const didKeyDriverMultikey = driver({verificationSuite: EcdsaMultikey});
+      const didKeyDriverMultikey = driver({
+        verificationSuite: createVerificationSuite({
+          generate: EcdsaMultikey.generate, from: EcdsaMultikey.from
+        })
+      });
       const key = await didKeyDriverMultikey.get({did: mutikeyDid});
       expect(key).to.eql({
         '@context': 'https://w3id.org/security/multikey/v1',
@@ -230,7 +234,11 @@ describe('did:key method driver', () => {
     });
     it('should generate "EcdsaMultikey" DID document using keypair options',
       async () => {
-        const didKeyDriverMultikey = driver({verificationSuite: EcdsaMultikey});
+        const didKeyDriverMultikey = driver({
+          verificationSuite: createVerificationSuite({
+            generate: EcdsaMultikey.generate, from: EcdsaMultikey.from
+          })
+        });
         const {didDocument} = await didKeyDriverMultikey.generate({
           curve: 'P-256'
         });

@@ -1,11 +1,12 @@
 # did:key driver ChangeLog
 
-## 4.0.0 - 2023-TBD
+## 4.0.0 - 2023-04-03
 
 ### Added
 - Added ECDSA Multikey support. Exports `createVerificationSuite()` utility
-  function that can be used to create a `verificationSuite` when creating
-  a `DidKeyDriver` instance.
+  function that can be used to create a `verificationSuite` from a multikey
+  library such as `@digitalbazaar/ecdsa-multikey` when creating a
+  `DidKeyDriver` instance.
 
 ### Changed
 - **BREAKING**: Remove support for node <= 14.

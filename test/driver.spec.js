@@ -166,9 +166,7 @@ describe('did:key method driver', () => {
       const mutikeyDid =
         `${did}#zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR`;
       const didKeyDriverMultikey = driver({
-        verificationSuite: createVerificationSuite({
-          generate: EcdsaMultikey.generate, from: EcdsaMultikey.from
-        })
+        verificationSuite: createVerificationSuite(EcdsaMultikey)
       });
       const key = await didKeyDriverMultikey.get({did: mutikeyDid});
       expect(key).to.eql({
@@ -235,9 +233,7 @@ describe('did:key method driver', () => {
     it('should generate "EcdsaMultikey" DID document using keypair options',
       async () => {
         const didKeyDriverMultikey = driver({
-          verificationSuite: createVerificationSuite({
-            generate: EcdsaMultikey.generate, from: EcdsaMultikey.from
-          })
+          verificationSuite: createVerificationSuite(EcdsaMultikey)
         });
         const {didDocument} = await didKeyDriverMultikey.generate({
           curve: 'P-256'

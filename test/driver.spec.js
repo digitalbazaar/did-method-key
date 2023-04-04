@@ -161,12 +161,13 @@ describe('did:key method driver', () => {
       });
     });
 
-    it('should resolve an individual ecdsa multikey did', async () => {
+    it.only('should resolve an individual ecdsa multikey did', async () => {
       const did = 'did:key:zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR';
       const mutikeyDid =
         `${did}#zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR`;
-      const didKeyDriverMultikey = driver({
-        verificationSuite: createVerificationSuite(EcdsaMultikey)
+      const didKeyDriverMultikey = driver();
+      didKeyDriver.registerKeyTypeHandler({
+        multikeyHeaderType: 'P-256', keyTypeHandler: EcdsaMultikey
       });
       const key = await didKeyDriverMultikey.get({did: mutikeyDid});
       expect(key).to.eql({

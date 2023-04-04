@@ -2,7 +2,7 @@
  * Copyright (c) 2019-2023 Digital Bazaar, Inc. All rights reserved.
  */
 import * as EcdsaMultikey from '@digitalbazaar/ecdsa-multikey';
-import {createVerificationSuite, driver} from '../lib/index.js';
+import {createKeyTypeHandler, driver} from '../lib/index.js';
 import chai from 'chai';
 import {Ed25519VerificationKey2018} from
   '@digitalbazaar/ed25519-verification-key-2018';
@@ -57,8 +57,10 @@ describe('did:key method driver', () => {
     });
 
     it('should get the DID Doc in 2018 mode', async () => {
-      const didKeyDriver2018 = driver({
-        verificationSuite: Ed25519VerificationKey2018
+      const didKeyDriver2018 = driver();
+      didKeyDriver2018.registerKeyTypeHandler({
+        multikeyHeaderType: 'Ed25519',
+        keyTypeHandler: Ed25519VerificationKey2018
       });
       // Note: Testing same keys as previous (2020 mode) test
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
@@ -161,13 +163,14 @@ describe('did:key method driver', () => {
       });
     });
 
-    it.only('should resolve an individual ecdsa multikey did', async () => {
+    it('should resolve an individual ecdsa multikey did', async () => {
       const did = 'did:key:zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR';
       const mutikeyDid =
         `${did}#zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR`;
       const didKeyDriverMultikey = driver();
-      didKeyDriver.registerKeyTypeHandler({
-        multikeyHeaderType: 'P-256', keyTypeHandler: EcdsaMultikey
+      didKeyDriverMultikey.registerKeyTypeHandler({
+        multikeyHeaderType: 'P-256',
+        keyTypeHandler: createKeyTypeHandler(EcdsaMultikey)
       });
       const key = await didKeyDriverMultikey.get({did: mutikeyDid});
       expect(key).to.eql({

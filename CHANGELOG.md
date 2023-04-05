@@ -1,5 +1,20 @@
 # did:key driver ChangeLog
 
+## 5.0.0 - 2023-TBD
+
+### Changed
+- **BREAKING**: `generate()` method now requires a `keyTypeHandler` param which
+  is the `verificationSuite`.
+
+### Added
+- Add `registerKeyTypeHandler()` method that can be used to register multikey
+  headers and the key type handler (which is the verificationSuite previously)
+  to be used.
+
+### Removed
+- **BREAKING**: `DidKeyDriver` no longer takes a `verificationSuite` param in
+  the constructor.
+
 ## 4.0.0 - 2023-04-03
 
 ### Added

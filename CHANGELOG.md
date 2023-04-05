@@ -7,7 +7,7 @@
   is the `verificationSuite`.
 
 ### Added
-- Add `registerKeyTypeHandler()` method that can be used to register multikey
+- Add `use()` method that can be used to register multikey
   headers and the key type handler (which is the verificationSuite previously)
   to be used.
 

@@ -59,7 +59,7 @@ describe('did:key method driver', () => {
     it('should get the DID Doc in 2018 mode', async () => {
       const didKeyDriver2018 = driver();
       didKeyDriver2018.registerKeyTypeHandler({
-        multikeyHeaderType: 'Ed25519',
+        multikeyHeaders: ['z6Mk', 'B12N'],
         keyTypeHandler: Ed25519VerificationKey2018
       });
       // Note: Testing same keys as previous (2020 mode) test
@@ -130,11 +130,16 @@ describe('did:key method driver', () => {
     });
 
     it('should resolve an individual key in 2018 mode', async () => {
-      const didKeyDriver2018 = driver({
-        verificationSuite: Ed25519VerificationKey2018
-      });
+      const didKeyDriver2018 = driver();
+
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const keyId = did + '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      const fingerprint = 'z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      const keyId = `${did}#${fingerprint}`;
+
+      didKeyDriver2018.registerKeyTypeHandler({
+        multikeyHeaders: ['z6Mk', 'B12N'],
+        keyTypeHandler: Ed25519VerificationKey2018
+      });
       const key = await didKeyDriver2018.get({did: keyId});
 
       expect(key).to.eql({
@@ -169,7 +174,7 @@ describe('did:key method driver', () => {
         `${did}#zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR`;
       const didKeyDriverMultikey = driver();
       didKeyDriverMultikey.registerKeyTypeHandler({
-        multikeyHeaderType: 'P-256',
+        multikeyHeaders: 'zDna',
         keyTypeHandler: createKeyTypeHandler(EcdsaMultikey)
       });
       const key = await didKeyDriverMultikey.get({did: mutikeyDid});
@@ -184,12 +189,14 @@ describe('did:key method driver', () => {
     });
 
     it('should resolve an individual key agreement key (2018)', async () => {
-      const didKeyDriver2018 = driver({
-        verificationSuite: Ed25519VerificationKey2018
-      });
+      const didKeyDriver2018 = driver();
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const kakKeyId =
-        `${did}#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc`;
+      const fingerprint = 'z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc';
+      const kakKeyId = `${did}#${fingerprint}`;
+      didKeyDriver2018.registerKeyTypeHandler({
+        multikeyHeaders: ['z6LS', 'z6Mk', 'B12N'],
+        keyTypeHandler: Ed25519VerificationKey2018
+      });
       const key = await didKeyDriver2018.get({did: kakKeyId});
 
       expect(key).to.eql({

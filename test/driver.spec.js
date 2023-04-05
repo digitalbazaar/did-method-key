@@ -12,7 +12,7 @@ import {Ed25519VerificationKey2020} from
 chai.should();
 const {expect} = chai;
 const didKeyDriver = driver();
-didKeyDriver.registerKeyTypeHandler({
+didKeyDriver.use({
   multikeyHeader: 'z6Mk',
   keyTypeHandler: Ed25519VerificationKey2020
 });
@@ -63,7 +63,7 @@ describe('did:key method driver', () => {
       const didKeyDriver2018 = driver();
       const multikeyHeaders = ['z6Mk', 'B12N'];
       for(const header of multikeyHeaders) {
-        didKeyDriver2018.registerKeyTypeHandler({
+        didKeyDriver2018.use({
           multikeyHeader: header,
           keyTypeHandler: Ed25519VerificationKey2018
         });
@@ -143,7 +143,7 @@ describe('did:key method driver', () => {
       const keyId = `${did}#${fingerprint}`;
       const multikeyHeaders = ['z6Mk', 'B12N'];
       for(const header of multikeyHeaders) {
-        didKeyDriver2018.registerKeyTypeHandler({
+        didKeyDriver2018.use({
           multikeyHeader: header,
           keyTypeHandler: Ed25519VerificationKey2018
         });
@@ -182,7 +182,7 @@ describe('did:key method driver', () => {
         `${did}#zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR`;
       const didKeyDriverMultikey = driver();
 
-      didKeyDriverMultikey.registerKeyTypeHandler({
+      didKeyDriverMultikey.use({
         multikeyHeader: 'zDna',
         keyTypeHandler: createKeyTypeHandler(EcdsaMultikey)
       });
@@ -204,7 +204,7 @@ describe('did:key method driver', () => {
       const kakKeyId = `${did}#${fingerprint}`;
       const multikeyHeaders = ['z6LS', 'z6Mk', 'B12N'];
       for(const header of multikeyHeaders) {
-        didKeyDriver2018.registerKeyTypeHandler({
+        didKeyDriver2018.use({
           multikeyHeader: header,
           keyTypeHandler: Ed25519VerificationKey2018
         });
@@ -260,7 +260,7 @@ describe('did:key method driver', () => {
     it('should generate "EcdsaMultikey" DID document using keypair options',
       async () => {
         const didKeyDriverMultikey = driver();
-        didKeyDriverMultikey.registerKeyTypeHandler({
+        didKeyDriverMultikey.use({
           multikeyHeader: 'zDna',
           keyTypeHandler: createKeyTypeHandler(EcdsaMultikey)
         });

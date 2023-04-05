@@ -212,9 +212,16 @@ describe('did:key method driver', () => {
 
   describe('generate', () => {
     it('should generate and get round trip', async () => {
+      const didKeyDriver = driver();
+      didKeyDriver.registerKeyTypeHandler({
+        multikeyHeaders: 'zDna',
+        keyTypeHandler: createKeyTypeHandler(EcdsaMultikey)
+      });
       const {
         didDocument, keyPairs, methodFor
-      } = await didKeyDriver.generate();
+      } = await didKeyDriver.generate({
+        keyTypeHandler: Ed25519VerificationKey2020
+      });
       const did = didDocument.id;
       const keyId = didDocument.authentication[0];
 
@@ -231,8 +238,15 @@ describe('did:key method driver', () => {
       expect(fetchedDidDoc).to.eql(didDocument);
     });
     it('should generate a DID document from seed', async () => {
+      const didKeyDriver = driver();
+      didKeyDriver.registerKeyTypeHandler({
+        multikeyHeaders: 'zDna',
+        keyTypeHandler: createKeyTypeHandler(EcdsaMultikey)
+      });
       const seedBytes = (new TextEncoder()).encode(TEST_SEED).slice(0, 32);
-      const {didDocument} = await didKeyDriver.generate({seed: seedBytes});
+      const {didDocument} = await didKeyDriver.generate({
+        seed: seedBytes, keyTypeHandler: Ed25519VerificationKey2020
+      });
       expect(didDocument).to.exist;
       expect(didDocument).to.have.keys([
         '@context', 'id', 'authentication', 'assertionMethod',
@@ -243,11 +257,13 @@ describe('did:key method driver', () => {
     });
     it('should generate "EcdsaMultikey" DID document using keypair options',
       async () => {
-        const didKeyDriverMultikey = driver({
-          verificationSuite: createVerificationSuite(EcdsaMultikey)
+        const didKeyDriverMultikey = driver();
+        didKeyDriverMultikey.registerKeyTypeHandler({
+          multikeyHeaders: 'zDna',
+          keyTypeHandler: createKeyTypeHandler(EcdsaMultikey)
         });
         const {didDocument} = await didKeyDriverMultikey.generate({
-          curve: 'P-256'
+          keyTypeHandler: EcdsaMultikey, curve: 'P-256'
         });
         expect(didDocument).to.exist;
         expect(didDocument).to.have.keys([

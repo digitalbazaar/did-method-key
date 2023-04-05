@@ -13,7 +13,7 @@ chai.should();
 const {expect} = chai;
 const didKeyDriver = driver();
 didKeyDriver.use({
-  multikeyHeader: 'z6Mk',
+  multibaseMultikeyHeader: 'z6Mk',
   keyTypeHandler: Ed25519VerificationKey2020
 });
 // eslint-disable-next-line max-len
@@ -61,10 +61,10 @@ describe('did:key method driver', () => {
 
     it('should get the DID Doc in 2018 mode', async () => {
       const didKeyDriver2018 = driver();
-      const multikeyHeaders = ['z6Mk', 'B12N'];
-      for(const header of multikeyHeaders) {
+      const multibaseMultikeyHeaders = ['z6Mk', 'B12N'];
+      for(const header of multibaseMultikeyHeaders) {
         didKeyDriver2018.use({
-          multikeyHeader: header,
+          multibaseMultikeyHeader: header,
           keyTypeHandler: Ed25519VerificationKey2018
         });
       }
@@ -141,10 +141,10 @@ describe('did:key method driver', () => {
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
       const fingerprint = 'z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
       const keyId = `${did}#${fingerprint}`;
-      const multikeyHeaders = ['z6Mk', 'B12N'];
-      for(const header of multikeyHeaders) {
+      const multibaseMultikeyHeaders = ['z6Mk', 'B12N'];
+      for(const header of multibaseMultikeyHeaders) {
         didKeyDriver2018.use({
-          multikeyHeader: header,
+          multibaseMultikeyHeader: header,
           keyTypeHandler: Ed25519VerificationKey2018
         });
       }
@@ -183,7 +183,7 @@ describe('did:key method driver', () => {
       const didKeyDriverMultikey = driver();
 
       didKeyDriverMultikey.use({
-        multikeyHeader: 'zDna',
+        multibaseMultikeyHeader: 'zDna',
         keyTypeHandler: createKeyTypeHandler(EcdsaMultikey)
       });
       const key = await didKeyDriverMultikey.get({did: mutikeyDid});
@@ -202,10 +202,10 @@ describe('did:key method driver', () => {
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
       const fingerprint = 'z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc';
       const kakKeyId = `${did}#${fingerprint}`;
-      const multikeyHeaders = ['z6LS', 'z6Mk', 'B12N'];
-      for(const header of multikeyHeaders) {
+      const multibaseMultikeyHeaders = ['z6LS', 'z6Mk', 'B12N'];
+      for(const header of multibaseMultikeyHeaders) {
         didKeyDriver2018.use({
-          multikeyHeader: header,
+          multibaseMultikeyHeader: header,
           keyTypeHandler: Ed25519VerificationKey2018
         });
       }
@@ -261,7 +261,7 @@ describe('did:key method driver', () => {
       async () => {
         const didKeyDriverMultikey = driver();
         didKeyDriverMultikey.use({
-          multikeyHeader: 'zDna',
+          multibaseMultikeyHeader: 'zDna',
           keyTypeHandler: createKeyTypeHandler(EcdsaMultikey)
         });
         const {didDocument} = await didKeyDriverMultikey.generate({

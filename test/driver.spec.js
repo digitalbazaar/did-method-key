@@ -12,7 +12,10 @@ import {Ed25519VerificationKey2020} from
 chai.should();
 const {expect} = chai;
 const didKeyDriver = driver();
-
+didKeyDriver.registerKeyTypeHandler({
+  multikeyHeaders: ['z6Mk'],
+  keyTypeHandler: Ed25519VerificationKey2020
+});
 // eslint-disable-next-line max-len
 const TEST_SEED = '8c2114a150a16209c653817acc7f3e7e9c6c6290ae93d6689cbd61bb038cd31b';
 
@@ -212,11 +215,6 @@ describe('did:key method driver', () => {
 
   describe('generate', () => {
     it('should generate and get round trip', async () => {
-      const didKeyDriver = driver();
-      didKeyDriver.registerKeyTypeHandler({
-        multikeyHeaders: 'zDna',
-        keyTypeHandler: createKeyTypeHandler(EcdsaMultikey)
-      });
       const {
         didDocument, keyPairs, methodFor
       } = await didKeyDriver.generate({
@@ -238,11 +236,6 @@ describe('did:key method driver', () => {
       expect(fetchedDidDoc).to.eql(didDocument);
     });
     it('should generate a DID document from seed', async () => {
-      const didKeyDriver = driver();
-      didKeyDriver.registerKeyTypeHandler({
-        multikeyHeaders: 'zDna',
-        keyTypeHandler: createKeyTypeHandler(EcdsaMultikey)
-      });
       const seedBytes = (new TextEncoder()).encode(TEST_SEED).slice(0, 32);
       const {didDocument} = await didKeyDriver.generate({
         seed: seedBytes, keyTypeHandler: Ed25519VerificationKey2020

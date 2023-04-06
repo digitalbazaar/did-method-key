@@ -16,12 +16,6 @@ didKeyDriver.use({
   multibaseMultikeyHeader: 'z6Mk',
   keyTypeHandler: Ed25519VerificationKey2020
 });
-// eslint-disable-next-line max-len
-const TEST_SEED = '8c2114a150a16209c653817acc7f3e7e9c6c6290ae93d6689cbd61bb038cd31b';
-
-// TODO
-//import EXPECTED_DID_DOC from './expected-did-doc.json' assert {type: 'json'};
-import {expectedDidDoc as EXPECTED_DID_DOC} from './expected-data.js';
 
 describe('did:key method driver', () => {
   describe('get', () => {
@@ -188,6 +182,7 @@ describe('did:key method driver', () => {
         keyTypeHandler: EcdsaMultikey
       });
       const key = await didKeyDriverMultikey.get({did: mutikeyDid});
+
       expect(key).to.eql({
         '@context': 'https://w3id.org/security/multikey/v1',
         id: 'did:key:zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR' +
@@ -224,13 +219,17 @@ describe('did:key method driver', () => {
     });
   });
 
-  describe('generate', () => {
-    it('should generate and get round trip', async () => {
+  describe('fromKeyPair', () => {
+    it('should generate DID document and get round trip', async () => {
+      const publicKeyMultibase =
+        'z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T';
+      const keyPair = await Ed25519VerificationKey2020.from({
+        publicKeyMultibase
+      });
       const {
         didDocument, keyPairs, methodFor
-      } = await didKeyDriver.generate({
-        keyTypeHandler: Ed25519VerificationKey2020
-      });
+      } = await didKeyDriver.fromKeyPair({verificationKeyPair: keyPair});
+
       const did = didDocument.id;
       const keyId = didDocument.authentication[0];
 
@@ -246,28 +245,18 @@ describe('did:key method driver', () => {
       const fetchedDidDoc = await didKeyDriver.get({did});
       expect(fetchedDidDoc).to.eql(didDocument);
     });
-    it('should generate a DID document from seed', async () => {
-      const seedBytes = (new TextEncoder()).encode(TEST_SEED).slice(0, 32);
-      const {didDocument} = await didKeyDriver.generate({
-        seed: seedBytes, keyTypeHandler: Ed25519VerificationKey2020
-      });
-      expect(didDocument).to.exist;
-      expect(didDocument).to.have.keys([
-        '@context', 'id', 'authentication', 'assertionMethod',
-        'capabilityDelegation', 'capabilityInvocation', 'keyAgreement',
-        'verificationMethod'
-      ]);
-      expect(didDocument).eql(EXPECTED_DID_DOC);
-    });
-    it('should generate "EcdsaMultikey" DID document using keypair options',
+    it('should generate "EcdsaMultikey" DID document using keypair',
       async () => {
+        const publicKeyMultibase =
+        'zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR';
+        const keyPair = await EcdsaMultikey.from({publicKeyMultibase});
         const didKeyDriverMultikey = driver();
         didKeyDriverMultikey.use({
           multibaseMultikeyHeader: 'zDna',
           keyTypeHandler: EcdsaMultikey
         });
-        const {didDocument} = await didKeyDriverMultikey.generate({
-          keyTypeHandler: EcdsaMultikey, curve: 'P-256'
+        const {didDocument} = await didKeyDriverMultikey.fromKeyPair({
+          verificationKeyPair: keyPair
         });
         expect(didDocument).to.exist;
         expect(didDocument).to.have.keys([

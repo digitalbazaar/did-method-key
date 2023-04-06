@@ -65,7 +65,7 @@ describe('did:key method driver', () => {
       for(const header of multibaseMultikeyHeaders) {
         didKeyDriver2018.use({
           multibaseMultikeyHeader: header,
-          keyTypeHandler: Ed25519VerificationKey2018
+          keyTypeHandler: createKeyTypeHandler(Ed25519VerificationKey2018)
         });
       }
       // Note: Testing same keys as previous (2020 mode) test
@@ -145,7 +145,7 @@ describe('did:key method driver', () => {
       for(const header of multibaseMultikeyHeaders) {
         didKeyDriver2018.use({
           multibaseMultikeyHeader: header,
-          keyTypeHandler: Ed25519VerificationKey2018
+          keyTypeHandler: createKeyTypeHandler(Ed25519VerificationKey2018)
         });
       }
       const key = await didKeyDriver2018.get({did: keyId});
@@ -184,7 +184,7 @@ describe('did:key method driver', () => {
 
       didKeyDriverMultikey.use({
         multibaseMultikeyHeader: 'zDna',
-        keyTypeHandler: createKeyTypeHandler(EcdsaMultikey)
+        keyTypeHandler: EcdsaMultikey
       });
       const key = await didKeyDriverMultikey.get({did: mutikeyDid});
       expect(key).to.eql({
@@ -206,7 +206,7 @@ describe('did:key method driver', () => {
       for(const header of multibaseMultikeyHeaders) {
         didKeyDriver2018.use({
           multibaseMultikeyHeader: header,
-          keyTypeHandler: Ed25519VerificationKey2018
+          keyTypeHandler: createKeyTypeHandler(Ed25519VerificationKey2018)
         });
       }
       const key = await didKeyDriver2018.get({did: kakKeyId});
@@ -262,7 +262,7 @@ describe('did:key method driver', () => {
         const didKeyDriverMultikey = driver();
         didKeyDriverMultikey.use({
           multibaseMultikeyHeader: 'zDna',
-          keyTypeHandler: createKeyTypeHandler(EcdsaMultikey)
+          keyTypeHandler: EcdsaMultikey
         });
         const {didDocument} = await didKeyDriverMultikey.generate({
           keyTypeHandler: EcdsaMultikey, curve: 'P-256'

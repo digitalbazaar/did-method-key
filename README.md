@@ -114,6 +114,43 @@ npm install
 
 ## Usage
 
+### `use()`
+
+This method registers a multibase-multikey header and a key type handler and
+configures a driver to use a key type handler to handle data with that
+multibase-multikey header.
+
+```js
+import * as EcdsaMultikey from '@digitalbazaar/ecdsa-multikey';
+import {driver} from '@digitalbazaar/did-method-key';
+
+const didKeyDriverMultikey = driver();
+
+didKeyDriverMultikey.use({
+  multibaseMultikeyHeader: 'zDna',
+  keyTypeHandler: EcdsaMultikey
+});
+```
+
+### `createKeyTypeHandler()`
+
+This utility function can be used to adapt legacy key type handlers sucn as
+`Ed25519VerificationSuite2018` to work properly with `keyTypeHandler.from()`
+calls in `DidKeyDriver`.
+
+```js
+import {driver} from '@digitalbazaar/did-method-key';
+import {Ed25519VerificationKey2018} from
+  '@digitalbazaar/ed25519-verification-key-2018';
+
+const didKeyDriver2018 = driver();
+
+didKeyDriver2018.use({
+  multibaseMultikeyHeader: header,
+  keyTypeHandler: createKeyTypeHandler(Ed25519VerificationKey2018)
+});
+```
+
 ### `fromKeyPair()`
 
 To generate a new key and get its corresponding `did:key` method DID Document
@@ -177,7 +214,7 @@ const keyAgreementPair = methodFor({purpose: 'keyAgreement'});
 ```
 
 Note that `methodFor` returns a key pair that contains a `publicKeyMultibase`.
-This makes it useful for _signing_ operations.
+This makes it useful for _signing_ and _encrypting_ operations.
 
 ### `publicKeyToDidDoc()`
 

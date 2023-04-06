@@ -139,8 +139,9 @@ describe('did:key method driver', () => {
       const didKeyDriver2018 = driver();
 
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const fingerprint = 'z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const keyId = `${did}#${fingerprint}`;
+      const publicKeyMultibase =
+        'z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+      const keyId = `${did}#${publicKeyMultibase}`;
       const multibaseMultikeyHeaders = ['z6Mk', 'B12N'];
       for(const header of multibaseMultikeyHeaders) {
         didKeyDriver2018.use({
@@ -200,8 +201,9 @@ describe('did:key method driver', () => {
     it('should resolve an individual key agreement key (2018)', async () => {
       const didKeyDriver2018 = driver();
       const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const fingerprint = 'z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc';
-      const kakKeyId = `${did}#${fingerprint}`;
+      const publicKeyMultibase =
+        'z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc';
+      const kakKeyId = `${did}#${publicKeyMultibase}`;
       const multibaseMultikeyHeaders = ['z6LS', 'z6Mk', 'B12N'];
       for(const header of multibaseMultikeyHeaders) {
         didKeyDriver2018.use({

@@ -248,21 +248,39 @@ describe('did:key method driver', () => {
     it('should generate "EcdsaMultikey" DID document using keypair',
       async () => {
         const publicKeyMultibase =
-        'zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR';
+          'zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR';
         const keyPair = await EcdsaMultikey.from({publicKeyMultibase});
         const didKeyDriverMultikey = driver();
         didKeyDriverMultikey.use({
           multibaseMultikeyHeader: 'zDna',
           keyTypeHandler: EcdsaMultikey
         });
-        const {didDocument} = await didKeyDriverMultikey.fromKeyPair({
+        const {
+          didDocument, keyPairs, methodFor
+        } = await didKeyDriverMultikey.fromKeyPair({
           verificationKeyPair: keyPair
         });
-        expect(didDocument).to.exist;
-        expect(didDocument).to.have.keys([
-          '@context', 'id', 'authentication', 'assertionMethod',
-          'capabilityDelegation', 'capabilityInvocation', 'verificationMethod'
-        ]);
+        const did = didDocument.id;
+        const keyId = didDocument.authentication[0];
+
+        const verificationKeyPair = methodFor({purpose: 'assertionMethod'});
+        let err;
+        let keyAgreementKeyPair;
+        try {
+          keyAgreementKeyPair = methodFor({purpose: 'keyAgreement'});
+        } catch(e) {
+          err = e;
+        }
+        expect(err).to.exist;
+        expect(keyAgreementKeyPair).to.not.exist;
+
+        expect(keyId).to.equal(verificationKeyPair.id);
+
+        expect(keyPairs.get(keyId).controller).to.equal(did);
+        expect(keyPairs.get(keyId).id).to.equal(keyId);
+
+        const fetchedDidDoc = await didKeyDriverMultikey.get({did});
+        expect(fetchedDidDoc).to.eql(didDocument);
       });
   });
 

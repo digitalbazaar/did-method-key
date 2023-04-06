@@ -2,18 +2,24 @@
 
 ## 5.0.0 - 2023-TBD
 
-### Changed
-- **BREAKING**: `generate()` method now requires a `keyTypeHandler` param which
-  is the `verificationSuite`.
-
 ### Added
-- Add `use()` method that can be used to register multikey
-  headers and the key type handler (which is the verificationSuite previously)
-  to be used.
+- Add `use()` method that allows multibase-multikey headers and the key type
+  handler (which replaces `verificationSuite` previously) to handle data using
+  that header.
+- Add `fromKeyPair()` that generates the DID Document along with the
+  corresponding key pairs from a `verificationKeyPair`. `fromKeyPair()` also
+  optionally takes a `keyAgreementKeypair` param.
+
+### Changed
+- **BREAKING** Renamed `createVerificationSuite()` to `createKeyTypeHandler()`
+  which now no longer takes a `generate` param and is adapted to convert the
+  legacy verification suites to provide proper `.from()` method.
 
 ### Removed
 - **BREAKING**: `DidKeyDriver` no longer takes a `verificationSuite` param in
   the constructor.
+- **BREAKING**: `generate()` method has now been replaced by a new method
+  `fromKeyPair()`.
 
 ## 4.0.0 - 2023-04-03
 

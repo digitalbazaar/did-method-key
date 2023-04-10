@@ -214,7 +214,7 @@ const keyAgreementPair = methodFor({purpose: 'keyAgreement'});
 ```
 
 Note that `methodFor` returns a key pair that contains a `publicKeyMultibase`.
-This makes it useful for _signing_ and _encrypting_ operations.
+This makes it useful for _verifying_ and _encrypting_ operations.
 
 ### `publicKeyToDidDoc()`
 
@@ -241,7 +241,7 @@ const didDocument = await didKeyDriver.get({did});
 
 #### Getting the DID Document from key id
 
-You can also use a `.get()` to retrieve an individual key, if you know it's id
+You can also use a `.get()` to retrieve an individual key, if you know its id
 already (this is useful for constructing `documentLoader`s for JSON-LD Signature
 libs, and the resulting key does include the appropriate `@context`).
 

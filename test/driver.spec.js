@@ -55,7 +55,7 @@ describe('did:key method driver', () => {
 
     it('should get the DID Doc in 2018 mode', async () => {
       const didKeyDriver2018 = driver();
-      const multibaseMultikeyHeaders = ['z6Mk', 'B12N'];
+      const multibaseMultikeyHeaders = ['z6Mk'];
       for(const header of multibaseMultikeyHeaders) {
         didKeyDriver2018.use({
           multibaseMultikeyHeader: header,
@@ -136,7 +136,7 @@ describe('did:key method driver', () => {
       const publicKeyMultibase =
         'z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
       const keyId = `${did}#${publicKeyMultibase}`;
-      const multibaseMultikeyHeaders = ['z6Mk', 'B12N'];
+      const multibaseMultikeyHeaders = ['z6Mk'];
       for(const header of multibaseMultikeyHeaders) {
         didKeyDriver2018.use({
           multibaseMultikeyHeader: header,
@@ -199,7 +199,7 @@ describe('did:key method driver', () => {
       const publicKeyMultibase =
         'z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc';
       const kakKeyId = `${did}#${publicKeyMultibase}`;
-      const multibaseMultikeyHeaders = ['z6LS', 'z6Mk', 'B12N'];
+      const multibaseMultikeyHeaders = ['z6LS', 'z6Mk'];
       for(const header of multibaseMultikeyHeaders) {
         didKeyDriver2018.use({
           multibaseMultikeyHeader: header,

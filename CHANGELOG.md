@@ -3,17 +3,17 @@
 ## 5.0.0 - 2023-TBD
 
 ### Added
-- Add `use()` method that allows multibase-multikey headers and the key type
-  handler (which replaces `verificationSuite` previously) to handle data using
-  that header.
+- Add `use()` method that allows multibase-multikey headers and a
+  multibase-multikey deserializer (which replaces `verificationSuite`
+  previously) to handle data using that header.
 - Add `fromKeyPair()` that generates the DID Document along with the
   corresponding key pairs from a `verificationKeyPair`. `fromKeyPair()` also
   optionally takes a `keyAgreementKeypair` param.
 
 ### Changed
-- **BREAKING** Renamed `createVerificationSuite()` to `createKeyTypeHandler()`
+- **BREAKING** Renamed `createVerificationSuite()` to `createFromMultibase()`
   which now no longer takes a `generate` param and is adapted to convert the
-  legacy verification suites to provide proper `.from()` method.
+  legacy verification suites to provide proper `.fromMultibase()` method.
 
 ### Removed
 - **BREAKING**: `DidKeyDriver` no longer takes a `verificationSuite` param in

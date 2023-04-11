@@ -2,7 +2,7 @@
  * Copyright (c) 2019-2023 Digital Bazaar, Inc. All rights reserved.
  */
 import * as EcdsaMultikey from '@digitalbazaar/ecdsa-multikey';
-import {createKeyTypeHandler, driver} from '../lib/index.js';
+import {createFromMultibase, driver} from '../lib/index.js';
 import chai from 'chai';
 import {Ed25519VerificationKey2018} from
   '@digitalbazaar/ed25519-verification-key-2018';
@@ -14,7 +14,7 @@ const {expect} = chai;
 const didKeyDriver = driver();
 didKeyDriver.use({
   multibaseMultikeyHeader: 'z6Mk',
-  keyTypeHandler: Ed25519VerificationKey2020
+  fromMultibase: Ed25519VerificationKey2020.from
 });
 
 describe('did:key method driver', () => {
@@ -59,7 +59,7 @@ describe('did:key method driver', () => {
       for(const header of multibaseMultikeyHeaders) {
         didKeyDriver2018.use({
           multibaseMultikeyHeader: header,
-          keyTypeHandler: createKeyTypeHandler(Ed25519VerificationKey2018)
+          fromMultibase: createFromMultibase(Ed25519VerificationKey2018)
         });
       }
       // Note: Testing same keys as previous (2020 mode) test
@@ -140,7 +140,7 @@ describe('did:key method driver', () => {
       for(const header of multibaseMultikeyHeaders) {
         didKeyDriver2018.use({
           multibaseMultikeyHeader: header,
-          keyTypeHandler: createKeyTypeHandler(Ed25519VerificationKey2018)
+          fromMultibase: createFromMultibase(Ed25519VerificationKey2018)
         });
       }
       const key = await didKeyDriver2018.get({did: keyId});
@@ -179,7 +179,7 @@ describe('did:key method driver', () => {
 
       didKeyDriverMultikey.use({
         multibaseMultikeyHeader: 'zDna',
-        keyTypeHandler: EcdsaMultikey
+        fromMultibase: EcdsaMultikey.from
       });
       const key = await didKeyDriverMultikey.get({did: mutikeyDid});
 
@@ -203,7 +203,7 @@ describe('did:key method driver', () => {
       for(const header of multibaseMultikeyHeaders) {
         didKeyDriver2018.use({
           multibaseMultikeyHeader: header,
-          keyTypeHandler: createKeyTypeHandler(Ed25519VerificationKey2018)
+          fromMultibase: createFromMultibase(Ed25519VerificationKey2018)
         });
       }
       const key = await didKeyDriver2018.get({did: kakKeyId});
@@ -253,7 +253,7 @@ describe('did:key method driver', () => {
         const didKeyDriverMultikey = driver();
         didKeyDriverMultikey.use({
           multibaseMultikeyHeader: 'zDna',
-          keyTypeHandler: EcdsaMultikey
+          fromMultibase: EcdsaMultikey.from
         });
         const {
           didDocument, keyPairs, methodFor

@@ -1,6 +1,6 @@
 # did:key driver ChangeLog
 
-## 5.0.0 - 2023-TBD
+## 5.0.0 - 2023-04-11
 
 ### Added
 - Add `use()` method that allows multibase-multikey headers and a
@@ -19,7 +19,11 @@
 - **BREAKING**: `DidKeyDriver` no longer takes a `verificationSuite` param in
   the constructor.
 - **BREAKING**: `generate()` method has now been replaced by a new method
-  `fromKeyPair()`.
+  `fromKeyPair()`. This approach externalizes key pair generation to allow
+  whatever parameters are necessary / possible (such as random bytes / seeds)
+  to be provided in the key-pair-specific implementation. This also greatly
+  reduces the complexity of this library and the need to import key pair
+  libraries generally.
 
 ## 4.0.0 - 2023-04-03
 

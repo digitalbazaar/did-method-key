@@ -136,7 +136,7 @@ didKeyDriverMultikey.use({
 
 This utility function can be used to adapt legacy verification suites such as
 `Ed25519VerificationSuite2018` to work properly with `fromMultibase()`
-calls in `DidKeyDriver`. 
+calls in `DidKeyDriver`.
 
 ```js
 import {driver} from '@digitalbazaar/did-method-key';
@@ -163,7 +163,6 @@ import {Ed25519VerificationKey2020} from
 
 const didKeyDriver = driver();
 
-// generate did:key using Ed25519 key type by default
 const publicKeyMultibase = 'z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
 const verificationKeyPair = await Ed25519VerificationKey2020.from({
   publicKeyMultibase

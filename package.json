@@ -28,7 +28,7 @@
     "@digitalbazaar/x25519-key-agreement-key-2020": "^3.0.0"
   },
   "devDependencies": {
-    "@digitalbazaar/ecdsa-multikey": "digitalbazaar/ecdsa-multikey#update-importKeyPair",
+    "@digitalbazaar/ecdsa-multikey": "^1.1.1",
     "@digitalbazaar/ed25519-verification-key-2018": "^4.0.0",
     "@digitalbazaar/ed25519-verification-key-2020": "^4.0.0",
     "c8": "^7.11.3",

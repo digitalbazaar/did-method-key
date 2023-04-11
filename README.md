@@ -116,9 +116,9 @@ npm install
 
 ### `use()`
 
-This method registers a multibase-multikey header and a key type handler and
-configures a driver to use a key type handler to handle data with that
-multibase-multikey header.
+This method registers a multibase-multikey header and a multibase-multikey
+deserializer and configures a driver to use a multibase-multikey deserializer
+to handle data using that multibase-multikey header.
 
 ```js
 import * as EcdsaMultikey from '@digitalbazaar/ecdsa-multikey';
@@ -128,15 +128,15 @@ const didKeyDriverMultikey = driver();
 
 didKeyDriverMultikey.use({
   multibaseMultikeyHeader: 'zDna',
-  keyTypeHandler: EcdsaMultikey
+  fromMultibase: EcdsaMultikey.from
 });
 ```
 
-### `createKeyTypeHandler()`
+### `createFromMultibase()`
 
-This utility function can be used to adapt legacy key type handlers sucn as
-`Ed25519VerificationSuite2018` to work properly with `keyTypeHandler.from()`
-calls in `DidKeyDriver`.
+This utility function can be used to adapt legacy verification suites such as
+`Ed25519VerificationSuite2018` to work properly with `fromMultibase()`
+calls in `DidKeyDriver`. 
 
 ```js
 import {driver} from '@digitalbazaar/did-method-key';
@@ -147,7 +147,7 @@ const didKeyDriver2018 = driver();
 
 didKeyDriver2018.use({
   multibaseMultikeyHeader: header,
-  keyTypeHandler: createKeyTypeHandler(Ed25519VerificationKey2018)
+  fromMultibase: createFromMultibase(Ed25519VerificationKey2018)
 });
 ```
 

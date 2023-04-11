@@ -271,16 +271,18 @@ For that purpose, you can use a combination of `get()` and `publicMethodFor`:
 // Start with the DID
 const didDocument = await didKeyDriver.get({did});
 // This lets you use `publicMethodFor()` to get a key for a specific purpose
-const keyAgreementData = didKeyDriver.publicMethodFor({
+const keyAgreementMethod = didKeyDriver.publicMethodFor({
   didDocument, purpose: 'keyAgreement'
 });
-const assertionMethodData = didKeyDriver.publicMethodFor({
+const assertionMethod = didKeyDriver.publicMethodFor({
   didDocument, purpose: 'assertionMethod'
 });
 
-// If you're using a `crypto-ld` driver harness, you can create key instances
-// which allow you to get access to a `verify()` function.
-const assertionMethodPublicKey = await cryptoLd.from(assertionMethodData);
+// If you have a known key type, for example, `Ed25519VerificationKey2020`,
+// you can create key instances which allow you to get access to a
+// `verify()` function.
+const assertionMethodPublicKey = await Ed25519VerificationKey2020.from(
+  assertionMethod);
 const {verify} = assertionMethodPublicKey.verifier();
 ```
 

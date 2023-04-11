@@ -167,6 +167,8 @@ const publicKeyMultibase = 'z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
 const verificationKeyPair = await Ed25519VerificationKey2020.from({
   publicKeyMultibase
 });
+// or perhaps:
+// const verificationKeyPair = await Ed25519VerificationKey2020.generate();
 
 const {didDocument, keyPairs, methodFor} = await didKeyDriver.fromKeyPair({
   verificationKeyPair

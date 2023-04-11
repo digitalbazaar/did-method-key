@@ -53,6 +53,37 @@ describe('did:key method driver', () => {
         .equal('z6LSotGbgPCJD2Y6TSvvgxERLTfVZxCh9KSrez3WNrNp7vKW');
     });
 
+    it('should get the DID Document for an ecdsa multikey did', async () => {
+      const did = 'did:key:zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR';
+      const keyId =
+        `${did}#zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR`;
+      const didKeyDriverMultikey = driver();
+
+      didKeyDriverMultikey.use({
+        multibaseMultikeyHeader: 'zDna',
+        fromMultibase: EcdsaMultikey.from
+      });
+
+      const didDocument = await didKeyDriverMultikey.get({did});
+
+      expect(didDocument.id).to.equal(did);
+      expect(didDocument['@context']).to.eql([
+        'https://www.w3.org/ns/did/v1',
+        'https://w3id.org/security/multikey/v1'
+      ]);
+      expect(didDocument.authentication).to.eql([keyId]);
+      expect(didDocument.assertionMethod).to.eql([keyId]);
+      expect(didDocument.capabilityDelegation).to.eql([keyId]);
+      expect(didDocument.capabilityInvocation).to.eql([keyId]);
+
+      const [publicKey] = didDocument.verificationMethod;
+      expect(publicKey.id).to.equal(keyId);
+      expect(publicKey.type).to.equal('Multikey');
+      expect(publicKey.controller).to.equal(did);
+      expect(publicKey.publicKeyMultibase).to
+        .equal('zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR');
+    });
+
     it('should get the DID Doc in 2018 mode', async () => {
       const didKeyDriver2018 = driver();
       const multibaseMultikeyHeaders = ['z6Mk'];

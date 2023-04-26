@@ -98,6 +98,8 @@ describe('did:key method driver', () => {
 
       didKeyDriverKak.use({
         multibaseMultikeyHeader: 'z6LS',
+        // FIXME: Use EcdsaMultikey instead once X25519KeyAgreementKey support
+        // is added in EcdsaMultikey
         fromMultibase: X25519KeyAgreementKey2020.from
       });
 
@@ -241,6 +243,8 @@ describe('did:key method driver', () => {
 
       didKeyDriverKak.use({
         multibaseMultikeyHeader: 'z6LS',
+        // FIXME: Use EcdsaMultikey instead once X25519KeyAgreementKey support
+        // is added in EcdsaMultikey
         fromMultibase: X25519KeyAgreementKey2020.from
       });
       const key = await didKeyDriverKak.get({did: keyId});
@@ -325,7 +329,6 @@ describe('did:key method driver', () => {
 
       expect(keyPairs.get(keyId).controller).to.equal(did);
       expect(keyPairs.get(keyId).id).to.equal(keyId);
-
       const fetchedDidDoc = await didKeyDriver.get({did});
       expect(fetchedDidDoc).to.eql(didDocument);
     });
@@ -362,10 +365,87 @@ describe('did:key method driver', () => {
 
         expect(keyPairs.get(keyId).controller).to.equal(did);
         expect(keyPairs.get(keyId).id).to.equal(keyId);
-
         const fetchedDidDoc = await didKeyDriverMultikey.get({did});
         expect(fetchedDidDoc).to.eql(didDocument);
       });
+    it('should generate DID document with verificationKeyPair and ' +
+      'keyAgreementKeyPair', async () => {
+      const publicKeyMultibaseForVerificationKeyPair =
+        'z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T';
+      const keyPairForVerification = await Ed25519VerificationKey2020.from({
+        publicKeyMultibase: publicKeyMultibaseForVerificationKeyPair
+      });
+      const publicKeyMultibaseForKeyAgreementKeyPair =
+        'z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc';
+      const keyPairForKeyAgreement = await X25519KeyAgreementKey2020.from({
+        publicKeyMultibase: publicKeyMultibaseForKeyAgreementKeyPair
+      });
+      const didKeyDriver = driver();
+      didKeyDriver.use({
+        multibaseMultikeyHeader: 'z6Mk',
+        fromMultibase: Ed25519VerificationKey2020.from
+      });
+      didKeyDriver.use({
+        multibaseMultikeyHeader: 'z6LS',
+        // FIXME: Use EcdsaMultikey instead once X25519KeyAgreementKey support
+        // is added in EcdsaMultikey
+        fromMultibase: X25519KeyAgreementKey2020.from
+      });
+      const {
+        didDocument, keyPairs, methodFor
+      } = await didKeyDriver.fromKeyPair({
+        verificationKeyPair: keyPairForVerification,
+        keyAgreementKeyPair: keyPairForKeyAgreement
+      });
+      const did = didDocument.id;
+      const keyId = `did:key:${publicKeyMultibaseForVerificationKeyPair}` +
+        `#${publicKeyMultibaseForVerificationKeyPair}`;
+      const keyAgreementId =
+        `did:key:${publicKeyMultibaseForKeyAgreementKeyPair}` +
+        `#${publicKeyMultibaseForKeyAgreementKeyPair}`;
+      expect(didDocument['@context']).to.eql([
+        'https://www.w3.org/ns/did/v1',
+        'https://w3id.org/security/suites/ed25519-2020/v1',
+        'https://w3id.org/security/suites/x25519-2020/v1'
+      ]);
+      expect(didDocument.authentication).to.eql([keyId]);
+      expect(didDocument.assertionMethod).to.eql([keyId]);
+      expect(didDocument.capabilityDelegation).to.eql([keyId]);
+      expect(didDocument.capabilityInvocation).to.eql([keyId]);
+
+      const [publicKey] = didDocument.verificationMethod;
+      expect(publicKey.id).to.equal(keyId);
+      expect(publicKey.type).to.equal('Ed25519VerificationKey2020');
+      expect(publicKey.controller).to.equal(did);
+      expect(publicKey.publicKeyMultibase).to
+        .equal(publicKeyMultibaseForVerificationKeyPair);
+
+      const [kak] = didDocument.keyAgreement;
+      const kakDid = `did:key:${publicKeyMultibaseForKeyAgreementKeyPair}`;
+
+      expect(kak.id).to.equal(keyAgreementId);
+      expect(kak.type).to.equal('X25519KeyAgreementKey2020');
+      expect(kak.controller).to.equal(kakDid);
+      expect(kak.publicKeyMultibase).to
+        .equal(publicKeyMultibaseForKeyAgreementKeyPair);
+
+      const verificationKeyPair = methodFor({purpose: 'assertionMethod'});
+      let err;
+      let keyAgreementKeyPair;
+      try {
+        keyAgreementKeyPair = methodFor({purpose: 'keyAgreement'});
+      } catch(e) {
+        err = e;
+      }
+      expect(err).to.not.exist;
+      expect(keyAgreementKeyPair).to.exist;
+      expect(verificationKeyPair).to.exist;
+
+      expect(verificationKeyPair.id).to.equal(keyId);
+      expect(keyAgreementKeyPair.id).to.equal(keyAgreementId);
+      expect(keyPairs.get(keyId).controller).to.equal(did);
+      expect(keyPairs.get(keyAgreementId).controller).to.equal(kakDid);
+    });
   });
 
   describe('publicKeyToDidDoc', () => {

@@ -8,6 +8,9 @@ import {Ed25519VerificationKey2018} from
   '@digitalbazaar/ed25519-verification-key-2018';
 import {Ed25519VerificationKey2020} from
   '@digitalbazaar/ed25519-verification-key-2020';
+import {
+  X25519KeyAgreementKey2020
+} from '@digitalbazaar/x25519-key-agreement-key-2020';
 
 chai.should();
 const {expect} = chai;
@@ -82,6 +85,31 @@ describe('did:key method driver', () => {
       expect(publicKey.controller).to.equal(did);
       expect(publicKey.publicKeyMultibase).to
         .equal('zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR');
+    });
+
+    it('should get the DID Document for a X25519-based DID', async () => {
+      const did = 'did:key:z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc';
+      const keyId =
+        `${did}#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc`;
+      const didKeyDriverKak = driver();
+
+      didKeyDriverKak.use({
+        multibaseMultikeyHeader: 'z6LS',
+        fromMultibase: X25519KeyAgreementKey2020.from
+      });
+
+      const didDocument = await didKeyDriverKak.get({did});
+      expect(didDocument.id).to.equal(did);
+      expect(didDocument['@context']).to.eql([
+        'https://www.w3.org/ns/did/v1',
+        'https://w3id.org/security/suites/x25519-2020/v1'
+      ]);
+      const [publicKey] = didDocument.keyAgreement;
+      expect(publicKey.id).to.equal(keyId);
+      expect(publicKey.type).to.equal('X25519KeyAgreementKey2020');
+      expect(publicKey.controller).to.equal(did);
+      expect(publicKey.publicKeyMultibase).to
+        .equal('z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc');
     });
 
     it('should get the DID Doc in 2018 mode', async () => {
@@ -199,6 +227,28 @@ describe('did:key method driver', () => {
         type: 'X25519KeyAgreementKey2020',
         controller: 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T',
         publicKeyMultibase: 'z6LSotGbgPCJD2Y6TSvvgxERLTfVZxCh9KSrez3WNrNp7vKW'
+      });
+    });
+
+    it('should resolve an individual X25519-based DID', async () => {
+      const did = 'did:key:z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc';
+      const keyId =
+        `${did}#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc`;
+      const didKeyDriverKak = driver();
+
+      didKeyDriverKak.use({
+        multibaseMultikeyHeader: 'z6LS',
+        fromMultibase: X25519KeyAgreementKey2020.from
+      });
+      const key = await didKeyDriverKak.get({did: keyId});
+
+      expect(key).to.eql({
+        '@context': 'https://w3id.org/security/suites/x25519-2020/v1',
+        id: 'did:key:z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc' +
+          '#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc',
+        type: 'X25519KeyAgreementKey2020',
+        controller: 'did:key:z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc',
+        publicKeyMultibase: 'z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc'
       });
     });
 

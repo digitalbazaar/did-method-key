@@ -200,13 +200,10 @@ describe('did:key method driver', () => {
       const publicKeyMultibase =
         'z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
       const keyId = `${did}#${publicKeyMultibase}`;
-      const multibaseMultikeyHeaders = ['z6Mk'];
-      for(const header of multibaseMultikeyHeaders) {
-        didKeyDriver2018.use({
-          multibaseMultikeyHeader: header,
-          fromMultibase: createFromMultibase(Ed25519VerificationKey2018)
-        });
-      }
+      didKeyDriver2018.use({
+        multibaseMultikeyHeader: 'z6Mk',
+        fromMultibase: createFromMultibase(Ed25519VerificationKey2018)
+      });
       const key = await didKeyDriver2018.get({did: keyId});
 
       expect(key).to.eql({
@@ -287,13 +284,10 @@ describe('did:key method driver', () => {
       const publicKeyMultibase =
         'z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc';
       const kakKeyId = `${did}#${publicKeyMultibase}`;
-      const multibaseMultikeyHeaders = ['z6LS', 'z6Mk'];
-      for(const header of multibaseMultikeyHeaders) {
-        didKeyDriver2018.use({
-          multibaseMultikeyHeader: header,
-          fromMultibase: createFromMultibase(Ed25519VerificationKey2018)
-        });
-      }
+      didKeyDriver2018.use({
+        multibaseMultikeyHeader: 'z6Mk',
+        fromMultibase: createFromMultibase(Ed25519VerificationKey2018)
+      });
       const key = await didKeyDriver2018.get({did: kakKeyId});
 
       expect(key).to.eql({
@@ -462,8 +456,13 @@ describe('did:key method driver', () => {
       expect(didDocument.id).to.equal(`did:key:${keyPair.fingerprint()}`);
     });
     it('should convert a 2019 X25519-based key to a did doc', async () => {
-      // Note that a freshly-generated key pair does not have a controller
-      // or key id
+      const didKeyDriver = driver();
+      didKeyDriver.use({
+        multibaseMultikeyHeader: 'z6LS',
+        // FIXME: Use EcdsaMultikey instead once X25519KeyAgreementKey support
+        // is added in EcdsaMultikey
+        fromMultibase: X25519KeyAgreementKey2019.from
+      });
       const keyPair = await X25519KeyAgreementKey2019.generate();
       const {didDocument} = await didKeyDriver.publicKeyToDidDoc({
         publicKeyDescription: keyPair
@@ -480,8 +479,13 @@ describe('did:key method driver', () => {
       expect(publicKey.controller).to.equal(`did:key:${keyPair.fingerprint()}`);
     });
     it('should convert a 2020 X25519-based key to a did doc', async () => {
-      // Note that a freshly-generated key pair does not have a controller
-      // or key id
+      const didKeyDriver = driver();
+      didKeyDriver.use({
+        multibaseMultikeyHeader: 'z6LS',
+        // FIXME: Use EcdsaMultikey instead once X25519KeyAgreementKey support
+        // is added in EcdsaMultikey
+        fromMultibase: X25519KeyAgreementKey2020.from
+      });
       const keyPair = await X25519KeyAgreementKey2020.generate();
       const {didDocument} = await didKeyDriver.publicKeyToDidDoc({
         publicKeyDescription: keyPair

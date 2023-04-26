@@ -9,6 +9,9 @@ import {Ed25519VerificationKey2018} from
 import {Ed25519VerificationKey2020} from
   '@digitalbazaar/ed25519-verification-key-2020';
 import {
+  X25519KeyAgreementKey2019
+} from '@digitalbazaar/x25519-key-agreement-key-2019';
+import {
   X25519KeyAgreementKey2020
 } from '@digitalbazaar/x25519-key-agreement-key-2020';
 
@@ -378,7 +381,42 @@ describe('did:key method driver', () => {
       expect(didDocument).to.have.property('@context');
       expect(didDocument.id).to.equal(`did:key:${keyPair.fingerprint()}`);
     });
-
+    it('should convert a 2019 X25519-based key to a did doc', async () => {
+      // Note that a freshly-generated key pair does not have a controller
+      // or key id
+      const keyPair = await X25519KeyAgreementKey2019.generate();
+      const {didDocument} = await didKeyDriver.publicKeyToDidDoc({
+        publicKeyDescription: keyPair
+      });
+      expect(didDocument).to.exist;
+      expect(didDocument).to.have.property('@context');
+      expect(didDocument.id).to.equal(`did:key:${keyPair.fingerprint()}`);
+      expect(didDocument['@context']).to.eql([
+        'https://www.w3.org/ns/did/v1',
+        'https://w3id.org/security/suites/x25519-2019/v1'
+      ]);
+      const [publicKey] = didDocument.keyAgreement;
+      expect(publicKey.type).to.equal('X25519KeyAgreementKey2019');
+      expect(publicKey.controller).to.equal(`did:key:${keyPair.fingerprint()}`);
+    });
+    it('should convert a 2020 X25519-based key to a did doc', async () => {
+      // Note that a freshly-generated key pair does not have a controller
+      // or key id
+      const keyPair = await X25519KeyAgreementKey2020.generate();
+      const {didDocument} = await didKeyDriver.publicKeyToDidDoc({
+        publicKeyDescription: keyPair
+      });
+      expect(didDocument).to.exist;
+      expect(didDocument).to.have.property('@context');
+      expect(didDocument.id).to.equal(`did:key:${keyPair.fingerprint()}`);
+      expect(didDocument['@context']).to.eql([
+        'https://www.w3.org/ns/did/v1',
+        'https://w3id.org/security/suites/x25519-2020/v1'
+      ]);
+      const [publicKey] = didDocument.keyAgreement;
+      expect(publicKey.type).to.equal('X25519KeyAgreementKey2020');
+      expect(publicKey.controller).to.equal(`did:key:${keyPair.fingerprint()}`);
+    });
     it('should convert a plain object to a did doc', async () => {
       const publicKeyDescription = {
         '@context': 'https://w3id.org/security/suites/ed25519-2020/v1',

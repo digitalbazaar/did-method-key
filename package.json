@@ -1,6 +1,6 @@
 {
   "name": "@digitalbazaar/did-method-key",
-  "version": "5.1.0",
+  "version": "5.1.1-0",
   "description": "A did:key method resolver.",
   "homepage": "https://github.com/digitalbazaar/did-method-key",
   "author": {

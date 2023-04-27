@@ -98,8 +98,6 @@ describe('did:key method driver', () => {
 
       didKeyDriverKak.use({
         multibaseMultikeyHeader: 'z6LS',
-        // FIXME: Use EcdsaMultikey instead once X25519KeyAgreementKey support
-        // is added in EcdsaMultikey
         fromMultibase: X25519KeyAgreementKey2020.from
       });
 
@@ -240,8 +238,6 @@ describe('did:key method driver', () => {
 
       didKeyDriverKak.use({
         multibaseMultikeyHeader: 'z6LS',
-        // FIXME: Use EcdsaMultikey instead once X25519KeyAgreementKey support
-        // is added in EcdsaMultikey
         fromMultibase: X25519KeyAgreementKey2020.from
       });
       const key = await didKeyDriverKak.get({did: keyId});
@@ -381,8 +377,6 @@ describe('did:key method driver', () => {
       });
       didKeyDriver.use({
         multibaseMultikeyHeader: 'z6LS',
-        // FIXME: Use EcdsaMultikey instead once X25519KeyAgreementKey support
-        // is added in EcdsaMultikey
         fromMultibase: X25519KeyAgreementKey2020.from
       });
       const {
@@ -459,8 +453,6 @@ describe('did:key method driver', () => {
       const didKeyDriver = driver();
       didKeyDriver.use({
         multibaseMultikeyHeader: 'z6LS',
-        // FIXME: Use EcdsaMultikey instead once X25519KeyAgreementKey support
-        // is added in EcdsaMultikey
         fromMultibase: X25519KeyAgreementKey2019.from
       });
       const keyPair = await X25519KeyAgreementKey2019.generate();
@@ -482,8 +474,6 @@ describe('did:key method driver', () => {
       const didKeyDriver = driver();
       didKeyDriver.use({
         multibaseMultikeyHeader: 'z6LS',
-        // FIXME: Use EcdsaMultikey instead once X25519KeyAgreementKey support
-        // is added in EcdsaMultikey
         fromMultibase: X25519KeyAgreementKey2020.from
       });
       const keyPair = await X25519KeyAgreementKey2020.generate();

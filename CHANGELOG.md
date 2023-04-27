@@ -1,5 +1,10 @@
 # did:key driver ChangeLog
 
+## 5.1.0 - 2023-04-TBD
+
+### Changed
+- Update `get()` and `publicKeyToDidDoc()` to support `keyAgreement-only` DIDs.
+
 ## 5.0.0 - 2023-04-11
 
 ### Added

@@ -163,6 +163,11 @@ import {Ed25519VerificationKey2020} from
 
 const didKeyDriver = driver();
 
+didKeyDriver.use({
+  multibaseMultikeyHeader: 'z6Mk',
+  fromMultibase: Ed25519VerificationKey2020.from
+});
+
 const publicKeyMultibase = 'z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
 const verificationKeyPair = await Ed25519VerificationKey2020.from({
   publicKeyMultibase

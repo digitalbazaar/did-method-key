@@ -1,7 +1,8 @@
 /*!
- * Copyright (c) 2019-2023 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2019-2024 Digital Bazaar, Inc. All rights reserved.
  */
 import * as EcdsaMultikey from '@digitalbazaar/ecdsa-multikey';
+import * as Bls12381Multikey from '@digitalbazaar/bls12-381-multikey';
 import {createFromMultibase, driver} from '../lib/index.js';
 import chai from 'chai';
 import {Ed25519VerificationKey2018} from
@@ -88,6 +89,37 @@ describe('did:key method driver', () => {
       expect(publicKey.controller).to.equal(did);
       expect(publicKey.publicKeyMultibase).to
         .equal('zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR');
+    });
+
+    it('should get the DID Document for a BLS12-381 multikey did', async () => {
+      // eslint-disable-next-line max-len
+      const publicKeyMultibase = 'zUC7GMwWWkA5UMTx7Gg6sabmpchWgq8p1xGhUXwBiDytY8BgD6eq5AmxNgjwDbAz8Rq6VFBLdNjvXR4ydEdwDEN9L4vGFfLkxs8UsU3wQj9HQGjQb7LHWdRNJv3J1kGoA3BvnBv';
+      const did = `did:key:${publicKeyMultibase}`;
+      const keyId = `${did}#${publicKeyMultibase}`;
+      const didKeyDriverMultikey = driver();
+
+      didKeyDriverMultikey.use({
+        multibaseMultikeyHeader: 'zUC7',
+        fromMultibase: Bls12381Multikey.from
+      });
+
+      const didDocument = await didKeyDriverMultikey.get({did});
+
+      expect(didDocument.id).to.equal(did);
+      expect(didDocument['@context']).to.eql([
+        'https://www.w3.org/ns/did/v1',
+        'https://w3id.org/security/multikey/v1'
+      ]);
+      expect(didDocument.authentication).to.eql([keyId]);
+      expect(didDocument.assertionMethod).to.eql([keyId]);
+      expect(didDocument.capabilityDelegation).to.eql([keyId]);
+      expect(didDocument.capabilityInvocation).to.eql([keyId]);
+
+      const [publicKey] = didDocument.verificationMethod;
+      expect(publicKey.id).to.equal(keyId);
+      expect(publicKey.type).to.equal('Multikey');
+      expect(publicKey.controller).to.equal(did);
+      expect(publicKey.publicKeyMultibase).to.equal(publicKeyMultibase);
     });
 
     it('should get the DID Document for a X25519-based DID', async () => {

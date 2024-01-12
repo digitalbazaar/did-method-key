@@ -1,8 +1,8 @@
 /*!
  * Copyright (c) 2019-2024 Digital Bazaar, Inc. All rights reserved.
  */
-import * as EcdsaMultikey from '@digitalbazaar/ecdsa-multikey';
 import * as Bls12381Multikey from '@digitalbazaar/bls12-381-multikey';
+import * as EcdsaMultikey from '@digitalbazaar/ecdsa-multikey';
 import {createFromMultibase, driver} from '../lib/index.js';
 import chai from 'chai';
 import {Ed25519VerificationKey2018} from

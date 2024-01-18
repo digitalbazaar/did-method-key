@@ -66,8 +66,8 @@ jobs:
     - run: npm install
     - name: Generate coverage report
       run: npm run coverage-ci
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v2
-      with:
-        file: ./coverage/lcov.info
-        fail_ci_if_error: true
+#    - name: Upload coverage to Codecov
+#      uses: codecov/codecov-action@v2
+#      with:
+#        file: ./coverage/lcov.info
+#        fail_ci_if_error: true

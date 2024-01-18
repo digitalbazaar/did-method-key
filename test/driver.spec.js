@@ -460,11 +460,38 @@ describe('did:key method driver', () => {
       expect(err).to.not.exist;
       expect(keyAgreementKeyPair).to.exist;
       expect(verificationKeyPair).to.exist;
-
       expect(verificationKeyPair.id).to.equal(keyId);
       expect(keyAgreementKeyPair.id).to.equal(keyAgreementId);
       expect(keyPairs.get(keyId).controller).to.equal(did);
       expect(keyPairs.get(keyAgreementId).controller).to.equal(kakDid);
+    });
+    it('should generate DID document from X25519 key', async () => {
+      // eslint-disable-next-line max-len
+      const publicKeyMultibase = 'z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc';
+      const keyPair = await X25519KeyAgreementKey2020.from({
+        publicKeyMultibase
+      });
+      const didKeyDriverMultikey = driver();
+      didKeyDriverMultikey.use({
+        multibaseMultikeyHeader: 'z6LS',
+        fromMultibase: X25519KeyAgreementKey2020.from
+      });
+      const {
+        didDocument, keyPairs, methodFor
+      } = await didKeyDriverMultikey.fromKeyPair({
+        keyAgreementKeyPair: keyPair
+      });
+      const did = didDocument.id;
+      const keyId = didDocument.keyAgreement[0].id;
+      const keyAgreementKeyPair = methodFor({purpose: 'keyAgreement'});
+
+      expect(keyId).to.equal(keyAgreementKeyPair.id);
+
+      expect(keyPairs.get(keyId).controller).to.equal(did);
+      expect(keyPairs.get(keyId).id).to.equal(keyId);
+
+      const fetchedDidDoc = await didKeyDriverMultikey.get({did});
+      expect(fetchedDidDoc).to.eql(didDocument);
     });
   });
 

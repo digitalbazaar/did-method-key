@@ -1,5 +1,10 @@
 # did:key driver ChangeLog
 
+## 5.2.0 - 2024-01-dd
+
+### Added
+- Allow `fromKeyPair` to be called with only a key agreement key pair.
+
 ## 5.1.0 - 2023-04-27
 
 ### Changed

@@ -99,6 +99,10 @@ describe('did:key method driver', () => {
       const didKeyDriverMultikey = driver();
 
       didKeyDriverMultikey.use({
+        multibaseMultikeyHeader: 'zUC6',
+        fromMultibase: Bls12381Multikey.from
+      });
+      didKeyDriverMultikey.use({
         multibaseMultikeyHeader: 'zUC7',
         fromMultibase: Bls12381Multikey.from
       });

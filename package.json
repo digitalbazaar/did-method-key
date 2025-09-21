@@ -38,6 +38,7 @@
     "cross-env": "^7.0.3",
     "eslint": "^8.37.0",
     "eslint-config-digitalbazaar": "^5.2.0",
+    "eslint-plugin-jsdoc": "^50.8.0",
     "eslint-plugin-unicorn": "^56.0.1",
     "karma": "^6.3.20",
     "karma-babel-preprocessor": "^8.0.2",

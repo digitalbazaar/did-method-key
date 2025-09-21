@@ -1,5 +1,10 @@
 # did:key driver ChangeLog
 
+## 5.3.0 - 2025-09-21
+
+### Changed
+- Update dependencies to remove legacy 2019 x25519 library.
+
 ## 5.2.0 - 2024-01-17
 
 ### Added
